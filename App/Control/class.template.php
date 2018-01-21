@@ -1,6 +1,6 @@
 <?php
 if ( !class_exists( 'App_config_template' ) ) {
-    class App_config_template 
+    class App_config_template extends Controller 
     {
         public function __construct()
         {
