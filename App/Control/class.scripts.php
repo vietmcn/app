@@ -1,6 +1,6 @@
 <?php
-if ( !class_exists('App_conf_header' ) ) {
-    class App_conf_header extends Controller
+if ( !class_exists('App_conf_script' ) ) {
+    class App_conf_script extends Controller
     {
         public function __construct()
         {
@@ -20,4 +20,4 @@ if ( !class_exists('App_conf_header' ) ) {
         }
     }
 }
-return new App_conf_header();
+return new App_conf_script();
