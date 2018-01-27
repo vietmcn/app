@@ -9,3 +9,4 @@
 </head>
 <body <?php body_class(); ?>>
 <div id="App-page" class="App-site"><div id="App-content" class="">
+<header data-elemt="App-header" id="App-head"><div class="App-header-content"><?php do_action('App_temp_header');?></div></header>
