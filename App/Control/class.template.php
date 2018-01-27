@@ -61,4 +61,4 @@ if ( !class_exists( 'App_config_template' ) ) {
     }
     
 }
-return new App_config_template();
+#return new App_config_template();

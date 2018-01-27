@@ -2,10 +2,12 @@
 //lib
 require_once 'Lib/class.controller.php';
 //Controller Templates
-require_once 'Control/class.template.php';
-require_once 'Control/class.scripts.php';
-
-$App_Controller->call_controller( array(
-    'control_name' => '',
-    'link' => '',
+global $App_controller;
+$App_controller->call_controller( array( 
+    'className' => 'template',
+    'new' => 'App_config_template',
 ) );
+$App_controller->call_controller( array(
+    'className' => 'scripts',
+    'new' => 'App_conf_script'
+));

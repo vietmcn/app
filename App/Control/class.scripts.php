@@ -21,4 +21,4 @@ if ( !class_exists('App_conf_script' ) ) {
         }
     }
 }
-return new App_conf_script();
+#return new App_conf_script();
