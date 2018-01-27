@@ -3,4 +3,4 @@
 require_once 'Lib/class.controller.php';
 //Controller Templates
 require_once 'Control/class.template.php';
-require_once 'Control/class.script.php';
+require_once 'Control/class.scripts.php';

@@ -4,7 +4,7 @@ if ( !class_exists('Controller' ) ) {
     {
         public function __construct()
         {
-            require_once __FILE__
+           
         }
     }
 }
