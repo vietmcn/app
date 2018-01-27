@@ -9,6 +9,7 @@ if ( !class_exists( 'App_content' ) ) :
         public function app_home()
         {
             global $post, $getPost;
+            
         }
     }
     
