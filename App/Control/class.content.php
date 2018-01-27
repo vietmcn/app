@@ -12,5 +12,6 @@ if ( !class_exists( 'App_content' ) ) :
             
         }
     }
-    
 endif;
+
+return new App_content();
