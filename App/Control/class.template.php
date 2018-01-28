@@ -5,6 +5,8 @@ if ( !class_exists( 'App_config_template' ) ) {
         public function __construct()
         {
             add_action( 'after_setup_theme', array( $this, 'config' ) );
+            //remove bar admin
+            add_filter('show_admin_bar', '__return_false');
         }
         public function config()
         {

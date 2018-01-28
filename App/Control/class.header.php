@@ -32,7 +32,7 @@ if ( !class_exists('App_header') ) :
             }
             $out  = '<div class="App-header-contents container">';
             $out .= '<div class="row">';
-            $out .= '<div data-elemt="logo" class="col-6 col-md-4"><'.$h1.' class="App-logo">Trangfox.com</'.$h1.'></div>';
+            $out .= '<div data-elemt="logo" class="col-6 col-md-4"><'.$h1.' class="App-logo"><a href="/" title="Trang Chủ">Trangfox.com</a></'.$h1.'></div>';
             $out .= '</div>';
             $out .= '</div>';
             echo $out;
@@ -42,7 +42,7 @@ if ( !class_exists('App_header') ) :
             wp_nav_menu( array(
                 'theme_location' => 'menu_main',
                 'echo' => true,
-                'container_class' => 'app',
+                'container_class' => 'App-menu container',
             ) );
         }
     }
