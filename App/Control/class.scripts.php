@@ -13,8 +13,11 @@ if ( !class_exists('App_conf_script' ) ) {
 
             wp_enqueue_style( 'App-style', get_template_directory_uri() .'/style.css', '', $app_ver, 'all' );
             wp_enqueue_style( 'App-bootstrap-css', get_template_directory_uri() .'/App/Public/css/bootstrap.min.css', '', '4.0', 'all' );
-            wp_enqueue_style( 'App-global-css', get_template_directory_uri() .'/App/Public/css/app.global.min.css', '', $app_ver, 'all' );
+            if ( ! wp_is_mobile() ) {
+                wp_enqueue_style( 'App-global-css', get_template_directory_uri() .'/App/Public/css/app.global.min.css', '', $app_ver, 'all' );
+            }
             wp_enqueue_style( 'App-icon-css', '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', '', '2.0.1', 'all' );
+            wp_enqueue_style( 'App-fonts-css', '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700', '', $app_ver, 'all' );
         }
         public function conf_script()
         {

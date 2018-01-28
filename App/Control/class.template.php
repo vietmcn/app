@@ -57,8 +57,12 @@ if ( !class_exists( 'App_config_template' ) ) {
 
             // Indicate widget sidebars can use selective refresh in the Customizer.
             add_theme_support( 'customize-selective-refresh-widgets' );
+
+            // Menu 
+            register_nav_menus( array(
+                'menu_main'    => __( 'Menu chính', 'app' ),
+            ) );
         }
     }
     
 }
-#return new App_config_template();
