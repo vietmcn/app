@@ -4,7 +4,14 @@ if ( !class_exists( 'App_getPost' ) ) :
     {
         private function listPost( $atts = array() )
         {
-            $out = '';
+            global $App_getMetaPost;
+        
+            $out  = '<div data-post="'.$atts['post_id'].'" class="">';
+            $out .= $App_getMetaPost->getThumbnail( array(
+                'thumbnail_size' => '',
+                'echo' => false,
+            ) );
+            $out .= '</div>';
 
         }
         public function getPost( $atts = array() )
@@ -17,6 +24,9 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'tag_id' => null,
                 'paged' => null,
             ), $atts );
+            $this->listPost( array(
+
+            ) );
         }
     }
     

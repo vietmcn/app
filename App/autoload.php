@@ -1,4 +1,8 @@
 <?php
+//Admin
+if ( is_admin() ) {
+    require_once 'Admin/class.metapost.php';
+}
 //lib
 require_once 'Lib/class.controller.php';
 //Controller Templates
