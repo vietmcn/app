@@ -4,6 +4,22 @@ if ( !class_exists('App_getMeta') ) :
     {
         public function getThumbnail( $atts = array() )
         {
+            $meta = get_post_meta( $atts['post_id'], '_meta_post', true );
+            $out = '';
+            if ( !empty( $meta ) ) {
+                foreach ($meta as $key => $value) {
+                    $key = explode( '-', $key );
+                    if ( $key[1] == 'meta_thumbnail_png' ) {
+                        $out .= '<span data-thumbnail="App-thumbnail" style="background-image:url('.$value.')"></span>';
+                    }
+                }
+            } else {
+                $out .= 'Lổi Hệ thống Rồi Đại Vương Ơi!';
+            }
+            return $out;
+        }
+        public function getTitle()
+        {
 
         }
     }

@@ -5,6 +5,8 @@ if ( is_admin() ) {
 }
 //lib
 require_once 'Lib/class.controller.php';
+require_once 'Lib/class.getMetapost.php';
+require_once 'Lib/class.getPost.php';
 //Controller Templates
 global $App_controller;
 $App_controller->call_controller( array( 
@@ -18,4 +20,8 @@ $App_controller->call_controller( array(
 $App_controller->call_controller( array(
     'className' => 'header',
     'new' => 'App_header'
+) );
+$App_controller->call_controller( array(
+    'className' => 'content',
+    'new' => 'App_content'
 ) );
