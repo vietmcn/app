@@ -3,21 +3,54 @@
     padding: 0px;
     margin-top: 20px;
     .App-content-item {
+        margin-bottom: 25px;
         .thumbnail {
-            [data-thumbnail="App-thumbnail"] {
-                min-height: 250px;
+            img {
                 width: 100%;
-                display: block;
-                background-position: center top;
-                background-repeat: no-repeat;
-                background-size: cover;
             }
         }
-        .title {
+        .app-info {
             padding-left: 20px;
             h2 {
                 font-size: 24px;
                 font-weight: 600;
+                a {
+                    color: #333;
+                }
+                a:hover {
+                    text-decoration: none;
+                }
+            }
+            .postmeta {
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 15px;
+                font-size: 12px;
+                .category {
+                    background-color: rgb(241, 40, 78);
+                    padding: 5px 10px;
+                    a {
+                        color: #fff;
+                    }
+                    a:hover {
+                        text-decoration: none;
+                    }
+                }
+                span,time {
+                    margin-right: 10px;
+                }
+                time {
+                    font-weight: 600;
+                }
+            }
+            .desc {
+                font-size: 15px;
+                line-height: 24px;
+                font-weight: 400;
+                color: rgb(95, 91, 91);
+                p {
+                    margin-bottom: 5px;
+                }
             }
         }
     }

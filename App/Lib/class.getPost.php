@@ -2,6 +2,20 @@
 if ( !class_exists( 'App_getPost' ) ) :
     class App_getPost
     {
+        function getAuthor( $att = array() ) 
+        {
+            $author_id = get_post_field ('post_author', $att['post_id']);
+            $display_name = get_the_author_meta( 'display_name' , $att['post_id'] ); 
+            return $display_name;
+        }
+        function getCategory()
+        {
+            $cats = get_the_category();
+            $out  = '<a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">';
+            $out .= $cats[0]->name;
+            $out .= '</a>';
+            return $out;
+        }
         private function listPost( $atts = array() )
         {
             global $App_getMetapost;
@@ -10,17 +24,22 @@ if ( !class_exists( 'App_getPost' ) ) :
             $out .= '<div class="thumbnail col-12 col-md-6">';
             $out .= $App_getMetapost->getThumbnail( array(
                 'post_id' => $atts['post_id'],
+                'alt' => get_the_title(),
             ) );
             $out .= '</div>';
-            $out .= '<div class="col-6 col-md-6">';
-            $out .= '<div class="title">';
-            $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">';
-            $out .= '<h2>'.get_the_title().'</h2>';
-            $out .= '</a>';
-            $out .= '</div>';
+            $out .= '<div class="col-6 col-md-6 app-info">';
             $out .= '<div class="postmeta">';
-            $out .= '<span class="category"></span>';
+            $out .= '<span class="category">'.$this->getCategory().'</span>';
+            $out .= '<span><i class="ion-ios-more-outline"></i></span>';
+            $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
             $out .= '</div>';
+            $out .= '<div class="title">';
+            $out .= '<h2>';
+            $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a>';
+            $out .= '</h2>';
+            $out .= '</div>';
+            $out .= '<div class="desc"><p>'.get_the_excerpt().'</p></div>';
+            $out .= '<div class="author">'.$this->getAuthor( $atts['post_id'] ).'</div>';
             $out .= '</div>';
             $out .= '</div>';
             return $out;

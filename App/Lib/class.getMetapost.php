@@ -10,7 +10,7 @@ if ( !class_exists('App_getMeta') ) :
                 foreach ($meta as $key => $value) {
                     $key = explode( '-', $key );
                     if ( $key[1] == 'meta_thumbnail_png' ) {
-                        $out .= '<span data-thumbnail="App-thumbnail" style="background-image:url('.$value.')"></span>';
+                        $out .= '<img class="app-lazy" src="'.$value.'" alt="'.$atts['alt'].'" />';
                     }
                 }
             } else {
