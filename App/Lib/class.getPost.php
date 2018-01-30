@@ -39,7 +39,7 @@ if ( !class_exists( 'App_getPost' ) ) :
             $out .= '</h2>';
             $out .= '</div>';
             $out .= '<div class="desc"><p>'.get_the_excerpt().'</p></div>';
-            $out .= '<div class="author">'.$this->getAuthor( $atts['post_id'] ).'</div>';
+            $out .= '<div class="author"><i class="ion-android-create"></i><span>'.$this->getAuthor( $atts['post_id'] ).'</span></div>';
             $out .= '</div>';
             $out .= '</div>';
             return $out;
