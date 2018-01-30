@@ -10,7 +10,7 @@ if( !class_exists( 'App_controller_footer' ) ) {
         }
         public function footer_before()
         {
-            echo '<div class="container no-gutters">';
+            echo '<div class="container">';
         }
         public function footer_after()
         {
@@ -19,9 +19,9 @@ if( !class_exists( 'App_controller_footer' ) ) {
         public function footer_top()
         {
             $out  = '<div class="App-footer-info row">';
-            $out .= '<div class="col-sm">Trangfox</div>';
-            $out .= '<div class="col-sm">Trangfox</div>';
-            $out .= '<div class="col-sm">Trangfox</div>';
+            $out .= '<span class="app-contact"><a href="/contact">Liên hệ</a></span>';
+            $out .= '<span class="app-contact"><a href="/adv">Quảng cáo</a></span>';
+            $out .= '<span class="app-cp">Trangfox © 2018</span>';
             $out .= '</div>';
             echo $out;
         }

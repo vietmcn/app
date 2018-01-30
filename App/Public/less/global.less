@@ -1,4 +1,11 @@
 // out: ../css/app.global.min.css, compress: true, sourceMap: false
+* {
+    outline: 0;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+}
 body {
     background-repeat: no-repeat;
     background-size: cover;
@@ -22,8 +29,17 @@ a:hover {
 footer#App-content {
     margin-bottom: 3rem;
     background: rgb(25, 35, 45);
-    min-height: 100px;
-    color: #fff;
+    color: #a0a0a0;
+    font-size: 13px;
+    padding: 1rem 0px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    span {
+        margin-right: 5px;
+        a {
+            color: #dedddd;
+        }
+    }
 }
 @import 'mod/header.less';
 @import 'mod/content.less';
