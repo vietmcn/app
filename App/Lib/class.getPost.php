@@ -21,25 +21,28 @@ if ( !class_exists( 'App_getPost' ) ) :
             global $App_getMetapost;
         
             $out  = '<div data-post="trangfox-'.$atts['post_id'].'" class="App-content-item row no-gutters">';
-            $out .= '<div class="thumbnail col-12 col-md-6">';
-            $out .= $App_getMetapost->getThumbnail( array(
-                'post_id' => $atts['post_id'],
-                'alt' => get_the_title(),
-            ) );
-            $out .= '</div>';
-            $out .= '<div class="col-6 col-md-6 app-info">';
+            $out .= '<div class="app-info">';
             $out .= '<div class="postmeta">';
             $out .= '<span class="category">'.$this->getCategory().'</span>';
             $out .= '<span><i class="ion-ios-more-outline"></i></span>';
             $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
             $out .= '</div>';
+            $out .= '<div class="thumbnail">';
+            $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">';
+            $out .= $App_getMetapost->getThumbnail( array(
+                'post_id' => $atts['post_id'],
+                'alt' => get_the_title(),
+                ) );
+            $out .= '</a>';
+            $out .= '</div>';
+            $out .= '<div class="footer">';
             $out .= '<div class="title">';
             $out .= '<h2>';
             $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a>';
             $out .= '</h2>';
             $out .= '</div>';
             $out .= '<div class="desc"><p>'.get_the_excerpt().'</p></div>';
-            $out .= '<div class="author"><i class="ion-android-create"></i><span>'.$this->getAuthor( $atts['post_id'] ).'</span></div>';
+            $out .= '</div>';
             $out .= '</div>';
             $out .= '</div>';
             return $out;

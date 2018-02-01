@@ -25,7 +25,3 @@ $App_controller->call_controller( array(
     'className' => 'content',
     'new' => 'App_content'
 ) );
-$App_controller->call_controller( array(
-    'className' => 'footer',
-    'new' => 'App_controller_footer'
-) );

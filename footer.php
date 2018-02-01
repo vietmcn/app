@@ -1,5 +1,5 @@
 </div>
-<footer id="App-content"><?php do_action( 'app_footer' );?></footer>
+<?php do_action( 'app_footer' );?>
 <?php wp_footer(); ?>
 </body>
 </html>
