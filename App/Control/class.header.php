@@ -4,26 +4,9 @@ if ( !class_exists('App_header') ) :
     {
         public function __construct()
         {
-            add_action( 'App_temp_header', array( $this, 'header_before' ) );
-            add_action( 'App_temp_header', array( $this, 'header_content' ) );
-            add_action( 'App_temp_header', array( $this, 'header_menu' ) );
+            add_action( 'App_temp_header', array( $this, 'header' ) );
         }
-        public function header_before()
-        {
-            $out  = '<div class="App-header-content-before row no-gutters">';
-            $out .= '<div class="app-menu col-12 col-sm-6 col-md-8"></div>';
-            $out .= '<div class="App-socail col-6 col-md-4">';
-            $out .= '<a href="//fb.com/trangfox.xyz" title="Fanpage"><i class="ion-social-facebook"></i></a>';
-            $out .= '<a href="//fb.com/trangfox.xyz" title="Fanpage"><i class="ion-social-twitter"></i></a>';
-            $out .= '<a href="//fb.com/trangfox.xyz" title="Fanpage"><i class="ion-social-googleplus"></i></a>';
-            $out .= '<a href="//fb.com/trangfox.xyz" title="Fanpage"><i class="ion-social-pinterest"></i></a>';
-            $out .= '<a href="//www.instagram.com/com.trangfox/" title="Instagram Trangfox"><i class="ion-social-instagram-outline"></i></a>';
-            $out .= '<a href="//fb.com/trangfox.xyz" title="Fanpage"><i class="ion-social-youtube"></i></a>';
-            $out .= '</div>';
-            $out .= '</div>';
-            echo $out;
-        }
-        public function header_content()
+        function header_logo()
         {
             if ( is_single() ) {
                 $h1 = 'div';
@@ -35,15 +18,23 @@ if ( !class_exists('App_header') ) :
             $out .= '<div data-elemt="logo" class="col-6 col-md-4"><'.$h1.' class="App-logo"><a href="/" title="Trang Chủ">Trangfox.com</a></'.$h1.'></div>';
             $out .= '</div>';
             $out .= '</div>';
-            echo $out;
+            return $out;
         }
-        public function header_menu()
+        function header_menu()
         {
-            wp_nav_menu( array(
+            return wp_nav_menu( array(
                 'theme_location' => 'menu_main',
-                'echo' => true,
+                'echo' => false,
                 'container_class' => 'App-menu container',
             ) );
+        }
+        public function header()
+        {
+            $out  = '<div class="">';
+            $out .= $this->header_menu();
+            $out .= $this->header_logo();
+            $out .= '</div>';
+            echo $out;
         }
     }
     
