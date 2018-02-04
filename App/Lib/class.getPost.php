@@ -16,6 +16,52 @@ if ( !class_exists( 'App_getPost' ) ) :
             $out .= '</a>';
             return $out;
         }
+        function title()
+        {
+            $out  = '<div class="title">';
+            $out .= '<h2>';
+            $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a>';
+            $out .= '</h2>';
+            $out .= '</div>';
+            return $out;
+        }
+        function desc()
+        {
+            $out = '<div class="desc">';
+            $excerpt = get_the_excerpt();
+            $charlength = '150';
+            if ( mb_strlen( $excerpt ) > $charlength ) {
+                $subex = mb_substr( $excerpt, 0, $charlength - 5 );
+                $exwords = explode( ' ', $subex );
+                $excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
+                if ( $excut < 0 ) {
+                    $out .=  mb_substr( $subex, 0, $excut );
+                } else {
+                    $out .= $subex;
+                }
+                $out .= '... <a href="'.get_permalink().'"> Xem Thêm</a>';
+            } else {
+                $out .= $excerpt;
+            }
+            $out .= '</p></div>';
+            return $out;
+        }
+        function tag()
+        {
+            $tags = get_the_tags();
+            if ( $tags ) {
+                $out  = '<div class="footer">';
+                foreach ($tags as $atts ) {
+                    $out .= '<a href="'.get_tag_link( $atts->term_id ).'" title="Thẻ '.$atts->name.'">';
+                    $out .= $atts->name;
+                    $out .= '</a>';
+                }
+                $out .= '</div>';
+            } else {
+                $out = '';
+            }
+            return $out;
+        }
         private function listPost( $atts = array() )
         {
             global $App_getMetapost;
@@ -24,9 +70,10 @@ if ( !class_exists( 'App_getPost' ) ) :
             $out .= '<div class="app-info">';
             $out .= '<div class="postmeta">';
             $out .= '<span class="category">'.$this->getCategory().'</span>';
-            $out .= '<span><i class="ion-ios-more-outline"></i></span>';
             $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
             $out .= '</div>';
+            $out .= $this->title();
+            $out .= $this->desc();
             $out .= '<div class="thumbnail">';
             $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">';
             $out .= $App_getMetapost->getThumbnail( array(
@@ -35,14 +82,7 @@ if ( !class_exists( 'App_getPost' ) ) :
                 ) );
             $out .= '</a>';
             $out .= '</div>';
-            $out .= '<div class="footer">';
-            $out .= '<div class="title">';
-            $out .= '<h2>';
-            $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a>';
-            $out .= '</h2>';
-            $out .= '</div>';
-            $out .= '<div class="desc"><p>'.get_the_excerpt().'</p></div>';
-            $out .= '</div>';
+            $out .= $this->tag();
             $out .= '</div>';
             $out .= '</div>';
             return $out;
@@ -54,7 +94,7 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'post__not_in' => null,
                 'posts_per_page' => 15,
                 'cat' => null,
-                'tag_id' => null,
+                'tag' => null,
                 'paged' => null,
                 'col' => 'col-md-6',
             ), $atts );
@@ -64,11 +104,11 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'post__not_in' => $atts['post__not_in'],
                 'posts_per_page' => $atts['posts_per_page'],
                 'cat' => $atts['cat'],
-                'tag_id' => $atts['tag_id'],
+                'tag_id' => $atts['tag'],
                 'paged' => $atts['post_type'],
             ) );
             
-            $out = '<section class="col-12 '.$atts['col'].'">';
+            $out = '<section class="App-getContents col-12 '.$atts['col'].'">';
             if ( $App_query->have_posts() ) {
                 while ( $App_query->have_posts() ) : $App_query->the_post(); 
                     

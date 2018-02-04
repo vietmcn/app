@@ -81,10 +81,10 @@ if ( !class_exists( 'App_config_template' ) ) {
 			);
 			foreach ( $sidebar_args as $sidebar => $args ) {
 				$widget_tags = array(
-					'before_widget' => '<aside itemtype="http://schema.org/WPSideBar" itemscope role="complementary" id="%1$s" class="App-widget col-md-3">',
-					'after_widget'  => '</aside>',
-					'before_title'  => '<span class="gamma widget-title">',
-					'after_title'   => '</span>',
+					'before_widget' => '<div id="%1$s" class="App-widget-item col-md-12">',
+					'after_widget'  => '</div>',
+					'before_title'  => '<h4 class="widget-title">',
+					'after_title'   => '</h4>',
 				);
 
 				/**

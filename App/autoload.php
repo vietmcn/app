@@ -7,6 +7,7 @@ if ( is_admin() ) {
 require_once 'Lib/class.controller.php';
 require_once 'Lib/class.getMetapost.php';
 require_once 'Lib/class.getPost.php';
+require_once 'Lib/class.sidebar.php';
 //Controller Templates
 global $App_controller;
 $App_controller->call_controller( array( 

@@ -1,1 +1,49 @@
 //main: ../global.less
+.App-widget {
+    max-width: 285px;
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 0px;
+    .App-widget-item {
+        background-color: #fff;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ebebf3;
+        padding: 0px;
+        h4 {
+            font-size: 16px;
+            padding: 10px;
+            margin: 0;
+            background: #fbfbfb;
+            border-bottom: 1px solid #dadada;
+        }
+        ul {
+            margin: 0px;
+            padding: 0px;
+            li {
+                list-style: none;
+                a { 
+                    color: inherit;
+                    padding: 10px;
+                    display: flex;
+                    font-weight: 500;
+                    border-bottom: 1px solid #f2f2f6;
+                    border-left: 2px solid transparent;
+                    width: 100%;
+                }
+                a:hover {
+                    text-decoration: none;
+                }
+            }
+            li.current-cat a, li a:hover {
+                border-left: 2px solid #f7da0f;
+            }
+            
+        }
+    }
+}
+.App-content-sidebar {
+    .App-widget {
+        padding: 0px;
+    }
+}

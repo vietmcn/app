@@ -15,17 +15,30 @@ if ( !class_exists( 'App_content' ) ) :
         }
         public function app_home_after()
         {   
-            dynamic_sidebar('right-1');
+            global $App_getSidebar;
+            $App_getSidebar->Set( array( 
+                'sidebar_slug' => 'right-1',
+            ) );
             echo '</div></div>';
         }
         public function app_home()
         {
-            global $App_getcontent;
+            global $App_getcontent, $App_getSidebar;
             echo '<div class="App-content-sidebar col-md-9 no-gutters">';
-            dynamic_sidebar('left-1');
+            $App_getSidebar->Set( array( 
+                'sidebar_slug' => 'left-1',
+                'cover' => array( 
+                    'name' => 'Trangfox',
+                )
+            ) );
+            $cat = get_query_var( 'cat' );
+            $tag = 
             $App_getcontent->Post( array(
                 'post_type' => 'post',
                 'container' => true,
+                'col' => 'col-md-9',
+                'cat' => isset( $cat ) ? $cat : null,
+                'tag' =>  isset( $tag ) ? $tag : null,
             ) );
             echo '</div>';
         }
