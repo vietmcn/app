@@ -7,6 +7,7 @@ if ( !class_exists( 'App_content' ) ) :
             add_action( 'app_main', array( $this, 'app_home_before' ), 10 );
             add_action( 'app_main', array( $this, 'app_home' ), 15 );
             add_action( 'app_main', array( $this, 'app_home_after' ), 50 );
+
         }
         public function app_home_before()
         {
@@ -31,15 +32,11 @@ if ( !class_exists( 'App_content' ) ) :
                     'name' => 'Trangfox',
                 )
             ) );
+            //get content
             $cat = get_query_var( 'cat' );
-            $tag = 
-            $App_getcontent->Post( array(
-                'post_type' => 'post',
-                'container' => true,
-                'col' => 'col-md-9',
-                'cat' => isset( $cat ) ? $cat : null,
-                'tag' =>  isset( $tag ) ? $tag : null,
-            ) );
+            $tag = get_query_var( 'tag_id' );
+            echo '<div id="App"></div>';
+            //end
             echo '</div>';
         }
     }
