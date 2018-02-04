@@ -5,6 +5,7 @@ if ( !class_exists( 'App_config_template' ) ) {
         public function __construct()
         {
             add_action( 'after_setup_theme', array( $this, 'config' ) );
+            add_action( 'widgets_init',      array( $this, 'widgets_init' ) );
             //remove bar admin
             add_filter('show_admin_bar', '__return_false');
         }
@@ -64,6 +65,37 @@ if ( !class_exists( 'App_config_template' ) ) {
             register_nav_menus( array(
                 'menu_main'    => __( 'Menu chính', 'app' ),
             ) );
+        }
+        public function widgets_init()
+        {
+            $sidebar_args['left'] = array(
+				'name'          => __( 'Sidebar left', 'app' ),
+				'id'            => 'left-1',
+				'description'   => ''
+			);
+
+			$sidebar_args['right'] = array(
+				'name'        => __( 'Sidebar right', 'app' ),
+				'id'          => 'right-1',
+				'description' => __( 'Widgets added to this region will appear beneath the header and above the main content.', 'storefront' ),
+			);
+			foreach ( $sidebar_args as $sidebar => $args ) {
+				$widget_tags = array(
+					'before_widget' => '<aside itemtype="http://schema.org/WPSideBar" itemscope role="complementary" id="%1$s" class="App-widget col-md-3">',
+					'after_widget'  => '</aside>',
+					'before_title'  => '<span class="gamma widget-title">',
+					'after_title'   => '</span>',
+				);
+
+				/**
+				 * Dynamically generated filter hooks. Allow changing widget wrapper and title tags. See the list below.
+				 *
+				 */
+
+				if ( is_array( $widget_tags ) ) {
+					register_sidebar( $args + $widget_tags );
+				}
+            }
         }
     }
     

@@ -56,6 +56,7 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'cat' => null,
                 'tag_id' => null,
                 'paged' => null,
+                'col' => 'col-md-6',
             ), $atts );
             ob_start();
             $App_query = new WP_Query( array( 
@@ -66,7 +67,8 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'tag_id' => $atts['tag_id'],
                 'paged' => $atts['post_type'],
             ) );
-            $out = '<section class="col-12 col-md-8">';
+            
+            $out = '<section class="col-12 '.$atts['col'].'">';
             if ( $App_query->have_posts() ) {
                 while ( $App_query->have_posts() ) : $App_query->the_post(); 
                     

@@ -10,21 +10,24 @@ if ( !class_exists( 'App_content' ) ) :
         }
         public function app_home_before()
         {
-            echo '<div class="App-content container"><div class="row">';
-            do_action( 'app_sidebar_left' );
+            global $App_getsidebar;
+            echo '<div class="App-content container"><div class="row no-gutters">';
         }
         public function app_home_after()
-        {
-            do_action( 'app_sidebar_right' );
+        {   
+            dynamic_sidebar('right-1');
             echo '</div></div>';
         }
         public function app_home()
         {
             global $App_getcontent;
+            echo '<div class="App-content-sidebar col-md-9 no-gutters">';
+            dynamic_sidebar('left-1');
             $App_getcontent->Post( array(
                 'post_type' => 'post',
                 'container' => true,
             ) );
+            echo '</div>';
         }
     }
 endif;
