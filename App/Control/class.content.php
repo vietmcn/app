@@ -11,9 +11,11 @@ if ( !class_exists( 'App_content' ) ) :
         public function app_home_before()
         {
             echo '<div class="App-content container"><div class="row">';
+            do_action( 'app_sidebar_left' );
         }
         public function app_home_after()
         {
+            do_action( 'app_sidebar_right' );
             echo '</div></div>';
         }
         public function app_home()
