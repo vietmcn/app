@@ -16,14 +16,14 @@ if ( ! class_exists( 'App_ajax' ) ) :
 			    $paged = ( get_query_var('cat') ) ? absint( get_query_var('cat') ) : 1;
 			} elseif( is_tag() ) {
 				$paged = ( get_query_var('tag') ) ? absint( get_query_var('tag') ) : 1;
-			} elseif( is_single() ) {
+			} else {
 				$paged = '1';
 			}
             $args = array(
-                'posts_per_page' => '3',
+                'posts_per_page' => '2',
                 'paged' => $paged,
-                'cat' => get_query_var( 'cat' ) ? get_query_var( 'cat' ) : null,
-                'tag_id' => get_query_var( 'tag_id' ) ? get_query_var( 'tag_id' ) : null,
+                'cat' => get_query_var( 'cat' ) ? get_query_var( 'cat' ) : '',
+                'tag_id' => get_query_var( 'tag_id' ) ? get_query_var( 'tag_id' ) : '',
             );
             
             $cpt_query = new WP_Query( $args );
@@ -35,7 +35,7 @@ if ( ! class_exists( 'App_ajax' ) ) :
                     'ajaxurl' => site_url() . '/wp-admin/admin-ajax.php', // WordPress AJAX
                     'check_nonce' => wp_create_nonce('app-nonce'),
                     'current_page' => $paged,
-                    'max_page' => $cpt_query->max_num_pages
+                    'max_page' => $cpt_query->max_num_pages ? $cpt_query->max_num_pages : '1',
                 ) );
                 wp_enqueue_script( 'app_loadmore' );
             } else {
