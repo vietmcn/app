@@ -7,18 +7,27 @@
     -o-transition: all .3s ease;
 }
 body {
-    background-color: #f7f7ff;
-    color: #777;
+    background: #81ee8e;
+    background: -moz-linear-gradient(left, #00c9fd 0%, #81ee8e 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#00c9fd), color-stop(100%,#81ee8e));
+    background: -webkit-linear-gradient(left, #00c9fd 0%,#81ee8e 100%);
+    background: -o-linear-gradient(left, #00c9fd 0%,#81ee8e 100%);
+    background: -ms-linear-gradient(left, #00c9fd 0%,#81ee8e 100%);
+    background: linear-gradient(to right, #00c9fd 0%,#81ee8e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00c9fd', endColorstr='#81ee8e',GradientType=1 );
 }
 body {
     font-family: 'Maven Pro', sans-serif;
+    font-weight: normal;
+    font-size: 17px;
+    color: #515151;
 }
 a:hover {
     color: #f1284e;
 }
-#App-content {
-    max-width: 1180px;
-    width: 60%;
+.App-content {
+    max-width: 1010px;
+    width: 100%;
     margin: 0px auto;
 }
 footer#App-content {

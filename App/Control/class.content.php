@@ -11,31 +11,24 @@ if ( !class_exists( 'App_content' ) ) :
         }
         public function app_home_before()
         {
-            global $App_getsidebar;
             echo '<div class="App-content container"><div class="row no-gutters">';
         }
         public function app_home_after()
         {   
-            global $App_getSidebar;
-            $App_getSidebar->Set( array( 
-                'sidebar_slug' => 'right-1',
-            ) );
             echo '</div></div>';
         }
         public function app_home()
         {
-            global $App_getcontent, $App_getSidebar;
-            echo '<div class="App-content-sidebar col-md-9 no-gutters">';
-            $App_getSidebar->Set( array( 
-                'sidebar_slug' => 'left-1',
-                'cover' => array( 
-                    'name' => 'Trangfox',
-                )
-            ) );
+            global $App_getcontent;
+            echo '<div class="App-content-sidebar col-md-12 no-gutters">';
             //get content
             $cat = get_query_var( 'cat' );
             $tag = get_query_var( 'tag_id' );
-            echo '<div id="App"></div>';
+            $App_getcontent->post( array(
+                'post_type' => 'post',
+                'posts_per_page' => '2',
+                'col' => 'col-md-12'
+            ) );
             //end
             echo '</div>';
         }

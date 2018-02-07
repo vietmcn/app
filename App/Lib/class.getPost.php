@@ -8,14 +8,6 @@ if ( !class_exists( 'App_getPost' ) ) :
             $display_name = get_the_author_meta( 'display_name' , $att['post_id'] ); 
             return $display_name;
         }
-        function getCategory()
-        {
-            $cats = get_the_category();
-            $out  = '<a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">';
-            $out .= $cats[0]->name;
-            $out .= '</a>';
-            return $out;
-        }
         function title()
         {
             $out  = '<div class="title">';
@@ -62,26 +54,38 @@ if ( !class_exists( 'App_getPost' ) ) :
             }
             return $out;
         }
+        function thumbnail( $atts )
+        {
+            global $App_getMetapost;
+            $out  = '<div class="thumbnail">';
+            $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">';
+            $out .= $App_getMetapost->getThumbnail( array(
+                'post_id' => $atts,
+                'alt' => get_the_title(),
+                ) );
+            $out .= '</a>';
+            $out .= '</div>';
+            return $out;
+        }
+        function meta()
+        {
+            $cats = get_the_category();
+            $out  = '<div class="postmeta">';
+            $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
+            $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
+            $out .= '</div>';
+            return $out;
+        }
         private function listPost( $atts = array() )
         {
             global $App_getMetapost;
         
             $out  = '<div data-post="trangfox-'.$atts['post_id'].'" class="App-content-item row no-gutters">';
             $out .= '<div class="app-info">';
-            $out .= '<div class="postmeta">';
-            $out .= '<span class="category">'.$this->getCategory().'</span>';
-            $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
-            $out .= '</div>';
+            $out .= $this->meta();
+            $out .= $this->thumbnail( $atts['post_id'] );
             $out .= $this->title();
             $out .= $this->desc();
-            $out .= '<div class="thumbnail">';
-            $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">';
-            $out .= $App_getMetapost->getThumbnail( array(
-                'post_id' => $atts['post_id'],
-                'alt' => get_the_title(),
-                ) );
-            $out .= '</a>';
-            $out .= '</div>';
             $out .= $this->tag();
             $out .= '</div>';
             $out .= '</div>';
