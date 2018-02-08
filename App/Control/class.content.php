@@ -11,26 +11,23 @@ if ( !class_exists( 'App_content' ) ) :
         }
         public function app_home_before()
         {
-            echo '<div class="App-content container"><div class="row no-gutters">';
+            echo '<div class="App-content container">';
         }
         public function app_home_after()
         {   
-            echo '</div></div>';
+            echo '</div>';
         }
         public function app_home()
         {
             global $App_getcontent;
-            echo '<div class="App-content-sidebar col-md-12 no-gutters">';
             //get content
-            $cat = get_query_var( 'cat' );
-            $tag = get_query_var( 'tag_id' );
             $App_getcontent->post( array(
                 'post_type' => 'post',
-                'posts_per_page' => '2',
-                'col' => 'col-md-12'
+                'posts_per_page' => '5',
+                'cat_id' => get_query_var( 'cat' ) ? absint( get_query_var( 'cat' ) ) : null,
+                'tag_id' => get_query_var( 'tag_id' ) ? absint( get_query_var( 'tag_id' ) ) : null,
             ) );
             //end
-            echo '</div>';
         }
     }
 endif;

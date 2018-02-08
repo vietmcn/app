@@ -19,24 +19,28 @@ if ( !class_exists( 'App_getPost' ) ) :
         }
         function desc()
         {
-            $out = '<div class="desc">';
             $excerpt = get_the_excerpt();
-            $charlength = '150';
-            if ( mb_strlen( $excerpt ) > $charlength ) {
-                $subex = mb_substr( $excerpt, 0, $charlength - 5 );
-                $exwords = explode( ' ', $subex );
-                $excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
-                if ( $excut < 0 ) {
-                    $out .=  mb_substr( $subex, 0, $excut );
+            if ( $excerpt ) {
+                $out = '<div class="desc">';
+                $charlength = '150';
+                if ( mb_strlen( $excerpt ) > $charlength ) {
+                    $subex = mb_substr( $excerpt, 0, $charlength - 5 );
+                    $exwords = explode( ' ', $subex );
+                    $excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
+                    if ( $excut < 0 ) {
+                        $out .=  mb_substr( $subex, 0, $excut );
+                    } else {
+                        $out .= $subex;
+                    }
+                    $out .= '... <a href="'.get_permalink().'"> Xem Thêm</a>';
                 } else {
-                    $out .= $subex;
+                    $out .= $excerpt;
                 }
-                $out .= '... <a href="'.get_permalink().'"> Xem Thêm</a>';
+                $out .= '</p></div>';
+                return $out;
             } else {
-                $out .= $excerpt;
+                //
             }
-            $out .= '</p></div>';
-            return $out;
         }
         function tag()
         {
@@ -80,7 +84,7 @@ if ( !class_exists( 'App_getPost' ) ) :
         {
             global $App_getMetapost;
         
-            $out  = '<div data-post="trangfox-'.$atts['post_id'].'" class="App-content-item row no-gutters">';
+            $out  = '<div data-post="trangfox-'.$atts['post_id'].'" class="App-content-item col-12 col-md-6">';
             $out .= '<div class="app-info">';
             $out .= $this->meta();
             $out .= $this->thumbnail( $atts['post_id'] );
@@ -100,7 +104,6 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'cat' => null,
                 'tag' => null,
                 'paged' => null,
-                'col' => 'col-md-6',
             ), $atts );
             ob_start();
             $App_query = new WP_Query( array( 
@@ -112,7 +115,7 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'paged' => $atts['post_type'],
             ) );
             
-            $out = '<section class="App-getContents col-12 '.$atts['col'].'">';
+            $out = '<section class="App-getContents row no-gutters">';
             if ( $App_query->have_posts() ) {
                 while ( $App_query->have_posts() ) : $App_query->the_post(); 
                     

@@ -26,7 +26,3 @@ $App_controller->call_controller( array(
     'className' => 'content',
     'new' => 'App_content'
 ) );
-$App_controller->call_controller( array(
-    'className' => 'ajax',
-    'new' => 'App_ajax'
-) );
