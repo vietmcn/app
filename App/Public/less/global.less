@@ -18,6 +18,9 @@ body {
 a:hover {
     color: #f1284e;
 }
+#App-page {
+    margin-bottom: 1.5rem;
+}
 #App-Main {
     max-width: 800px;
     width: 100%;
@@ -43,6 +46,37 @@ footer#App-content {
         }
     }
 }
+//ads
+.App-ads-before {
+    margin-bottom: 1.5rem;
+    img {
+        width: 100%;
+    }
+}
+//footer 
+footer.App-footer {
+    background: #6C7A89;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    ul {
+        margin: 0px;
+        padding: 0px;
+        height: 100%;
+        li {
+            display: inline-flex;
+            list-style: none;
+            color: #e8e8e8;
+            margin-right: 10px;
+            font-size: 13px;
+            a {
+                color: #e8e8e8;
+                font-weight: 500;
+            }
+        }
+    }
+}
 @import 'mod/header.less';
+@import 'mod/menu.less';
 @import 'mod/content.less';
 @import 'mod/widget.less';

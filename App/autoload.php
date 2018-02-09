@@ -7,6 +7,7 @@ if ( is_admin() ) {
 require_once 'Lib/class.controller.php';
 require_once 'Lib/class.getMetapost.php';
 require_once 'Lib/class.getPost.php';
+require_once 'Lib/class.content.php';
 require_once 'Lib/class.sidebar.php';
 //Controller Templates
 global $App_controller;
@@ -25,4 +26,16 @@ $App_controller->call_controller( array(
 $App_controller->call_controller( array(
     'className' => 'content',
     'new' => 'App_content'
+) );
+$App_controller->call_controller( array(
+    'className' => 'content-single',
+    'new' => 'App_control_single'
+) );
+$App_controller->call_controller( array(
+    'className' => 'footer',
+    'new' => 'App_control_footer'
+) );
+$App_controller->call_controller( array(
+    'className' => 'ads',
+    'new' => 'App_control_ads'
 ) );

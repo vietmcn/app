@@ -4,10 +4,14 @@
 }
 .App-content {
     padding: 0;
+    margin-top: 0rem;
     .App-content-item {
         .thumbnail {
             img {
                 width: 100%;
+                object-fit: cover;
+                object-position: top;
+                max-height: 250px;
             }
             .app-thumbnail-bg {
                 display: block;
@@ -17,39 +21,27 @@
         }
         .app-info {
             display: flex;
-            width: 100%;
-            background: #fff;
-            border: 1px solid #ebebf3;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+            margin-bottom: 1.5rem;
             h2 {
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: 500;
                 margin: 0px;
                 a {
-                    color: #6b6d76;
-                }
-                a:hover {
-                    text-decoration: none;
+                    color: #222;
                 }
             }
             .postmeta {
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 font-size: 13px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                min-height: 65px;
-                padding: 0 15px;
-                font-weight: 600;
+                margin: 10px 0;
+                padding: 0 5px;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
                 .category {
                     a {
-                        color: #4976c1;
-                        font-size: 15px;
+                        color: #7c7f75;
                         font-weight: 500;
-                    }
-                    a:hover {
-                        text-decoration: none;
                     }
                 }
                 span,time {
@@ -58,6 +50,7 @@
                 time {
                     font-size: 12px;
                     font-weight: 400;
+                    color: #7c7f75;
                 }
             }
             .desc {
@@ -69,9 +62,6 @@
                 p {
                     margin-bottom: 5px;
                 }
-            }
-            .desc, .title {
-                padding: 10px;
             }
             .footer {
                 padding: 15px;

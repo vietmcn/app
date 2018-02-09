@@ -64,6 +64,7 @@ if ( !class_exists( 'App_config_template' ) ) {
             // Menu 
             register_nav_menus( array(
                 'menu_main'    => __( 'Menu chính', 'app' ),
+                'menu_category'    => __( 'Menu Danh Mục', 'app' ),
             ) );
         }
         public function widgets_init()

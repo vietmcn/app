@@ -84,7 +84,7 @@ if ( !class_exists( 'App_getPost' ) ) :
         {
             global $App_getMetapost;
         
-            $out  = '<div data-post="trangfox-'.$atts['post_id'].'" class="App-content-item">';
+            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item">';
             $out .= '<div class="app-info">';
             $out .= $this->thumbnail( $atts['post_id'] );
             $out .= '<div class="app-info-item col-md-7">';
@@ -94,7 +94,7 @@ if ( !class_exists( 'App_getPost' ) ) :
             #$out .= $this->tag();
             $out .= '</div>';
             $out .= '</div>';
-            $out .= '</div>';
+            $out .= '</article>';
             return $out;
         }
         public function Post( $atts = array() )
@@ -106,7 +106,9 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'cat' => null,
                 'tag' => null,
                 'paged' => null,
+                'orderby' => 'date',
             ), $atts );
+            
             ob_start();
             $App_query = new WP_Query( array( 
                 'post_type' => $atts['post_type'],
@@ -115,9 +117,10 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'cat' => $atts['cat'],
                 'tag_id' => $atts['tag'],
                 'paged' => $atts['post_type'],
+                'orderby' => $atts['orderby'],
             ) );
             
-            $out = '<section class="App-getContents row no-gutters col-12 col-md-9">';
+            $out = '<div class="App-getContents row no-gutters col-12 col-md-9">';
             if ( $App_query->have_posts() ) {
                 while ( $App_query->have_posts() ) : $App_query->the_post(); 
                     
@@ -130,7 +133,7 @@ if ( !class_exists( 'App_getPost' ) ) :
             } else {
                 $out .= 'No Content';
             }
-            $out .= '</section>';
+            $out .= '</div>';
             $out .= ob_get_clean();
             echo $out;    
         }

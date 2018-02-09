@@ -10,10 +10,8 @@ if ( !class_exists('App_getMeta') ) :
             if ( !empty( $meta ) ) {
                 foreach ($meta as $key => $value) {
                     $key = explode( '-', $key );
-                    if ( ! empty( $key[1] )  == 'meta_thumbnail_png' ) {
+                    if ( $key[1] == 'meta_thumbnail_png' ) {
                         $out .= '<img class="app-lazy" src="'.$value.'" alt="'.$atts['alt'].'" />';
-                    } elseif ( ! empty( $key[1] ) == 'meta_thumbnail_gif' ) {
-                        $out .= 'Hello Gif';
                     }
                 }
             } else {
