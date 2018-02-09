@@ -14,7 +14,11 @@ if ( !class_exists('App_header') ) :
             } else {
                 $h1 = 'h1';
             }
-            $out = '<div data-elemt="logo" class="col-12"><'.$h1.' class="App-logo"><a href="/" title="Trang Chủ">Trang<span>Fox</span>.Com</a></'.$h1.'></div>';
+            $out  = '<div data-elemt="logo" class="col-12">';
+            $out .= '<'.$h1.' class="App-logo"><a href="/" title="Trang Chủ">Trang<span>Fox</span>.Com</a></'.$h1.'>';
+            $out .= '<span class="App-logo-desc">'.get_bloginfo( 'description' ).'</span>';
+            $out .= '</div>';
+            
             return $out;
         }
         function header_menu()

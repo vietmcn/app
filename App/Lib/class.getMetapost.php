@@ -4,18 +4,22 @@ if ( !class_exists('App_getMeta') ) :
     {
         public function getThumbnail( $atts = array() )
         {
+            ob_start();
             $meta = get_post_meta( $atts['post_id'], '_meta_post', true );
             $out = '';
             if ( !empty( $meta ) ) {
                 foreach ($meta as $key => $value) {
                     $key = explode( '-', $key );
-                    if ( $key[1] == 'meta_thumbnail_png' ) {
+                    if ( ! empty( $key[1] )  == 'meta_thumbnail_png' ) {
                         $out .= '<img class="app-lazy" src="'.$value.'" alt="'.$atts['alt'].'" />';
+                    } elseif ( ! empty( $key[1] ) == 'meta_thumbnail_gif' ) {
+                        $out .= 'Hello Gif';
                     }
                 }
             } else {
                 $out .= 'Lổi Hệ thống Rồi Đại Vương Ơi!';
             }
+            $out .= ob_get_clean();
             return $out;
         }
         public function getTitle()

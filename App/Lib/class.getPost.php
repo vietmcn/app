@@ -84,13 +84,15 @@ if ( !class_exists( 'App_getPost' ) ) :
         {
             global $App_getMetapost;
         
-            $out  = '<div data-post="trangfox-'.$atts['post_id'].'" class="App-content-item col-12 col-md-6">';
+            $out  = '<div data-post="trangfox-'.$atts['post_id'].'" class="App-content-item">';
             $out .= '<div class="app-info">';
-            $out .= $this->meta();
             $out .= $this->thumbnail( $atts['post_id'] );
+            $out .= '<div class="app-info-item col-md-7">';
             $out .= $this->title();
+            $out .= $this->meta();
             $out .= $this->desc();
-            $out .= $this->tag();
+            #$out .= $this->tag();
+            $out .= '</div>';
             $out .= '</div>';
             $out .= '</div>';
             return $out;
@@ -115,7 +117,7 @@ if ( !class_exists( 'App_getPost' ) ) :
                 'paged' => $atts['post_type'],
             ) );
             
-            $out = '<section class="App-getContents row no-gutters">';
+            $out = '<section class="App-getContents row no-gutters col-12 col-md-9">';
             if ( $App_query->have_posts() ) {
                 while ( $App_query->have_posts() ) : $App_query->the_post(); 
                     
