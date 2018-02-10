@@ -5,10 +5,13 @@ if ( is_admin() ) {
 }
 //lib
 require_once 'Lib/class.controller.php';
-require_once 'Lib/class.getMetapost.php';
-require_once 'Lib/class.getPost.php';
-require_once 'Lib/class.content.php';
-require_once 'Lib/class.sidebar.php';
+require_once 'Lib/class.models.php';
+//mod
+require_once 'Mod/class.seo.php';
+require_once 'Mod/class.getPost.php';
+require_once 'Mod/class.content.php';
+require_once 'Mod/class.meta-post.php';
+require_once 'Mod/class.sidebar.php';
 //Controller Templates
 global $App_controller;
 $App_controller->call_controller( array( 
@@ -19,6 +22,10 @@ $App_controller->call_controller( array(
     'className' => 'scripts',
     'new' => 'App_conf_script'
 ));
+$App_controller->call_controller( array(
+    'className' => 'seo',
+    'new' => 'App_control_seo'
+) );
 $App_controller->call_controller( array(
     'className' => 'header',
     'new' => 'App_header'

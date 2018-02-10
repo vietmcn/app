@@ -1,6 +1,6 @@
 <?php
 if ( !class_exists( 'App_getPost' ) ) :
-    class App_getPost
+    class App_getPost extends Models
     {
         function getAuthor( $att = array() ) 
         {

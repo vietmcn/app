@@ -1,6 +1,6 @@
 <?php 
 if ( !class_exists( 'App_contents' ) ) :
-    class App_contents 
+    class App_contents extends Models
     {
         public function title()
         {

@@ -1,6 +1,6 @@
 <?php
 if ( ! class_exists( 'App_getsidebar' ) ) :
-    class App_getsidebar 
+    class App_getsidebar extends Models
     {
         function sidebar_before() 
         {

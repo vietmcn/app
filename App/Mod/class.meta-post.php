@@ -1,7 +1,11 @@
 <?php
 if ( !class_exists('App_getMeta') ) :
-    class App_getMeta
+    class App_getMeta extends Models
     {
+        private function get_postmeta()
+        {
+            
+        }
         public function getThumbnail( $atts = array() )
         {
             ob_start();
@@ -20,9 +24,10 @@ if ( !class_exists('App_getMeta') ) :
             $out .= ob_get_clean();
             return $out;
         }
-        public function getTitle()
+        public function title()
         {
-
+            ob_start();
+            $meta = 
         }
     }
     
