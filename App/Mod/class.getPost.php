@@ -63,9 +63,11 @@ if ( !class_exists( 'App_getPost' ) ) :
             global $App_getMetapost;
             $out  = '<div class="thumbnail">';
             $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">';
-            $out .= $App_getMetapost->getThumbnail( array(
+            $out .= $App_getMetapost->thumbnail( array(
                 'post_id' => $atts,
                 'alt' => get_the_title(),
+                'key_name' => '_meta_post',
+                'echo' => true
                 ) );
             $out .= '</a>';
             $out .= '</div>';

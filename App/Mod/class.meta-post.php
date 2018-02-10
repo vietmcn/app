@@ -2,20 +2,30 @@
 if ( !class_exists('App_getMeta') ) :
     class App_getMeta extends Models
     {
-        private function get_postmeta()
+        private function get_postmeta( $att = array() )
         {
-            
+            $meta = get_post_meta( $att['post_id'], $att['key_name'], true );
+            return $meta;
         }
-        public function getThumbnail( $atts = array() )
+        public function thumbnail( $atts = array() )
         {
             ob_start();
-            $meta = get_post_meta( $atts['post_id'], '_meta_post', true );
+            $meta = $this->get_postmeta( array( 
+                'post_id' => $atts['post_id'],
+                'key_name' => $atts['key_name'],
+            ) );
             $out = '';
             if ( !empty( $meta ) ) {
                 foreach ($meta as $key => $value) {
                     $key = explode( '-', $key );
-                    if ( $key[1] == 'meta_thumbnail_png' ) {
-                        $out .= '<img class="app-lazy" src="'.$value.'" alt="'.$atts['alt'].'" />';
+                    if ( $atts['echo'] == true ) {
+                        if ( $key[1] == 'meta_thumbnail_png' ) {
+                            $out .= '<img class="app-lazy" src="'.$value.'" alt="'.$atts['alt'].'" />';
+                        }
+                    } else {
+                        if ( $key[1] == 'meta_thumbnail_png' ) {
+                            $out .= $value;
+                        }
                     }
                 }
             } else {
@@ -24,10 +34,43 @@ if ( !class_exists('App_getMeta') ) :
             $out .= ob_get_clean();
             return $out;
         }
-        public function title()
+        public function title( $att = array() )
         {
-            ob_start();
-            $meta = 
+            $meta = $this->get_postmeta( array(
+                'post_id' => $att['post_id'],
+                'key_name' => $att['key_name'],
+            ) );
+            if ( $meta ) {
+                ob_start();
+                $out = '';
+                foreach ($meta as $key => $value) {
+                    $key = explode( '-', $key );
+                    if ( $key[1] == 'meta_title' ) {
+                        $out .= $value;
+                    }
+                }
+                $out .= ob_get_clean();
+                return $out;
+            }
+        }
+        public function desc( $att = array() )
+        {
+            $meta = $this->get_postmeta( array( 
+                'post_id' => $att['post_id'],
+                'key_name' => $att['key_name'],
+            ) );
+            if ( $meta ) {
+                ob_start();
+                $out = '';
+                foreach ($meta as $key => $value) {
+                    $key = explode( '-', $key );
+                    if ( $key[1] == 'meta_title' ) {
+                        $out .= $value;
+                    }
+                }
+                $out .= ob_get_clean();
+                return $out;
+            }
         }
     }
     

@@ -31,6 +31,23 @@ if ( !class_exists( 'Trangfox_post_field' ) ) :
                     ),
                 ) 
             );
+            //SEO Content single
+            //SEO Page
+            new Trangfox_field( 
+                array( 
+                    array(
+                        'id'        => '_meta_seo',
+                        'title'     => 'Tiêu đề và mô tả bài viết',
+                        'post_type' => 'post',
+                        'list' => array( 
+                            'Tiêu đề' => 'meta_title',
+                            'Mô tả' => 'meta_desc',
+                        ),
+                        'field' => 'textarea_muti',
+                    ),
+                ) 
+            );
+            //SEO Page
             new Trangfox_field( 
                 array( 
                     array(
