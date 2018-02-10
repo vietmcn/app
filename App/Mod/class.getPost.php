@@ -11,9 +11,9 @@ if ( !class_exists( 'App_getPost' ) ) :
         function title()
         {
             $out  = '<div class="title">';
-            $out .= '<h2>';
+            $out .= '<h3>';
             $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a>';
-            $out .= '</h2>';
+            $out .= '</h3>';
             $out .= '</div>';
             return $out;
         }

@@ -9,15 +9,12 @@ if ( !class_exists( 'App_seo' ) ) :
         }
         public function meta( $att = array() ) 
         {
-            $out  = '<meta name="description" content="'.$att['desc'].'" />';
-            $out .= '<meta itemprop="name" content="'.$att['name'].'" />';
+            $out  = '<link rel="canonical" href="'.$att['url'].'" >';
+            $out .= '<meta name="description" content="'.$att['desc'].'" />';
+            $out .= '<meta itemprop="name" content="'.$att['site_name'].'" />';
             $out .= '<meta itemprop="description" content="'.$att['desc'].'" />';
             $out .= '<meta itemprop="image" content="'.$att['img'].'" />';
-            echo $out;
-        }
-        public function meta_fb( $att = array() )
-        {
-            $out  = '<meta property="og:title" content="'.$att['title'].'">';
+            $out .= '<meta property="og:title" content="'.$att['title'].'">';
             $out .= '<meta property="og:description" content="'.$att['desc'].'">';
             $out .= '<meta property="og:image" content="'.$att['img'].'">';
             $out .= '<meta property="og:image:alt" content="'.$att['alt'].'">';
@@ -27,11 +24,7 @@ if ( !class_exists( 'App_seo' ) ) :
             $out .= '<meta property="fb:admins" content="'.$att['admin_id'].'">';
             $out .= '<meta property="fb:app_id" content="'.$att['app_id'].'">';
             $out .= '<meta property="og:type" content="'.$att['type'].'">';
-            echo $out;
-        }
-        public function meta_tw( $att = array() ) 
-        {
-            $out  = '<meta name="twitter:card" content="'.$att['card'].'" />';
+            $out .= '<meta name="twitter:card" content="'.$att['card'].'" />';
             $out .= '<meta name="twitter:title" content="'.$att['title'].'" />';
             $out .= '<meta name="twitter:description" content="'.$att['desc'].'" />';
             $out .= '<meta name="twitter:creator" content="'.$att['creator'].'">';
