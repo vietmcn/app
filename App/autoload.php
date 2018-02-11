@@ -1,8 +1,4 @@
 <?php
-//Admin
-if ( is_admin() ) {
-    require_once 'Admin/class.metapost.php';
-}
 //lib
 require_once 'Lib/class.controller.php';
 require_once 'Lib/class.models.php';
@@ -12,6 +8,11 @@ require_once 'Mod/class.getPost.php';
 require_once 'Mod/class.content.php';
 require_once 'Mod/class.meta-post.php';
 require_once 'Mod/class.sidebar.php';
+//Admin
+if ( is_admin() ) {
+    require_once 'Admin/class.metapost.php';
+    require_once 'Admin/class.category-field.php';
+}
 //Controller Templates
 global $App_controller;
 $App_controller->call_controller( array( 

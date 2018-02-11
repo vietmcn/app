@@ -77,7 +77,18 @@ if ( !class_exists('App_control_seo') ) :
         }
         private function app_seo_category()
         {
-
+            global $post, $App_setSeo;
+            $cat_id = get_query_var( 'cat' );
+            $cate_title = get_cat_name( $cat_id );
+            $cat_custom = get_option( '_meta_cate_'.$cat_id );
+            var_dump( $cat_custom );
+            $App_setSeo->title( array(
+                'title' => !empty( $cate_custom['title'] ) ? $cat_custom['title'] : $cate_title,
+            ) );
+            $App_setSeo->meta( array( 
+                'title' => !empty( $cate_custom['title'] ) ? $cat_custom['title'] : $cate_title,
+                'desc' => '',
+            ) );
         }
         private function app_seo_single()
         {
