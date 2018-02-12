@@ -18,7 +18,6 @@ if ( !class_exists( 'App_seo' ) ) :
             $out  = '<title>'.$att['title'].'</title>';
             $out .= '<link rel="canonical" href="'.$att['url'].'" >';
             $out .= '<meta name="description" content="'.$att['desc'].'" />';
-            $out .= '<meta itemprop="name" content="'.$att['site_name'].'" />';
             $out .= '<meta itemprop="description" content="'.$att['desc'].'" />';
             $out .= '<meta itemprop="image" content="'.$att['img'].'" />';
             $out .= '<meta property="og:title" content="'.$att['title'].'">';

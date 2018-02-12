@@ -4,7 +4,8 @@ if ( !class_exists('App_control_seo') ) :
     {
         public function __construct()
         {
-            add_action( 'app_seo', array( $this, 'app_temp_seo' ) );
+            add_action( 'app_seo', array( $this, 'app_temp_seo' ), 10 );
+            add_action( 'app_seo', array( $this, 'app_temp_seo_all' ), 20 );
         }
         public function app_temp_seo()
         {
@@ -16,12 +17,23 @@ if ( !class_exists('App_control_seo') ) :
                 //
             } elseif ( is_single() ) {
                 $this->app_seo_single();
-            }
+            } 
+        }
+        public function app_temp_seo_all()
+        {
+            global $App_setSeo;
+            $site_name = explode( '//', get_bloginfo( 'url' ) );
+            $App_setSeo->meta_all( array(
+                'site_name' => $site_name[1],
+                'app_id' => '',
+                'admin_id' => '',
+                'card' => '',
+                'creator' => '@trangfox'
+            ) );
         }
         private function app_seo_home()
         {
             global $post, $App_setSeo;
-            $site_name = explode( '//', get_bloginfo( 'name' ) );
             $App_setSeo->meta( array( 
                 'title' => $App_setSeo->field( array(
                     'key_name' => '_meta_seo',
@@ -34,15 +46,31 @@ if ( !class_exists('App_control_seo') ) :
                     'tag_id' => get_query_var( 'tag_id' ) ? get_query_var( 'tag_id' ) : '',
                 )),
                 'url' => get_bloginfo( 'url' ),
+                'img' => 'https://lh3.googleusercontent.com/KHhaBnVpLpxQtm6Mo8W8dJH4vqqDaiahbZ_OnUCeZsKo_Jc4DfZ1Dez0ukT7VpKNtEBe=w300',
+                'type' => 'website',
+                'alt' => $App_setSeo->field( array(
+                    'key_name' => '_meta_seo',
+                    'type' => 'title',
+                ) ),
             ) );
         }
         private function app_seo_category()
         {
             global $post, $App_setSeo;
             $cat_id = get_query_var( 'cat' );
-            $cate_title = get_cat_name( $cat_id );
+            #$cate_title = get_cat_name( $cat_id );
             $cat_custom = get_option( '_meta_cate_'.$cat_id );
-            
+            $App_setSeo->meta( array( 
+                'title' => $cat_custom['title'],
+                'desc' => $cat_custom['desc'],
+                'url' => get_bloginfo( 'url' ),
+                'img' => 'https://lh3.googleusercontent.com/KHhaBnVpLpxQtm6Mo8W8dJH4vqqDaiahbZ_OnUCeZsKo_Jc4DfZ1Dez0ukT7VpKNtEBe=w300',
+                'type' => 'website',
+                'alt' => $App_setSeo->field( array(
+                    'key_name' => '_meta_seo',
+                    'type' => 'title',
+                ) ),
+            ) );
         }
         private function app_seo_single()
         {
