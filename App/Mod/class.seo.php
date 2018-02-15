@@ -29,23 +29,34 @@ if ( !class_exists( 'App_seo' ) ) :
             $out .= '<meta name="twitter:title" content="'.$att['title'].'" />';
             $out .= '<meta name="twitter:description" content="'.$att['desc'].'" />';
             $out .= '<meta name="twitter:image:src" content="'.$att['img'].'">';
+            if ( isset( $att['single']['enbale'] ) == true ) {
+                $out .= '<meta name="article:section" content="'.$att['single']['cate'].'">';
+                $out .= '<meta name="article:published_time" content="'.$att['single']['date_public'].'">';
+                $out .= '<meta name="article:modified_time" content="'.$att['single']['date_modfied'].'">';
+                $out .= '<meta name="article:author" content="'.$att['single']['author'].'">';
+            }
             echo $out;
         }
         public function field( $att = array() ) 
         {
             global $post, $App_getMetapost;
             if ( $att['type'] == 'title' ) {
-                $title = $App_getMetapost->title( array(
-                    'post_id' => isset( $att['post_id'] ) ? $att['post_id'] : $post->ID,
-                    'key_name' => isset( $att['key_name'] ) ? $att['key_name'] : '_meta_seo', 
-                ) );
+                if ( ! is_category() || ! is_tag() ) {
+                    $title = $App_getMetapost->title( array(
+                        'post_id' => isset( $att['post_id'] ) ? $att['post_id'] : $post->ID,
+                        'key_name' => isset( $att['key_name'] ) ? $att['key_name'] : '_meta_seo', 
+                    ) );
+                } else {
+                    $option = get_option( $att['key_name_option'].$att['option_id'] );
+                    $title = $option['title'];
+                }
                 if ( $title ) {
                     return $title;
                 } else {
                     if ( is_page() || is_front_page() ) {
                         return get_the_title();
                     } elseif( is_category() ) {
-                        return get_cat_name();
+                        return get_cat_name( $att['cate_id'] );
                     } elseif( is_tag() ) {
                         return single_tag_title( false );
                     } elseif( is_single() ) {
@@ -55,10 +66,15 @@ if ( !class_exists( 'App_seo' ) ) :
                     }
                 }
             } elseif ( $att['type'] == 'desc' ) {
-                $desc = $App_getMetapost->desc( array(
-                    'post_id' => isset( $att['post_id'] ) ? $att['post_id'] : $post->ID,
-                    'key_name' => isset( $att['key_name'] ) ? $att['key_name'] : '_meta_seo', 
-                ) );
+                if ( !is_category() || ! is_tag() ) {
+                    $desc = $App_getMetapost->desc( array(
+                        'post_id' => isset( $att['post_id'] ) ? $att['post_id'] : $post->ID,
+                        'key_name' => isset( $att['key_name'] ) ? $att['key_name'] : '_meta_seo', 
+                    ) );
+                } else {
+                    $option = get_option( $att['key_name_option'].$att['option_id'] );
+                    $desc = $option['desc'];
+                }
                 if ( $desc ) {
                     return $desc;
                 } else {

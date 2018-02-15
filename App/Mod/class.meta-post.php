@@ -20,7 +20,7 @@ if ( !class_exists('App_getMeta') ) :
                     $key = explode( '-', $key );
                     if ( $atts['echo'] == true ) {
                         if ( $key[1] == 'meta_thumbnail_png' ) {
-                            $out .= '<img class="app-lazy" src="'.$value.'" alt="'.$atts['alt'].'" />';
+                            $out .= '<img class="app-lazy" data-src="'.$value.'" alt="'.$atts['alt'].'" />';
                         }
                     } else {
                         if ( $key[1] == 'meta_thumbnail_png' ) {

@@ -11,7 +11,7 @@ if ( !class_exists( 'App_control_footer' ) ) :
             $out  = '<div class="App-footer-menu">';
             $out .= '<ul>';
             $out .= '<li>Trangfox © 2018</li>';
-            $out .= '<li><a href="/about" title="Về chúng tôi">Trangfox About</a></li>';
+            $out .= '<li><a href="/about" title="Về chúng tôi">About</a></li>';
             $out .= '<li><a href="/contact">Liên hệ</a></li>';
             $out .= '</ul>';
             $out .= '</div>';

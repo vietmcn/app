@@ -25,7 +25,8 @@ if ( !class_exists('App_conf_script' ) ) {
         public function conf_script()
         {
             global $app_ver;
-            #wp_enqueue_script( 'App-bootstrap-js', get_template_directory_uri() .'/App/Public/js/bootstrap.min.js', array('jquery'), '4.0', true );
+            wp_enqueue_script( 'App-js', get_template_directory_uri() .'/App/Public/js/app.min.js', array('jquery'), $app_ver, true );
+            wp_enqueue_script( 'app-render-js', get_template_directory_uri() .'/App/Public/js/app-render.js', array('jquery'), $app_ver, true );
         }
     }
 }

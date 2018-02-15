@@ -4,9 +4,10 @@ require_once 'Lib/class.controller.php';
 require_once 'Lib/class.models.php';
 //mod
 require_once 'Mod/class.seo.php';
-require_once 'Mod/class.getPost.php';
 require_once 'Mod/class.content.php';
+require_once 'Mod/class.content-single.php';
 require_once 'Mod/class.meta-post.php';
+require_once 'Mod/class.pagined.php';
 require_once 'Mod/class.sidebar.php';
 //Admin
 if ( is_admin() ) {
@@ -34,6 +35,10 @@ $App_controller->call_controller( array(
 $App_controller->call_controller( array(
     'className' => 'content',
     'new' => 'App_content'
+) );
+$App_controller->call_controller( array(
+    'className' => 'ajax',
+    'new' => 'App_ajax'
 ) );
 $App_controller->call_controller( array(
     'className' => 'content-single',

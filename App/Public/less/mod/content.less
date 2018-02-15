@@ -9,7 +9,7 @@
         width: 100%;
         .thumbnail {
             img {
-                max-width: 250px;
+                max-width: 300px;
                 width: 100%;
                 object-fit: cover;
                 object-position: top;
@@ -36,13 +36,13 @@
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 font-size: 13px;
-                margin: 10px 0;
-                padding: 0 5px;
-                border-top: 1px solid #eee;
-                border-bottom: 1px solid #eee;
+                margin: 10px 0 5px;
+                padding: 0 0px;
                 .category {
+                    background: #f1284e;
+                    padding: 0 5px;
                     a {
-                        color: #7c7f75;
+                        color: #fff;
                         font-weight: 500;
                     }
                 }
@@ -76,6 +76,127 @@
                     content: "#";
                 }
             }
+            .App-icon {
+                display: flex;
+                align-content: center;
+                .App-format {
+                    line-height: 1.5;
+                }
+                .App-format::before {
+                    content: "";
+                    display: inline-block;
+                    font-family: "Ionicons";
+                    font-size: 22px;
+                    margin-right: 5px;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-variant: normal;
+                    text-transform: none;
+                    text-rendering: auto;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+                .App-format-gallery::before {
+                    content: "\f148";
+                }
+                .App-format-image::before {
+                    content: "\f147";
+                }
+                .App-format-video::before {
+                    content: "\f4cd";
+                }
+                .App-format-link::before {
+                    content: "\f1fe";
+                }
+            }
         }
     }
+    #App {
+        position: relative;
+        width: 100%;
+    }
+}
+@-webkit-keyframes placeHolderShimmer {
+    0% {
+      background-position: -468px 0
+    }
+    100% {
+      background-position: 468px 0
+    }
+  }
+  
+  @keyframes placeHolderShimmer {
+    0% {
+      background-position: -468px 0
+    }
+    100% {
+      background-position: 468px 0
+    }
+  }
+  .timeline-item {
+    background: #fff;
+    margin: 0 0 15px;
+    min-height: 200px;
+    width: 100%;
+  }
+  
+  .animated-background {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: #eeeeee;
+    background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
+    background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    -webkit-background-size: 800px 104px;
+    background-size: 800px 104px;
+    height: 200px;
+    position: relative;
+  }
+.load-thumbnail {
+    position: absolute;
+    width: 26rem;
+    bottom: 0;
+    right: 0;
+    background: #fff;
+    top: 75px;
+}
+.load-thumbnail.line {
+    top: 17px;
+    bottom: 160px;
+    height: 15px;
+}
+.load-thumbnail.l1 {
+    top: 47px;
+    height: 15px;
+}
+.load-thumbnail.top {
+  top: 0px;
+  bottom: 180px;
+  width: 27rem;
+  right: 0rem;
+}
+.load-thumbnail.right {
+    top: 30px;
+    right: 0rem;
+    width: 120px;
+}
+.load-thumbnail.left {
+    top: 0;
+    left: 19rem;
+    width: 15px;
+}
+.load-thumbnail.r1 {
+    right: 7rem;
+    top: 3rem;
+    width: 50px;
 }
