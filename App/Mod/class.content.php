@@ -11,10 +11,10 @@ if ( !class_exists( 'App_getContent' ) ) :
         function title()
         {
             $out  = '<div class="title App-icon">';
+            $out .= '<h3>';
             if ( get_post_format() ) {
                 $out .= '<span class="App-format App-format-'.get_post_format().'"></span>';
             }
-            $out .= '<h3>';
             $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a>';
             $out .= '</h3>';
             $out .= '</div>';
@@ -61,16 +61,18 @@ if ( !class_exists( 'App_getContent' ) ) :
             }
             return $out;
         }
-        function thumbnail( $atts )
+        function thumbnail( $atts = array() )
         {
             global $App_getMetapost;
             $out  = '<div class="thumbnail">';
             $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'">';
             $out .= $App_getMetapost->thumbnail( array(
-                'post_id' => $atts,
+                'post_id' => $atts['post_id'],
                 'alt' => get_the_title(),
                 'key_name' => '_meta_post',
-                'echo' => true
+                'echo' => true,
+                'lazyClass' => ( isset( $atts['lazyClass'] ) ) ? $atts['lazyClass'] : 'app-lazy',
+                'gallery' => ( isset( $atts['gallery'] ) ) ? $atts['gallery'] : true,
                 ) );
             $out .= '</a>';
             $out .= '</div>';
@@ -92,15 +94,19 @@ if ( !class_exists( 'App_getContent' ) ) :
         }
         private function listPost( $atts = array() )
         {
-            global $App_getMetapost;
+            global $App_getMetapost, $App_mobile;
         
             $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item">';
             $out .= '<div class="app-info">';
-            $out .= $this->thumbnail( $atts['post_id'] );
+            $out .= $this->thumbnail( array(
+                'post_id' => $atts['post_id'],
+            ) );
             $out .= '<div class="app-info-item col-md-7">';
             $out .= $this->title();
             $out .= $this->meta();
-            $out .= $this->desc();
+            if ( !$App_mobile->isMobile() ) {
+                $out .= $this->desc();
+            }
             $out .= '</div>';
             $out .= '</div>';
             $out .= '</article>';
@@ -117,9 +123,9 @@ if ( !class_exists( 'App_getContent' ) ) :
                 'tag' => null,
                 'paged' => null,
                 'orderby' => 'date',
-                'type' => 'normal',
             ), $atts );
             
+            ob_start();
             $App_query = new WP_Query( array( 
                 'post_type' => $atts['post_type'],
                 'post__not_in' => $atts['post__not_in'],
@@ -131,30 +137,58 @@ if ( !class_exists( 'App_getContent' ) ) :
                 'orderby' => $atts['orderby'],
             ) );
             $out  = '';
-            if ( $atts['type'] == 'normal' ) {
+            #$out = '<div class="App-getContents row no-gutters col-12 col-md-9">';
+            if ( $App_query->have_posts() ) {
+                while ( $App_query->have_posts() ) : $App_query->the_post(); 
+                    $out .= $this->listPost( array(
+                      'post_id' =>  $App_query->post->ID,
+                    ) );
+                endwhile;
+                wp_reset_postdata();
+            } else {
+               $out .= '<article id="App-noContent"><h4>Hết gì để tải rồi Đại Vương Ơi</h4></article>';
+            }
+            #$out .= '</div>';
+            $out .= ob_get_clean();
+            echo $out;
+        }
+        public function Ajax( $att = array() )
+        {
+            $App_query = new WP_Query( $att );
+            if ( $App_query->have_posts() ) {
                 ob_start();
-                #$out = '<div class="App-getContents row no-gutters col-12 col-md-9">';
-                if ( $App_query->have_posts() ) {
-                    while ( $App_query->have_posts() ) : $App_query->the_post(); 
-                        
-                        $out .= $this->listPost( array(
-                            'post_id' =>  $App_query->post->ID,
-                        ) );
-                    endwhile;
-                    wp_reset_postdata();
-                    /*$out .= $this->page( array(
-                        'page_max' => $App_query->max_num_pages,
-                        'page_number' => $atts['paged'],
-                    ) );*/
-                } else {
-                    $out .= '<article id="App-noContent"><h4>Hết gì để tải rồi Đại Vương Ơi</h4></article>';
-                }
-                #$out .= '</div>';
+                $out = '';
+                while ( $App_query->have_posts() ) : $App_query->the_post(); 
+                    $out .= $this->listPost( array(
+                        'post_id' =>  $App_query->post->ID,
+                    ) );
+                endwhile;
                 $out .= ob_get_clean();
                 echo $out;
-            } elseif ( $atts['type'] == 'ajax' ) {
-                return $App_query;
             }
+            wp_die();
+        }
+        public function swiper( $att = array() )
+        {
+            ob_start();
+            $App_query = new WP_Query( $att );
+            $out = '';
+            $out .= '<div class="swiper-container"><div class="swiper-wrapper">';
+            while ( $App_query->have_posts() ) : $App_query->the_post();
+                $out .= '<div class="swiper-slide">';
+                $out .= $this->thumbnail( array(
+                    'post_id' => $App_query->post->ID,
+                    'lazyClass' => 'swiper-lazy',
+                    'gallery' => $att['gallery'],
+                ) );
+                $out .= '<h2 id="swiper-title"><a href="'.get_permalink().'" title="'.get_the_title().'">'.get_the_title().'</a></h2>';
+                $out .= '</div>';
+            endwhile;
+            $out .= '</div>';
+            $out .= '<div class="swiper-pagination"></div></div>';
+            wp_reset_postdata();
+            $out .= ob_get_clean();
+            echo $out;
         }
     }
     

@@ -7,12 +7,6 @@
     -o-transition: all .3s ease;
 }
 body {
-    background: url(//3.bp.blogspot.com/-2LZz0E7Nsnw/WlivHtqfvfI/AAAAAAAAEg8/i303nvWo2sQtRFXYbBqp_yprAushZ2u-wCLcBGAs/s1600/box-background.jpg);
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-}
-body {
     font-family: 'Maven Pro', sans-serif;
     font-weight: normal;
     font-size: 17px;
@@ -21,39 +15,46 @@ body {
 a:hover {
     color: #f1284e;
 }
-#App-page {
-    margin-bottom: 1.5rem;
+//img 
+img:not([src]) {
+    visibility: hidden;
 }
-#App-Main {
-    max-width: 1000px;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #fff;
-}
-.App-content {
-    width: 100%;
-    margin: 0px auto;
-}
-footer#App-content {
-    margin-bottom: 3rem;
-    background: rgb(25, 35, 45);
-    color: #a0a0a0;
-    font-size: 13px;
-    padding: 1rem 0px;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-    span {
-        margin-right: 5px;
-        a {
-            color: #dedddd;
-        }
+//icon
+.App-icon {
+    display: flex;
+    align-content: center;
+    .App-format {
+        line-height: 1.5;
     }
-}
-//ads
-.App-ads-before {
-    margin-bottom: 1.5rem;
-    img {
-        width: 100%;
+    .App-format::before {
+        content: "";
+        display: inline-block;
+        font-family: "Ionicons";
+        font-size: 22px;
+        margin-right: 5px;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        text-rendering: auto;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    .App-format-gallery::before {
+        content: "\f148";
+    }
+    .App-format-image::before {
+        content: "\f147";
+    }
+    .App-format-video::before {
+        content: "\f4cd";
+    }
+    .App-format-link::before {
+        content: "\f1fe";
+    }
+    .App-format-audio::before {
+        content: "\f4ce";
     }
 }
 //footer 
@@ -80,8 +81,4 @@ footer.App-footer {
         }
     }
 }
-@import 'mod/header.less';
-@import 'mod/menu.less';
-@import 'mod/content.less';
-@import 'mod/widget.less';
-@import 'mod/paged.less';
+@import 'mod/media.less';

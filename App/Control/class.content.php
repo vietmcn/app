@@ -6,6 +6,7 @@ if ( !class_exists( 'App_content' ) ) :
         {
             add_action( 'app_main', array( $this, 'app_home_category' ), 10 );
             add_action( 'app_main', array( $this, 'app_home_before' ), 15 );
+            add_action( 'app_main', array( $this, 'app_home_slide' ), 20 );
             add_action( 'app_main', array( $this, 'app_home' ), 25 );
             add_action( 'app_main', array( $this, 'app_home_after' ), 50 );
         }
@@ -22,12 +23,34 @@ if ( !class_exists( 'App_content' ) ) :
         }
         public function app_home_category()
         {
-            if ( !is_tag() ) {
+            global $App_mobile;
+
+            if ( ! is_tag() && ! $App_mobile->isMobile() ) {
                 wp_nav_menu( array(
                     'theme_location' => 'menu_category',
                     'echo' => true,
                     'container_class' => 'App-menu-category col-12',
                 ) );
+            }
+        }
+        public function app_home_slide()
+        {
+            global $post, $App_getcontent, $App_mobile;
+            if ( $App_mobile->isMobile() ) {
+                echo '<div id="App-ticky">';
+                $App_getcontent->swiper( array(
+                    'post_type' => 'post',
+                    'posts_per_page' => '4',
+                    'gallery' => false,
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'sticky',
+                            'field'    => 'slug',
+                            'terms'    => 'sk',
+                        ),
+                    ),
+                ) );
+                echo '</div>';
             }
         }
         public function app_home()
@@ -42,21 +65,17 @@ if ( !class_exists( 'App_content' ) ) :
                 } elseif ( is_tag() ) {
                     $paged = get_query_var( 'page_tag' ) ? get_query_var( 'page_tag' ) : 1;
                 } 
-                if ( ! is_category() ) {
-                    //get content
-                    $App_query = $App_getcontent->Post( array(
-                        'post_type' => 'post',
-                        'posts_per_page' => '4',
-                        'cat' => get_query_var( 'cat' ) ? absint( get_query_var( 'cat' ) ) : null,
-                        'tag' => get_query_var( 'tag_id' ) ? absint( get_query_var( 'tag_id' ) ) : null,
-                        'paged' => $paged
-                    ) );
-                }
-                if ( $wp_query->max_num_pages > 1 ) {
-                    echo '<div id="App"></div>';
-                } elseif( is_home() || is_front_page() ) {
-                    echo '<div id="App"></div>';
-                }
+                
+                //get content
+                $App_getcontent->Post( array(
+                    'post_type' => 'post',
+                    'posts_per_page' => '4',
+                    'cat' => get_query_var( 'cat' ) ? absint( get_query_var( 'cat' ) ) : null,
+                    'tag' => get_query_var( 'tag_id' ) ? absint( get_query_var( 'tag_id' ) ) : null,
+                    'paged' => $paged
+                ) );
+                echo '<div id="App"></div>';
+                
             } else {
                 echo 'Models Content Không Được Thêm Vào Đúng Cách';
             }

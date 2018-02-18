@@ -5,6 +5,7 @@ if ( ! class_exists( 'App_control_single' ) ) :
         public function __construct()
         {
             add_action( 'app_single', array( $this, 'app_single_before' ) );
+            add_action( 'app_single', array( $this, 'app_single_menu'), 10 );
             add_action( 'app_single', array( $this, 'app_single_content'), 15 );
             add_action( 'app_single', array( $this, 'app_single_after' ), 55 );
         }
@@ -15,6 +16,16 @@ if ( ! class_exists( 'App_control_single' ) ) :
         public function app_single_after()
         {
             echo '</div></div>';
+        }
+        public function app_single_menu()
+        {
+            global $post;
+            wp_nav_menu( array(
+                'theme_location' => 'menu_category',
+                'echo' => true,
+                'container_class' => 'App-menu-category col-12',
+            ) );
+
         }
         public function app_single_content()
         {

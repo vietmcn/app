@@ -4,7 +4,10 @@ if ( !class_exists( 'App_contents' ) ) :
     {
         public function title()
         {
-            $out  = '<h1>';
+            $out  = '<h1 class="App-icon">';
+            if ( get_post_format() ) {
+                $out .= '<span class="App-format App-format-'.get_post_format().'"></span>';
+            }
             $out .= get_the_title();
             $out .= '</h1>';
             echo $out;
@@ -42,7 +45,7 @@ if ( !class_exists( 'App_contents' ) ) :
         public function comment() 
         {
             $out  = '<div id="app-single-comment">';
-            $out .= '<h4>Bình Luận</h4>';
+            $out .= '<h4><i class="ion-ios-paperplane-outline"></i> Bình Luận</h4>';
             $out .= '<div class="fb-comments" data-mobile="true" data-width="100%" data-href="'.get_permalink().'" data-numposts="10"></div>';
             $out .= '</div>';
             echo $out;

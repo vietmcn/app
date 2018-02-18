@@ -2,6 +2,7 @@
 //lib
 require_once 'Lib/class.controller.php';
 require_once 'Lib/class.models.php';
+require_once 'Lib/class.Mobile_Detect.php';
 //mod
 require_once 'Mod/class.seo.php';
 require_once 'Mod/class.content.php';
@@ -12,8 +13,9 @@ require_once 'Mod/class.sidebar.php';
 //Admin
 if ( is_admin() ) {
     require_once 'Admin/class.metapost.php';
-    require_once 'Admin/class.category-field.php';
+    require_once 'Admin/class.category.php';
 }
+require_once 'Admin/class.taxonomy.php';
 //Controller Templates
 global $App_controller;
 $App_controller->call_controller( array( 

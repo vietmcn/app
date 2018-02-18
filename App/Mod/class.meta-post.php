@@ -9,18 +9,29 @@ if ( !class_exists('App_getMeta') ) :
         }
         public function thumbnail( $atts = array() )
         {
+            global $App_mobile;
             ob_start();
             $meta = $this->get_postmeta( array( 
                 'post_id' => $atts['post_id'],
                 'key_name' => $atts['key_name'],
             ) );
+
             $out = '';
             if ( !empty( $meta ) ) {
                 foreach ($meta as $key => $value) {
                     $key = explode( '-', $key );
                     if ( $atts['echo'] == true ) {
-                        if ( $key[1] == 'meta_thumbnail_png' ) {
-                            $out .= '<img class="app-lazy" data-src="'.$value.'" alt="'.$atts['alt'].'" />';
+                        if ( get_post_format( $atts['post_id'] ) == 'gallery' && $App_mobile->isMobile() && $atts['gallery'] == true ) {
+                            if ( $key[1] == 'meta_thumbnail_png' ) {
+                                $v = explode( ';', $value );
+                                foreach ( $v as $vs ) {
+                                    $out .= '<img class="'.$atts['lazyClass'].'" data-src="'.$vs.'" alt="'.$atts['alt'].'" />';
+                                }
+                            }
+                        } else {
+                            if ( $key[1] == 'meta_thumbnail_png' ) {
+                                $out .= '<img class="'.$atts['lazyClass'].'" data-src="'.$value.'" alt="'.$atts['alt'].'" />';
+                            }
                         }
                     } else {
                         if ( $key[1] == 'meta_thumbnail_png' ) {

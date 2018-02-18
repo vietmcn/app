@@ -10,7 +10,7 @@ if ( !class_exists( 'Trangfox_post_field' ) ) :
         }
         public function init_metabox()
         {
-             //thuộc tính bài viết       
+             //Hình ảnh bài viết       
              new Trangfox_field( 
                 array( 
                     array(
@@ -18,21 +18,16 @@ if ( !class_exists( 'Trangfox_post_field' ) ) :
                         'title'     => 'Thuộc tính bài viết',
                         'post_type' => 'post',
                         'list' => array( 
-                            'Ảnh png'          => 'meta_thumbnail_png',
-                            'Ảnh gif'          => 'meta_thumbnail_gif',
-                            'Ảnh fb 1200x600'  => 'meta_thumbnail_fb',
-                            'Ảnh tw 1024x512'  => 'meta_thumbnail_tw',
-                            'Youtube'          => 'meta_yt_id',
+                            'Ảnh đại diện'     => 'meta_thumbnail_png',
+                            'Video'            => 'meta_video',
                             'Ảnh nền bài viết' => 'meta_bg_content',
                             'Nguồn bài viết'   => 'meta_credit_post',
-                            'Hash Tag'         => 'meta_post_hasgtag'
                         ),
                         'field' => 'textfield_muti',
                     ),
-                ) 
+                )
             );
             //SEO Content single
-            //SEO Page
             new Trangfox_field( 
                 array( 
                     array(

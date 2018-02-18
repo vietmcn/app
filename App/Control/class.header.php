@@ -9,6 +9,7 @@ if ( !class_exists('App_header') ) :
         }
         function header_logo()
         {
+            global $App_mobile;
             if ( is_single() ) {
                 $h1 = 'div';
                 $h2 = 'span';
@@ -19,17 +20,22 @@ if ( !class_exists('App_header') ) :
             $out  = '<div data-elemt="logo" class="col-12">';
             $out .= '<'.$h1.' class="App-logo"><a href="/" title="Trang Chủ">Trang<span>Fox</span>.Com</a></'.$h1.'>';
             $out .= '<'.$h2.' class="App-logo-desc">'.get_bloginfo( 'description' ).'</'.$h2.'>';
+            
             $out .= '</div>';
             
             return $out;
         }
         function header_menu()
         {
-            return wp_nav_menu( array(
-                'theme_location' => 'menu_main',
-                'echo' => false,
-                'container_class' => 'App-menu col-6 col-md-4',
-            ) );
+            global $App_mobile;
+
+            if ( ! $App_mobile->isMobile() ) {
+                return wp_nav_menu( array(
+                    'theme_location' => 'menu_main',
+                    'echo' => false,
+                    'container_class' => 'App-menu col-6 col-md-4',
+                ) );
+            }
         }
         public function header_before()
         {

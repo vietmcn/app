@@ -1,6 +1,6 @@
 <?php 
-if ( !class_exists( 'App_cate_field' ) ) :
-    class App_cate_field 
+if ( !class_exists( 'App_category' ) ) :
+    class App_category 
     {
         public function __construct()
         {
@@ -48,7 +48,11 @@ if ( !class_exists( 'App_cate_field' ) ) :
                 update_option( "_meta_cate_$t_id", $cat_meta );
             }
         }
+        public function sticky()
+        {
+            
+        }
     }
     
 endif;
-return new App_cate_field();
+return new App_category();
