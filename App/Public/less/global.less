@@ -21,8 +21,6 @@ img:not([src]) {
 }
 //icon
 .App-icon {
-    display: flex;
-    align-content: center;
     .App-format {
         line-height: 1.5;
     }
@@ -80,5 +78,58 @@ footer.App-footer {
             }
         }
     }
+}
+.App-loading {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    img {
+        object-fit: cover;
+        object-position: top;
+        height: 140px;
+        width: 150px;
+    }
+}
+//App-youtube Button
+.App-youtube {
+	position: relative;
+	cursor: pointer;
+}
+.App-youtube .play-button {
+    width: 70px;
+    height: 50px;
+    background-color: #d81e46;
+    /* box-shadow: 0 0 30px rgba(0,0,0,0.6); */
+    z-index: 1;
+    opacity: .8;
+    border-radius: 3px;
+}
+.App-youtube .play-button:before {
+	content: "";
+	border-style: solid;
+	border-width: 15px 0 15px 26.0px;
+	border-color: transparent transparent transparent #fff;
+}
+.App-youtube img,
+.App-youtube .play-button {
+	cursor: pointer;
+}
+.App-youtube .play-button,
+.App-youtube .play-button:before {
+	position: absolute;
+}
+.App-youtube .play-button,
+.App-youtube .play-button:before {
+	top: 50%;
+	left: 50%;
+	transform: translate3d( -50%, -50%, 0 );
+}
+.App-youtube iframe {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
 }
 @import 'mod/media.less';

@@ -6,6 +6,7 @@ if ( !class_exists('App_header') ) :
         {
             add_action( 'App_temp_header', array( $this, 'header_before' ) );
             add_action( 'App_temp_header', array( $this, 'header_content' ) );
+            add_action( 'App_temp_header_after', array( $this, 'header_after' ) );
         }
         function header_logo()
         {
@@ -50,6 +51,10 @@ if ( !class_exists('App_header') ) :
         {
             $out = $this->header_logo();
             echo $out;
+        }
+        public function header_after() 
+        {
+            echo '<div class="">hello world</div>';
         }
     }
     

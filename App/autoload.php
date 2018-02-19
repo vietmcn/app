@@ -3,11 +3,12 @@
 require_once 'Lib/class.controller.php';
 require_once 'Lib/class.models.php';
 require_once 'Lib/class.Mobile_Detect.php';
+require_once 'Lib/class.meta-post.php';
+require_once 'Lib/class.posts.php';
 //mod
 require_once 'Mod/class.seo.php';
 require_once 'Mod/class.content.php';
 require_once 'Mod/class.content-single.php';
-require_once 'Mod/class.meta-post.php';
 require_once 'Mod/class.pagined.php';
 require_once 'Mod/class.sidebar.php';
 //Admin
@@ -15,7 +16,9 @@ if ( is_admin() ) {
     require_once 'Admin/class.metapost.php';
     require_once 'Admin/class.category.php';
 }
+//custom taxomy
 require_once 'Admin/class.taxonomy.php';
+
 //Controller Templates
 global $App_controller;
 $App_controller->call_controller( array( 
