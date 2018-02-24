@@ -26,6 +26,9 @@
                     font-size: 18px;
                 }
             }
+            span::before {
+                font-size: 18px;
+            }
         }
         .app-video {
             width: 100%;
@@ -51,9 +54,6 @@
                 }
             }
         }
-        .App-icon .App-format::before {
-            font-size: 15px;
-        }
         //title 
         .app-video {
             h3 {
@@ -61,18 +61,6 @@
             }
             .postmeta {
                 margin-top: 10px;
-            }
-        }
-        .App-youtube{
-            img {
-                width: 100%;
-                height: 70vw;
-            }
-            iframe {
-                height: 65vw;
-                width: 100%;
-                top: 0;
-                left: 0;
             }
         }
     }
@@ -98,24 +86,19 @@
         position: absolute;
         right: 0px;
         left: 5%;
-        top: -10px;
+        top: -8px;
         height: 1px;
         background: #e8e8e8;
     }
     .app-video .postmeta::after, .app-gallery::after {
-        bottom: -6px;
+        bottom: -8px;
         left: 0px;
         top: auto;
     }
     .app-video::before {
         bottom: auto;
-        top: -3px;
+        top: -8px;
         left: 0px;
-    }
-}
-article:first-of-type {
-    .app-video::before {
-        height: 0;
     }
 }
 #App {
@@ -123,16 +106,22 @@ article:first-of-type {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
     text-align: center;
     position: relative;
     h5 {
         margin: 0px;
         font-size: 14px;
         font-weight: 400;
+        min-height: 50px;
+        align-items: center;
         i {
             margin-right: 5px;
         }
+    }
+    img {
+        width: 100%;
+        height: 115px;
+        object-fit: contain;
     }
 }
 //home title
@@ -152,6 +141,9 @@ article:first-of-type {
         margin: 0;
     }
     .app-home-link {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
         .app-home-Gallery {
             margin-right: 15px;
         }

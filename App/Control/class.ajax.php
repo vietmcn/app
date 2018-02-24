@@ -47,11 +47,11 @@ if ( ! class_exists( 'App_ajax' ) ) :
 			header("Content-Type: text/html");
 		   
             // prepare our arguments for the query
-            $args = json_decode( stripslashes( $_GET['query'] ), true );
-            $args['paged'] = esc_attr( $_GET['page'] ) + 1; // we need next page to be loaded
+            $args = json_decode( stripslashes( $_POST['query'] ), true );
+            $args['paged'] = esc_attr( $_POST['page'] ) + 1; // we need next page to be loaded
             $args['post_status'] = 'publish';
-            $args['posts_per_page'] = $_GET['posts_per_page'];
-            $args['cat'] = ( isset( $_GET['cat'] ) ) ? $_GET['cat'] : '';
+            $args['posts_per_page'] = $_POST['posts_per_page'];
+            $args['cat'] = ( isset( $_POST['cat'] ) ) ? $_POST['cat'] : '';
             // it is always better to use WP_Query but not here
             $App_getcontent->Ajax( $args );
             //Ngắt Vòng Lặp

@@ -45,8 +45,8 @@ if ( !class_exists( 'App_getContent' ) ) :
                 endwhile;
                 $out .= ob_get_clean();
                 echo $out;
+                die();
             }
-            wp_die();
         }
         public function swiper( $att = array() )
         {

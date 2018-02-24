@@ -13,13 +13,19 @@ if ( !class_exists( 'App_content' ) ) :
         }
         public function app_home_before()
         {
-            $out  = '<div class="App-content container">';
-            $out .= '<div class="App-getContents row no-gutters col-12 col-md-9">';
+            global $App_mobile;
+            if ( ! $App_mobile->isMobile() ) {
+                $class = 'col-md-9';
+            } else {
+                $class = 'col';
+            }
+            $out  = '<section class="App-content container">';
+            $out .= '<div class="App-getContents row no-gutters col-12 '.$class.' ">';
             echo $out;
         }
         public function app_home_after()
         {   
-            $out = '</div></div>';
+            $out = '</div></section>';
             echo $out;
         }
         public function app_home_bar()
@@ -59,14 +65,17 @@ if ( !class_exists( 'App_content' ) ) :
         }
         public function app_home_title()
         {
-            $out  = '<div id="app-home-title">';
-            $out .= '<h4>Newfeed</h4>';
-            $out .= '<div class="app-home-link">';
-            $out .= '<span class="app-home-Gallery"><a href="/danh-muc/thoi-trang/" title="Cập nhận xu hướng thời trang mới nhất">Hình ảnh</a></span>';
-            $out .= '<span class="app-home-Video"><a href="/danh-muc/video" title="Hướng dẫn làm đẹp">Video</a></span>';
-            $out .= '</div>';
-            $out .= '</div>';
-            echo $out;
+            global $App_mobile;
+            if ( $App_mobile->isMobile() ) {
+                $out  = '<div id="app-home-title">';
+                $out .= '<h4>Newfeed</h4>';
+                $out .= '<div class="app-home-link">';
+                $out .= '<span class="app-home-Gallery"><a href="/danh-muc/thoi-trang/" title="Cập nhận xu hướng thời trang mới nhất">Hình ảnh</a></span>';
+                $out .= '<span class="app-home-Video"><a href="/danh-muc/video" title="Hướng dẫn làm đẹp">Video</a></span>';
+                $out .= '</div>';
+                $out .= '</div>';
+                echo $out;
+            }
         }
         public function app_home()
         {

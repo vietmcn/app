@@ -56,7 +56,7 @@ if ( !class_exists('App_getMeta') ) :
                                     'post_id' => $atts['post_id'],
                                     'alt' => $atts['alt'],
                                 ) );
-                                $out .= '<div data-class="app-lazy" class="App-youtube" data-alt="'.$atts['alt'].'" data-embed="'.$value.'"><div class="play-button"></div></div>';
+                                $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
                                 $out .= $this->media_meta();
                             }
                         } else {

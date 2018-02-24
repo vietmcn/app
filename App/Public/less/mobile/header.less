@@ -1,26 +1,58 @@
 //main: ../mobile.less
 header {
     display: flex;
-    align-items: center;
-    height: 55px;
+    flex-direction: column;
     border-bottom: 1px solid #d2d2d2;
-    div[data-elemt="logo"] {
+    padding: 5px 0px;
+    .App-header-content {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        div[data-elemt="logo"] {
+            padding: 0 10px;
+            .App-logo {
+                font-size: 1.5rem;
+                margin: 0px;
+                a {
+                    color: #515151;
+                    font-weight: 400;
+                    span {
+                        font-weight: 500;
+                        color: #ff127d;
+                    }
+                }
+                a:hover {
+                    text-decoration: none;
+                }
+            }
+            .App-logo-desc {
+                display: none;
+            }
+        }
+    }
+    //menu
+    .App-menu-mobile {
+        display: flex;
         padding: 0 10px;
-        .App-logo {
-            font-size: 22px;
-            a {
-                color: #515151;
-                font-weight: 400;
-                span {
+        align-items: center;
+        margin-top: 5px;
+        .App-menu-mobile-button {
+            margin-right: 10px;
+            line-height: 0px;
+            i {
+                font-size: 1.6rem;
+                line-height: 0;
+                color: #888;
+            }
+        }
+        .App-menu-mobile-text {
+            span {
+                a {
+                    color: #333;
+                    font-size: 16px;
                     font-weight: 500;
                 }
             }
-            a:hover {
-                text-decoration: none;
-            }
-        }
-        .App-logo-desc {
-            display: none;
         }
     }
 }
