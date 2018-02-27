@@ -17,6 +17,7 @@ jQuery(document).ready(function($){
 		  dynamicBullets: true,
 		},
 	});
+	//lazyload youtube
 	$.fn.LAZYYT = function() {
 		$(this).lazyYT('AIzaSyD8kZXa_ycmJRrxlDc56zyYSuQniQVT7AY', {
 			loading_text: 'It is loading!...',
@@ -29,10 +30,9 @@ jQuery(document).ready(function($){
 	$('.js-lazyYT').each(function() {
 		$(this).LAZYYT();
 	});
-
 	//Ajax Load More Post srcoll
 	var canBeLoaded = true, // this param allows to initiate the AJAX call only if necessary
-	bottomOffset = 2000; // the distance (in px) from the page bottom when you want to load more posts
+	bottomOffset = 1500; // the distance (in px) from the page bottom when you want to load more posts
 	
 	$(window).scroll(function(){
 		var load = $(this),
@@ -75,7 +75,7 @@ jQuery(document).ready(function($){
 						canBeLoaded = false;
 						$('#App').html('<h5 class="flex"><i class="ion-social-octocat"></i>Hết Gì Để Xem Rồi Nàng Ơi!!</h5>');
 					}
-					}, 1000 );
+					}, 500 );
 				},
 				
 			});

@@ -6,7 +6,8 @@ if ( !class_exists('App_conf_script' ) ) {
         {
             add_action( 'wp_enqueue_scripts', array( $this, 'conf_css' ) );
             add_action( 'wp_enqueue_scripts', array( $this, 'conf_script' ) );
-        } 
+            add_action( 'wp_footer', array( $this, 'conf_print_script' ) );
+        }
         private function desktop()
         {
             global $app_ver;
@@ -49,6 +50,10 @@ if ( !class_exists('App_conf_script' ) ) {
             wp_enqueue_script( 'App-lib-js', get_template_directory_uri() .'/App/Public/js/App-lib.min.js', array('jquery'), $app_ver, true );
             wp_enqueue_script( 'App-js', get_stylesheet_directory_uri() . '/App/Public/js/App.min.js', array('jquery'), $app_ver, true );
             wp_enqueue_script( 'App-Swiper-js', '//cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js', array('jquery'), '4.0', true );
+        }
+        public function conf_print_script()
+        {
+            ?> <script>jQuery(document).ready(function($){var sticky = new Sticky('.sticky');sticky.update();});</script><?php
         }
     }
 }

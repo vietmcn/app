@@ -88,7 +88,7 @@ if ( !class_exists('App_post' ) ) :
             $cats = get_the_category();
             $out  = '<div class="postmeta">';
             $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
-            $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
+            $out .= '<time datetime="'.get_the_time('c').'">'.human_time_diff( get_the_time('U'), current_time('timestamp') ).' trước</time>';
             $out .= '</div>';
             return $out;
         }

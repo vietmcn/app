@@ -29,7 +29,7 @@ if ( !class_exists( 'App_category' ) ) :
             <tr class="form-field">
             <th scope="row" valign="top"><label for="extra2"><?php _e('Mô tả'); ?></label></th>
             <td>
-                <input type="text" name="_meta_cate[desc]" id="_meta_cate[desc]" size="25" style="width:60%;" value="<?php echo $cat_meta['desc'] ? $cat_meta['desc'] : ''; ?>"><br />
+                <textarea type="text" name="_meta_cate[desc]" id="_meta_cate[desc]" size="25" style="width:60%;"><?php echo $cat_meta['desc'] ? $cat_meta['desc'] : ''; ?></textarea><br />
             </td>
             </tr>
             <?php

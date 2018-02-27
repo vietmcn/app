@@ -7,10 +7,17 @@ if ( !class_exists( 'App_contents' ) ) :
             global $App_mobile;
             if ( $App_mobile->isMobile() ) {
                 $cat = get_the_category( $att['post_id'] );
+                $counter = 1; 
                 if ( $cat ) {
                     $out  = '<p class="the-article-category">';
                     foreach ($cat as $value) {
-                        $out .= '<a class="app-brum-'.$value->slug.'" href="'.get_category_link( $value->term_id ).'" title="Chuyên mục '.$value->name.'">';
+                        $number_cat = $counter++;
+                        if ( $number_cat >= 2 ) {
+                            $class = 'last';
+                        } else {
+                            $class = '';
+                        }
+                        $out .= '<a class="app-brum-'.$value->slug.' '.$class.'" href="'.get_category_link( $value->term_id ).'" title="Chuyên mục '.$value->name.'">';
                         $out .= $value->name;
                         $out .= '</a>';
                     }
@@ -90,6 +97,7 @@ if ( !class_exists( 'App_contents' ) ) :
             $out  = '<div class="App-content-single-tag">';
             if ( $tags ) {
                 $out .= '<ul>';
+                $out .= '<li><i class="ion-ios-pricetags-outline"></i> Tags:</li>';
                 foreach ( $tags as $tag ) {
                     $out .= '<li><a href="'.get_tag_link( $tag->term_id ).'" title="Thẻ '.$tag->name.'">';
                     $out .= $tag->name;
@@ -97,7 +105,7 @@ if ( !class_exists( 'App_contents' ) ) :
                 }
                 $out .= '</ul>';
             } else {
-                $out .= '<span>Không có thẻ nào đc gắng vào đây cả Đại Vương Ơi!!!</span>';
+                $out .= '<span><i class="ion-ios-pricetags-outline"></i> Oop!! Tags bị lổi rồi Nàng</span>';
             }
             $out .= '</div>';
             echo $out;
@@ -109,6 +117,14 @@ if ( !class_exists( 'App_contents' ) ) :
             $out .= '<div class="fb-comments" data-mobile="true" data-width="100%" data-href="'.get_permalink().'" data-numposts="10"></div>';
             $out .= '</div>';
             echo $out;
+        }
+        public function related( $att = array() )
+        {
+            global $App_ListPost;
+            $App_query = new WP_Query( $att );
+            if ( $App_query ) {
+                
+            }
         }
     }
     

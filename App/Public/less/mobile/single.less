@@ -58,7 +58,7 @@ header {
     a:first-of-type {
         font-weight: 500;
     }
-    a:first-of-type::after {
+    .last::before {
         content: ">";
         margin: 0 5px;
         color: #201919;
@@ -113,6 +113,38 @@ header {
         }
         img {
             width: 100%;
+        }
+        .App-content-single-tag {
+            margin-top: 15px;
+            ul {
+                padding: 0px;
+                li {
+                    font-size: 15px;
+                    display: inline-flex;
+                    display: -webkit-inline-flex;
+                    a {
+                        margin-right: 5px;
+                        color: #1871e4;
+                    }
+                    a:hover {
+                        text-decoration: none;
+                    }
+                    a::before {
+                        content: "#";
+                    }
+                }
+            }
+        }
+        #app-single-comment {
+            margin-top: 1rem;
+            h4 {
+                background: #000;
+                padding: 5px 10px;
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ if ( !class_exists( 'App_content' ) ) :
                 $class = 'col';
             }
             $out  = '<section class="App-content container">';
-            $out .= '<div class="App-getContents row no-gutters col-12 '.$class.' ">';
+            $out .= '<div class="App-getContents row no-gutters col-12 '.$class.' " data-sticky-container>';
             echo $out;
         }
         public function app_home_after()
@@ -67,7 +67,7 @@ if ( !class_exists( 'App_content' ) ) :
         {
             global $App_mobile;
             if ( $App_mobile->isMobile() ) {
-                $out  = '<div id="app-home-title">';
+                $out  = '<div id="app-home-title" class="sticky" data-sticky-class="is-sticky">';
                 $out .= '<h4>Newfeed</h4>';
                 $out .= '<div class="app-home-link">';
                 $out .= '<span class="app-home-Gallery"><a href="/danh-muc/thoi-trang/" title="Cập nhận xu hướng thời trang mới nhất">Hình ảnh</a></span>';

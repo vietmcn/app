@@ -3,6 +3,7 @@
 require_once 'Lib/class.controller.php';
 require_once 'Lib/class.models.php';
 require_once 'Lib/class.Mobile_Detect.php';
+require_once 'Lib/class.field.php';
 require_once 'Lib/class.meta-post.php';
 require_once 'Lib/class.posts.php';
 //mod
