@@ -1,4 +1,7 @@
 <?php 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 if ( !class_exists('App_post' ) ) :
     class App_post 
     {
@@ -137,6 +140,26 @@ if ( !class_exists('App_post' ) ) :
                 $out .= $out_enditem;
             }
             $out .= $out_endinfo;
+            $out .= '</article>';
+            return $out;
+        }
+        public function Video( $atts = array() ) 
+        {
+            global $App_mobile;
+            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-video">';
+            $out .= $this->title( array(
+                'post_id' => $atts['post_id'],
+                'type' => $atts['type'],
+            ) );
+            $out .= $this->media( array(
+                'post_id' => $atts['post_id'],
+                'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
+                'gallery' => ( $App_mobile->isMobile() ) ? true : false,
+                'alt' => get_the_title(),
+                'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
+                'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
+                'type' => $atts['type'],
+            ) );
             $out .= '</article>';
             return $out;
         }

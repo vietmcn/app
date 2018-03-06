@@ -1,4 +1,10 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+require_once( dirname(__FILE__) . '/class.field.php' );
+require_once( dirname(__FILE__) . '/class.seo-meta.php' );
+
 if ( !class_exists('App_control_seo') ) :
     class App_control_seo extends Controller
     {
@@ -19,13 +25,15 @@ if ( !class_exists('App_control_seo') ) :
                 $this->app_seo_single();
             } elseif ( is_404() ) {
                 $this->app_seo_404();
+            } elseif ( is_page( array('video', 'gallery') ) ) {
+                $this->app_seo_custom_page();
             }
         }
         public function app_temp_seo_all()
         {
-            global $App_setSeo;
+            global $App_setMeta;
             $site_name = explode( '//', get_bloginfo( 'url' ) );
-            $App_setSeo->meta_all( array(
+            $App_setMeta->meta_all( array(
                 'site_name' => $site_name[1],
                 'app_id' => '',
                 'admin_id' => '',
@@ -35,8 +43,8 @@ if ( !class_exists('App_control_seo') ) :
         }
         private function app_seo_home()
         {
-            global $post, $App_setSeo, $App_seo_field;
-            $App_setSeo->meta( array( 
+            global $post, $App_setMeta, $App_seo_field;
+            $App_setMeta->meta( array( 
                 'title' => $App_seo_field->field( array(
                     'key_name' => '_meta_seo',
                     'type' => 'title',
@@ -58,36 +66,61 @@ if ( !class_exists('App_control_seo') ) :
         }
         private function app_seo_category()
         {
-            global $post, $App_setSeo, $App_seo_field;
+            global $post, $App_setMeta, $App_seo_field;
             $cat_id = get_query_var( 'cat' );
-            $App_setSeo->meta( array( 
+            $App_setMeta->meta( array( 
                 'title' => $App_seo_field->field( array( 
                     'type' => 'title',
                     'cate_id' => $cat_id,
-                    'key_name_option' => '_meta_cate_',
+                    'key_name' => '_meta_cate_',
                 ) ),
                 'desc' => $App_seo_field->field( array( 
                     'type' => 'desc',
                     'cate_id' => $cat_id,
-                    'key_name_option' => '_meta_cate_',
+                    'key_name' => '_meta_cate_',
                 ) ),
                 'url' => get_bloginfo( 'url' ),
-                'img' => '',
+                'img' => $App_seo_field->field( array( 
+                    'type' => 'img',
+                    'cate_id' => $cat_id,
+                    'key_name' => '_meta_cate_',
+                ) ),
                 'type' => 'object',
                 'alt' => $App_seo_field->field( array( 
                     'type' => 'title',
                     'cate_id' => $cat_id,
-                    'key_name_option' => '_meta_cate_',
+                    'key_name' => '_meta_cate_',
+                ) ),
+            ) );
+        }
+        private function app_seo_custom_page()
+        {
+            global $post, $App_setMeta, $App_seo_field;
+            $App_setMeta->meta( array( 
+                'title' => $App_seo_field->field( array(
+                    'key_name' => '_meta_seo',
+                    'type' => 'title',
+                ) ),
+                'desc' => $App_seo_field->field( array( 
+                    'type' => 'desc',
+                    'key_name' => '_meta_seo',
+                )),
+                'url' => get_bloginfo( 'url' ),
+                'img' => 'https://lh3.googleusercontent.com/KHhaBnVpLpxQtm6Mo8W8dJH4vqqDaiahbZ_OnUCeZsKo_Jc4DfZ1Dez0ukT7VpKNtEBe=w300',
+                'type' => 'website',
+                'alt' => $App_seo_field->field( array(
+                    'key_name' => '_meta_seo',
+                    'type' => 'title',
                 ) ),
             ) );
         }
         private function app_seo_single()
         {
-            global $post, $App_setSeo, $App_seo_field;
+            global $post, $App_setMeta, $App_seo_field;
             $cate = get_the_category();
             $author_id = get_post_field ('post_author', $post->ID );
             $display_name = get_the_author_meta( 'nickname' , $author_id ); 
-            $App_setSeo->meta( array(
+            $App_setMeta->meta( array(
                 'title' => $App_seo_field->field( array(
                     'type' => 'title',
                 ) ),
@@ -98,9 +131,9 @@ if ( !class_exists('App_control_seo') ) :
                 'img' => $App_seo_field->field( array( 
                     'type' => 'img',
                     'post_id' => $post->ID,
-                    'echo' => false,
                     'key_name' => '_meta_post',
-                )),
+                    'echo' => false,
+                ) ),
                 'type' => 'article',
                 'alt' => $App_seo_field->field( array(
                     'type' => 'title',
@@ -121,3 +154,5 @@ if ( !class_exists('App_control_seo') ) :
     }
     
 endif;
+
+new App_control_seo;

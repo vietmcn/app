@@ -44,11 +44,11 @@ if ( !class_exists('App_getMeta') ) :
                                     'alt' => $atts['alt'],
                                 ) );
                                 $out .= $this->media_meta();
-                                $out .= '<div class="app-media-gallery"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                                $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 foreach ( $v as $vs ) {
                                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="'.$vs.'" alt="'.$atts['alt'].'" />';
                                 }
-                                $out .= '</a></div>';
+                                $out .= '</a></figure>';
                             }
                         } elseif( get_post_format( $atts['post_id'] ) == 'video' && $atts['type'] != 'swiper' && $App_mobile->isMobile() ) {
                             if ( $key[1] == 'meta_video' ) {
@@ -56,6 +56,9 @@ if ( !class_exists('App_getMeta') ) :
                                     'post_id' => $atts['post_id'],
                                     'alt' => $atts['alt'],
                                 ) );
+                                $out .= '<figure>';
+                                $out .= '<img style="display:none;" alt="'.$atts['alt'].'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
+                                $out .= '</figure>';
                                 $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
                                 $out .= $this->media_meta();
                             }
@@ -69,8 +72,9 @@ if ( !class_exists('App_getMeta') ) :
                                     ) );
                                 }
                                 $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                                $out .= '<figure>';
                                 $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="'.$value.'" alt="'.$atts['alt'].'" />';
-                                $out .= '</a>';
+                                $out .= '</figure></a>';
                             }
                         }
                     } else {
@@ -109,7 +113,7 @@ if ( !class_exists('App_getMeta') ) :
                 $out = '';
                 foreach ($meta as $key => $value) {
                     $key = explode( '-', $key );
-                    if ( $key[1] == 'meta_title' ) {
+                    if ( $key[1] == 'meta_desc' ) {
                         $out .= $value;
                     }
                 }

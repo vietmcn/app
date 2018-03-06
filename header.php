@@ -9,4 +9,4 @@
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>><div id="fb-root"></div>
-<div id="App-page" class="App-site"><div id="App-Main"><header data-elemt="App-header" id="App-head" class=""><?php do_action('App_temp_header_before');?><div class="App-header-content"><?php do_action('App_temp_header');?></div><?php do_action('App_temp_header_after');?></header>
+<div id="App-page" class="App-site <?php app_classBody();?>"><div id="App-Main"><header data-elemt="App-header" id="App-head" class=""><?php do_action('App_temp_header_before');?><div class="App-header-content"><?php do_action('App_temp_header');?></div><?php do_action('App_temp_header_after');?></header>

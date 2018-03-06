@@ -1,4 +1,7 @@
 <?php 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 if ( !class_exists( 'App_contents' ) ) :
     class App_contents extends Models
     {
@@ -41,7 +44,7 @@ if ( !class_exists( 'App_contents' ) ) :
             ) ).'" alt="'.get_the_title().'"/>';
             $out .= '</figure>';
             $out .= '<div class="logo share flex">';
-            $out .= '<h3 class="App-logo"><a href="/" title="Trang Chủ">Trang<span>Fox</span>.Com</a></h3>';
+            $out .= '<span class="App-logo"><a href="/" title="Trang Chủ">Trang<span>Fox</span>.Com</a></span>';
             $out .= '<p class="app-share flex">';
             $out .= '<span class="fb"><a href="//www.facebook.com/dialog/feed?app_id=622829237762080&link='.utf8_uri_encode( get_permalink() ).'" title="Chia sẽ bài viết"><i class="ion-social-facebook"></i></a></span>';
             $out .= '</p>';
@@ -120,13 +123,40 @@ if ( !class_exists( 'App_contents' ) ) :
         }
         public function related( $att = array() )
         {
-            global $App_ListPost;
-            $App_query = new WP_Query( $att );
-            if ( $App_query ) {
-                
+            global $App_ListPost, $App_getMetapost;
+            $App_Query = new WP_Query( $att );
+            ob_start();
+            $out  = '<section id="App-single-related" class="App-related">';
+            $out .= '<header class="App-single-title flex">';
+            $out .= '<h2>Bạn có thể sẽ thích</h2>';
+            $out .= '</header>';
+            if ( $App_Query->have_posts() ) {
+                while ( $App_Query->have_posts() ) : $App_Query->the_post();
+                    if ( get_post_format( $App_Query->post->ID ) ) {
+                        $format = '<span class="App-format App-format-'.get_post_format( $App_Query->post->ID ).'"></span>';
+                    } else {
+                        $format = '';
+                    }
+                    $out .= '<div data-post="'.$App_Query->post->ID.'" class="App-single-related-item App-icon">';
+                    $out .= $App_getMetapost->media( array(
+                        'post_id' => $App_Query->post->ID,
+                        'lazyClass' => 'app-lazy',
+                        'gallery' => false,
+                        'alt' => get_the_title(),
+                        'key_name' => '_meta_post',
+                        'echo' => true,
+                        'type' => 'normal',
+                    ) );
+                    $out .= '<h3 class="article-title"><a href="'.get_permalink().'" title="'.get_the_title().'">'.$format.get_the_title().'</a></h3>';
+                    $out .= '</div>';
+                endwhile;
+                wp_reset_postdata();
             }
+            $out .= '</section>';
+            $out .= ob_get_clean();
+            echo $out;
         }
     }
     
 endif;
-$App_getcontents = new App_contents();
+$App_getcontents = new App_contents;

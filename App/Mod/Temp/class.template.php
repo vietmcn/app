@@ -1,4 +1,12 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+require_once( dirname( __FILE__ ) . '/class.scripts.php' );
+require_once( dirname( __FILE__ ) . '/class.header.php' );
+require_once( dirname( __FILE__ ) . '/class.menu.php' );
+require_once( dirname( __FILE__ ) . '/class.footer.php' );
+
 if ( !class_exists( 'App_config_template' ) ) {
     class App_config_template extends Controller 
     {
@@ -10,6 +18,7 @@ if ( !class_exists( 'App_config_template' ) ) {
             add_filter('show_admin_bar', '__return_false');
             //Disable Emoji
             add_action( 'init', array( $this, 'disable_emojis' ) );
+
         }
         public function config()
         {
@@ -113,3 +122,5 @@ if ( !class_exists( 'App_config_template' ) ) {
     }
     
 }
+
+new App_config_template;

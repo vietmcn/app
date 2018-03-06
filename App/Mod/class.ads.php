@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 if ( !class_exists( 'App_control_ads' ) ) :
     class App_control_ads extends Controller
     {

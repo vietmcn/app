@@ -19,6 +19,9 @@ a:hover {
 img:not([src]) {
     visibility: hidden;
 }
+figure {
+    margin: 0px;
+}
 //icon
 .App-icon {
     .App-format {
@@ -83,6 +86,35 @@ footer.App-footer {
     display: flex;
     display: -webkit-flex;
     display: -ms-flexbox;
+}
+//Menu bottom
+#app-footer-menu {
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    background: #fff;
+    right: 0;
+    left: 0;
+    padding: 10px;
+    border-top: 1px solid #e7e7e8;
+    ul {
+        padding: 0px;
+        margin: 0px;
+        display: flex;
+        display: -webkit-flex;
+        display: -webkit-inline-flex;
+        min-height: 35px;
+        width: 100%;
+        align-items: center;
+        li {
+            list-style: none;
+            margin-right: 10px;
+            a {
+                color: #000;
+                font-size: 15px;
+            }
+        }
+    }
 }
 @import 'mod/youtube.less';
 @import 'mod/media.less';

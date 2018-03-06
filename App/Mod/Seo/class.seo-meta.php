@@ -1,6 +1,9 @@
 <?php 
-if ( !class_exists( 'App_seo' ) ) :
-    class App_seo extends Models
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+if ( !class_exists( 'App_meta_seo' ) ) :
+    class App_meta_seo extends Models
     {
         public function meta_all( $att = array() ) 
         {
@@ -19,7 +22,11 @@ if ( !class_exists( 'App_seo' ) ) :
         }
         public function meta( $att = array() ) 
         {
-            $out  = '<title>'.$att['title'].'</title>';
+            if ( is_single() ) {
+                $out  = '<title>'.esc_attr( get_the_title() ).'</title>';
+            } else {
+                $out  = '<title>'.$att['title'].'</title>';
+            }
             $out .= '<link rel="canonical" href="'.$att['url'].'" >';
             $out .= '<meta name="description" content="'.$att['desc'].'" />';
             $out .= '<meta itemprop="description" content="'.$att['desc'].'" />';
@@ -44,4 +51,4 @@ if ( !class_exists( 'App_seo' ) ) :
     }
     
 endif;
-$App_setSeo = new App_seo();
+$App_setMeta = new App_meta_seo;

@@ -9,14 +9,6 @@ jQuery(document).ready(function($){
 	}(document, 'script', 'facebook-jssdk'));
 	//lazy
 	$("img.app-lazy").lazyload();
-	//Swiper
-	var swiper = new Swiper('.swiper-container', {
-		lazy: true,
-		pagination: {
-		  el: '.swiper-pagination',
-		  dynamicBullets: true,
-		},
-	});
 	//lazyload youtube
 	$.fn.LAZYYT = function() {
 		$(this).lazyYT('AIzaSyD8kZXa_ycmJRrxlDc56zyYSuQniQVT7AY', {

@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 if ( !class_exists( 'App_control_footer' ) ) :
     class App_control_footer extends Controller
     {
@@ -27,3 +30,4 @@ if ( !class_exists( 'App_control_footer' ) ) :
     }
     
 endif;
+new App_control_footer;

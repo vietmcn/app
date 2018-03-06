@@ -1,4 +1,7 @@
 <?php 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 if ( !class_exists('App_seofield') ) :
     class App_seofield 
     {
@@ -6,20 +9,20 @@ if ( !class_exists('App_seofield') ) :
         {
             global $post, $App_getMetapost;
             if ( $att['type'] == 'title' ) {
-                if ( ! is_category() || ! is_tag() ) {
+                if ( is_single() || is_home() || is_front_page() || is_page() ) {
                     $title = $App_getMetapost->title( array(
                         'post_id' => ( isset( $att['post_id'] ) ) ? $att['post_id'] : $post->ID,
                         'key_name' => ( isset( $att['key_name'] ) ) ? $att['key_name'] : '_meta_seo', 
                     ) );
                 } else {
-                    $option = get_option( $att['key_name_option'].$att['cat_id'] );
+                    $option = get_option( $att['key_name'].$att['cate_id'] );
                     $title = $option['title'];
                 }
                 if ( $title ) {
                     return $title;
                 } else {
                     if ( is_page() || is_front_page() ) {
-                        //return get_the_title();
+                        return get_the_title();
                     } elseif( is_category() ) {
                         return get_cat_name( $att['cate_id'] );
                     } elseif( is_tag() ) {
@@ -31,26 +34,26 @@ if ( !class_exists('App_seofield') ) :
                     }
                 }
             } elseif ( $att['type'] == 'desc' ) {
-                if ( ! is_category() || ! is_tag() ) {
+                if ( is_single() || is_home() || is_front_page() || is_page() ) {
                     $desc = $App_getMetapost->desc( array(
                         'post_id' => ( isset( $att['post_id'] ) ) ? $att['post_id'] : $post->ID,
-                        'key_name' => ( isset( $att['key_name'] ) ) ? $att['key_name'] : '_meta_seo', 
+                        'key_name' => ( isset( $att['key_name'] ) ) ? $att['key_name'] : '_meta_seo',
                     ) );
                 } else {
-                    $option = get_option( $att['key_name_option'].$att['cat_id'] );
+                    $option = get_option( $att['key_name'].$att['cate_id'] );
                     $desc = $option['desc'];
                 }
                 if ( $desc ) {
                     return $desc;
                 } else {
                     if ( is_page() || is_front_page() ) {
-                        //return get_the_title();
+                        return get_the_title();
                     } elseif ( is_category() ) {
-                        //return category_description( $att['cate_id'] );
+                        return category_description( $att['cate_id'] );
                     } elseif ( is_tag() ) {
-                        //return tag_description( $att['tag_id'] );
+                        return tag_description( $att['tag_id'] );
                     } elseif ( is_single() ) {
-                        //return get_the_excerpt();
+                       return get_the_excerpt();
                     } else {
                         return 'Lổi rồi';
                     }
@@ -63,17 +66,14 @@ if ( !class_exists('App_seofield') ) :
                         'key_name' => $att['key_name'],
                         'echo' => $att['echo'],
                     ) );
-                    if ( $img ) {
-                        return $img;
-                    } else {
-                        return 'https://lh3.googleusercontent.com/KHhaBnVpLpxQtm6Mo8W8dJH4vqqDaiahbZ_OnUCeZsKo_Jc4DfZ1Dez0ukT7VpKNtEBe=w300';
-                    }
-                } elseif ( is_category() ) {
-                    
-                } elseif ( is_home() || is_front_page() ) {
-
-                } elseif ( is_tag() ) {
-
+                } else {
+                    $option = get_option( $att['key_name'].$att['cate_id'] );
+                    $img = $option['img'];
+                }
+                if ( $img ) {
+                    return $img;
+                } else {
+                    return 'https://lh3.googleusercontent.com/KHhaBnVpLpxQtm6Mo8W8dJH4vqqDaiahbZ_OnUCeZsKo_Jc4DfZ1Dez0ukT7VpKNtEBe=w300';
                 }
             }
         }

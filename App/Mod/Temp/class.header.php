@@ -58,3 +58,5 @@ if ( !class_exists('App_header') ) :
     }
     
 endif;
+
+new App_header;

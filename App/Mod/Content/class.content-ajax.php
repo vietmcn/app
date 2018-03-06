@@ -1,4 +1,7 @@
 <?php 
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
 if ( ! class_exists( 'App_ajax' ) ) :
     class App_ajax extends Controller
     {
@@ -13,6 +16,20 @@ if ( ! class_exists( 'App_ajax' ) ) :
             global $wp_query, $app_ver, $App_getcontent;
             if ( is_home() || is_front_page() ) {
                 $paged = ( get_query_var( 'paged' ) ) ? get_query_var('paged') : 1;
+            } elseif( is_page('video') ) {
+                $paged = ( get_query_var( 'paged' ) ) ? get_query_var('paged') : 1;
+                $tax = array(
+                    'taxonomy' => 'post_format',
+                    'field'    => 'slug',
+                    'terms'    => array( 'post-format-video' ),
+                );
+            } elseif ( is_page('gallery') ) {
+                $paged = ( get_query_var( 'paged' ) ) ? get_query_var('paged') : 1;
+                $tax = array(
+                    'taxonomy' => 'post_format',
+                    'field'    => 'slug',
+                    'terms'    => array( 'post-format-gallery' ),
+                );
             } else {
                 $paged = 1;
             }
@@ -23,6 +40,7 @@ if ( ! class_exists( 'App_ajax' ) ) :
                 'post_status' => 'publish',
                 'cat' => ( get_query_var( 'cat' ) ) ? get_query_var( 'cat' ) : NULL,
                 'tag_id' => ( get_query_var( 'tag_id' ) ) ? get_query_var( 'tag_id' ) : NULL,
+                'tax_query' => ( isset( $tax ) ) ? array( $tax ) : NULL,
             ) );
             if ( !empty( $App_query ) ) {
                 // register our main script but do not enqueue it yet
@@ -50,13 +68,20 @@ if ( ! class_exists( 'App_ajax' ) ) :
             $args = json_decode( stripslashes( $_POST['query'] ), true );
             $args['paged'] = esc_attr( $_POST['page'] ) + 1; // we need next page to be loaded
             $args['post_status'] = 'publish';
-            $args['posts_per_page'] = $_POST['posts_per_page'];
+            $args['posts_per_page'] = ( isset( $_POST['posts_per_page'] ) ) ? $_POST['posts_per_page'] : 5;
             $args['cat'] = ( isset( $_POST['cat'] ) ) ? $_POST['cat'] : '';
+            $args['tax_query'] = ( isset( $_POST['tax_query'] ) ) ? $_POST['tax_query'] : NULL;
             // it is always better to use WP_Query but not here
-            $App_getcontent->Ajax( $args );
+            if ( is_page( array( 'video', 'gallery' ) ) ) {
+                $App_getcontent->Ajax_custom_page( $args );
+            } else {
+                $App_getcontent->Ajax( $args );
+            }
             //Ngắt Vòng Lặp
             die;
         }
     }
     
 endif;
+
+new App_ajax;

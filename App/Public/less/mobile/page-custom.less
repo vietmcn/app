@@ -1,0 +1,27 @@
+//main: ../mobile.less
+.app-hidden {
+    #App-head {
+        display: none;
+    }
+}
+.app-page-video {
+    background-color: #222;
+    #app-home-title {
+        background: #222;
+    }
+    .App-content-item {
+        .app-info {
+            h3 {
+                a {
+                    color: #fff;
+                }
+            }
+        }
+    } 
+    .sticky::after {
+        border-bottom-width: 0px;
+    }
+    .App-content-item .app-info-item::before, .App-content-item .app-video .postmeta::after, .App-content-item .app-video::before, .App-content-item .app-gallery::after {
+        background: #182833;
+    }
+}
