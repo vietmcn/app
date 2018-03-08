@@ -6,7 +6,7 @@ if ( !class_exists('App_header') ) :
         {
             add_action( 'App_temp_header', array( $this, 'header_before' ) );
             add_action( 'App_temp_header', array( $this, 'header_content' ) );
-            add_action( 'App_temp_header_after', array( $this, 'header_after' ) );
+            #add_action( 'App_temp_header_after', array( $this, 'header_after' ) );
         }
         public function header_before()
         {

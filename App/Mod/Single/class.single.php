@@ -9,11 +9,8 @@ if ( ! class_exists( 'App_control_single' ) ) :
     {
         public function __construct()
         {
-            add_action( 'app_single', array( $this, 'app_single_before' ) );
             add_action( 'app_single', array( $this, 'app_single_cover' ), 5 );
-            add_action( 'app_single', array( $this, 'app_single_menu'), 10 );
             add_action( 'app_single', array( $this, 'app_single_content'), 15 );
-            add_action( 'app_single', array( $this, 'app_single_after' ), 55 );
             add_action( 'app_single', array( $this, 'app_single_related' ), 60 );
         }
         public function app_single_cover()
@@ -28,25 +25,6 @@ if ( ! class_exists( 'App_control_single' ) ) :
                     'post_id' => $post->ID,
                 ) );
             }   
-        }
-        public function app_single_before()
-        {
-            echo '<article id="App-main" class="container"><div class="row">';
-        }
-        public function app_single_after()
-        {
-            echo '</div></article>';
-        }
-        public function app_single_menu()
-        {
-            global $App_mobile;
-            if ( ! $App_mobile->isMobile() ) {
-                wp_nav_menu( array(
-                    'theme_location' => 'menu_category',
-                    'echo' => true,
-                    'container_class' => 'App-menu-category col-12',
-                ) );
-            }
         }
         public function app_single_content()
         {

@@ -8,8 +8,8 @@ if ( !class_exists( 'App_meta_seo' ) ) :
         public function meta_all( $att = array() ) 
         {
             $out  = '<meta property="og:site_name" content="'.$att['site_name'].'">';
-            if ( is_404() ) {
-                $out .= '<meta content="index,follow" name="robots">';
+            if ( is_404() || is_page('menu') ) {
+                $out .= '<meta content="noindex,nofollow" name="robots">';
             } else {
                 $out .= '<meta content="index,follow" name="robots">';
             }
