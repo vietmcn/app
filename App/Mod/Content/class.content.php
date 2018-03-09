@@ -36,7 +36,7 @@ if ( ! class_exists( 'App_content' ) ) :
         function app_home_title()
         {
             global $App_mobile, $App_getPostmeta;
-            if ( is_page( array( 'video', 'galler' ) ) ) {
+            if ( is_page( array( 'video', 'gallery' ) ) ) {
                 $title = get_the_title();
                 $menu = '';
             } else {
