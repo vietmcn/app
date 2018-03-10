@@ -4,25 +4,29 @@ if ( !class_exists('App_getMeta') ) :
     {
         function media_title( $atts = array() )
         {
-            if ( isset( $atts['type'] ) == 'swiper' ) {
-                $class = 'swiper-title';
-            } else {
-                $class = 'App-title';
+            if ( !is_single() ) {
+                if ( isset( $atts['type'] ) == 'swiper' ) {
+                    $class = 'swiper-title';
+                } else {
+                    $class = 'App-title';
+                }
+                $title  = '<div class="title App-icon app-media-mobie">';
+                $title .= '<h3 id="'.$class.'"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                $title .= '<span class="App-format App-format-'.get_post_format( $atts['post_id'] ).'"></span>'.$atts['alt'];
+                $title .= '</a></h3></div>';
+                return $title;
             }
-            $title  = '<div class="title App-icon app-media-mobie">';
-            $title .= '<h3 id="'.$class.'"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
-            $title .= '<span class="App-format App-format-'.get_post_format( $atts['post_id'] ).'"></span>'.$atts['alt'];
-            $title .= '</a></h3></div>';
-            return $title;
         }
         function media_meta() 
         {
-            $cats = get_the_category();
-            $out  = '<div class="postmeta">';
-            $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
-            $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
-            $out .= '</div>';
-            return $out;
+            #if ( ! is_single() ) {
+                $cats = get_the_category();
+                $out  = '<div class="postmeta">';
+                $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
+                $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
+                $out .= '</div>';
+                return $out;
+            #}
         }
         public function media( $atts = array() )
         {
@@ -59,7 +63,7 @@ if ( !class_exists('App_getMeta') ) :
                                 $out .= '<figure>';
                                 $out .= '<img style="display:none;" alt="'.$atts['alt'].'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
                                 $out .= '</figure>';
-                                $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
+                                $out = '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
                                 $out .= $this->media_meta();
                             }
                         } else {

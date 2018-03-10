@@ -63,6 +63,18 @@ if ( ! class_exists( 'App_control_single' ) ) :
                 $Query['cat'] = array( $cats );
             }
             $Query['post__not_in'] = array( $post->ID );
+
+            if ( get_post_format( $post->ID ) == 'video' ) {
+                $Query['tax_query'] = array(
+                    array(
+                        'taxonomy' => 'post_format',
+                        'field'    => 'slug',
+                        'terms'    => array( 'post-format-video' ),
+                    )
+                );
+            } else {
+                $Query['tax_query'] = NULL;
+            }
             $App_getcontents->related( $Query );
         }
     }

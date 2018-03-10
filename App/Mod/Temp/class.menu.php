@@ -30,7 +30,7 @@ if ( !class_exists( 'App_temp_menu' ) ) :
             global $App_mobile;
             if ( $App_mobile->isMobile() ) {
                 if ( ! is_tag() ) {
-                    
+                    //
                 }
             } else {
                 //menu
