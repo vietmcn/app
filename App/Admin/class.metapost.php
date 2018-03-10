@@ -1,10 +1,14 @@
 <?php 
+if ( !defined( 'ABSPATH' ) ) {
+    exit;
+}
+require_once get_template_directory(). '/App/Lib/class.meta-field.php';
+
 if ( !class_exists( 'Trangfox_post_field' ) ) :
     class Trangfox_post_field
     {
         public function __construct()
         {
-            require_once get_template_directory(). '/App/Lib/class.meta-field.php';
             add_action( 'load-post.php',               array( $this, 'init_metabox' ) );
             add_action( 'load-post-new.php',           array( $this, 'init_metabox' ) );
         }

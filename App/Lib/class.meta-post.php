@@ -4,7 +4,7 @@ if ( !class_exists('App_getMeta') ) :
     {
         function media_title( $atts = array() )
         {
-            if ( !is_single() ) {
+            if ( ! is_single() ) {
                 if ( isset( $atts['type'] ) == 'swiper' ) {
                     $class = 'swiper-title';
                 } else {
@@ -19,14 +19,14 @@ if ( !class_exists('App_getMeta') ) :
         }
         function media_meta() 
         {
-            #if ( ! is_single() ) {
-                $cats = get_the_category();
-                $out  = '<div class="postmeta">';
-                $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
-                $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
-                $out .= '</div>';
-                return $out;
-            #}
+            
+            $cats = get_the_category();
+            $out  = '<div class="postmeta">';
+            $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
+            $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
+            $out .= '</div>';
+            return $out;
+            
         }
         public function media( $atts = array() )
         {
@@ -63,7 +63,7 @@ if ( !class_exists('App_getMeta') ) :
                                 $out .= '<figure>';
                                 $out .= '<img style="display:none;" alt="'.$atts['alt'].'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
                                 $out .= '</figure>';
-                                $out = '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
+                                $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
                                 $out .= $this->media_meta();
                             }
                         } else {

@@ -17,7 +17,7 @@ if ( ! class_exists( 'App_control_single' ) ) :
         {
             global $post, $App_getcontents, $App_mobile;
             
-            if ( $App_mobile->isMobile() ) {
+            if ( $App_mobile->isMobile() && ! get_post_format( $post->ID ) == 'video' ) {
                 $App_getcontents->cover( array(
                     'post_id' => $post->ID,
                 ) );
