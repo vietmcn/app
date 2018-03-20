@@ -11,13 +11,13 @@ if ( !class_exists( 'App_meta_seo' ) ) :
             if ( is_404() || is_page('menu') ) {
                 $out .= '<meta content="noindex,nofollow" name="robots">';
             } else {
+                $out .= '<meta property="fb:app_id" content="'.$att['app_id'].'">';
+                $out .= '<meta property="fb:admins" content="'.$att['admin_id'].'">';
+                $out .= '<meta property="og:locale" content="vi_VN">';
+                $out .= '<meta name="twitter:card" content="'.$att['card'].'" />';
+                $out .= '<meta name="twitter:creator" content="'.$att['creator'].'">';
                 $out .= '<meta content="index,follow" name="robots">';
             }
-            $out .= '<meta property="fb:app_id" content="'.$att['app_id'].'">';
-            $out .= '<meta property="fb:admins" content="'.$att['admin_id'].'">';
-            $out .= '<meta property="og:locale" content="vi_VN">';
-            $out .= '<meta name="twitter:card" content="'.$att['card'].'" />';
-            $out .= '<meta name="twitter:creator" content="'.$att['creator'].'">';
             echo $out;
         }
         public function meta( $att = array() ) 
@@ -31,12 +31,15 @@ if ( !class_exists( 'App_meta_seo' ) ) :
             $out .= '<meta name="description" content="'.$att['desc'].'" />';
             $out .= '<meta itemprop="description" content="'.$att['desc'].'" />';
             $out .= '<meta itemprop="image" content="'.$att['img'].'" />';
+            $out .= '<meta property="og:type" content="'.$att['type'].'">';
+            $out .= '<meta property="og:url" content="'.$att['url'].'">';
             $out .= '<meta property="og:title" content="'.$att['title'].'">';
             $out .= '<meta property="og:description" content="'.$att['desc'].'">';
             $out .= '<meta property="og:image" content="'.$att['img'].'">';
             $out .= '<meta property="og:image:alt" content="'.$att['alt'].'">';
-            $out .= '<meta property="og:url" content="'.$att['url'].'">';
-            $out .= '<meta property="og:type" content="'.$att['type'].'">';
+            $out .= '<meta property="og:image:type" content="image/jpeg">';
+            $out .= '<meta property="og:image:width" content="600px">';
+            $out .= '<meta property="og:image:height" content="600px">';
             $out .= '<meta name="twitter:title" content="'.$att['title'].'" />';
             $out .= '<meta name="twitter:description" content="'.$att['desc'].'" />';
             $out .= '<meta name="twitter:image:src" content="'.$att['img'].'">';

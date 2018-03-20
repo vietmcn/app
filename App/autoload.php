@@ -20,6 +20,7 @@ require_once 'Mod/functions.php';
 if ( is_admin() ) {
     require_once 'Admin/class.metapost.php';
     require_once 'Admin/class.category.php';
+    require_once 'Admin/class.script.php';
 }
 //custom taxomy
 require_once 'Admin/class.taxonomy.php';

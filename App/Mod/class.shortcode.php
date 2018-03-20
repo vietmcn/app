@@ -14,7 +14,8 @@ if ( !class_exists('App_control_shortcode' ) ) :
                 'tieu-de' => get_the_title(),
                 'mota' => '',
             ), $att );
-            $out  = '<figure data-sub-html="'.$att['mota'].'" class="item" data-src="'.esc_url( $att['link'] ).'" ><img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy" alt="'.esc_attr( $att['tieu-de'] ).'" data-src="'.esc_url( $att['link'] ).'">';
+            $link = explode('https://imgur.com', $att['link'] );
+            $out  = '<figure data-sub-html="'.$att['mota'].'" class="item" data-src="'.esc_url( '//i.imgur.com'.$link[1].'.jpg' ).'" ><img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy" alt="'.esc_attr( $att['tieu-de'] ).'" data-src="'.esc_url( '//i.imgur.com'.$link[1].'.jpg' ).'">';
             $out .= '<figcaption class="img-desc">'.$att['mota'].'</figcaption>';
             $out .= '</figure>';
             return $out;

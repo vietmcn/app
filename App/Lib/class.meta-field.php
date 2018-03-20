@@ -21,7 +21,6 @@ if ( ! class_exists( 'Trangfox_filed' ) ) :
             foreach ( $this->fox_metabox as $value ) {
                 $value = $value;
             }
-
             add_meta_box(
                 $value['id'],
                 $value['title'],
@@ -94,18 +93,36 @@ if ( ! class_exists( 'Trangfox_filed' ) ) :
             if ( empty( $post_meta ) ) {
 
                 foreach ( $value['list'] as $id => $key ) {
-    
+                    $thumbnails = explode('-', $key );
+                    if ( $thumbnails[0] == 'meta_thumbnail_png' ) {
+                        $label = 'meta_thumbnail';
+                        $muitl = '[0]';
+                        $button = '<span id="add-address" class="button_plus">+</span>';
+                    } else {
+                        $label = 'meta_label';
+                        $muitl = '';
+                        $button = '';
+                    }
+                    $fox_out .= '<div class="Meta_item">';
                     $fox_out .= '<label class=""><span>'.$id.'</span></label>';
-                    $fox_out .= '<input style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.'-'.$key.']' ).'" value="" />';
-    
+                    $fox_out .= $button;
+                    $fox_out .= '<input class="'.$label.'" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.'-'.$key.']'.$muitl ).'" value="" />';
+                    $fox_out .= '</div>';
                 }
             } else {
 
                 foreach ( $post_meta as $id => $key ) {
-                    $fox_name = explode( "-", $id );
-                    $fox_out .= '<label class=""><span>'.$fox_name[0].'</span></label>';
-                    $fox_out .= '<input style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']' ).'" value="'.esc_attr( $key ).'" />';
-    
+                    $id = explode( '-', $id );
+                    $fox_out .= '<div class="Meta_item">';
+                    $fox_out .= '<label class="'.$value['id'].'"><span>'.$id[0].'</span></label>';
+                    if ( $id[1] == 'meta_thumbnail_png' ) {
+                        foreach ($key as $keys ) {
+                            $fox_out .= '<input style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']' ).'" value="'.esc_attr( $keys ).'" />';
+                        }
+                    } else {
+                        $fox_out .= '<input style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']' ).'" value="'.esc_attr( $key ).'" />';
+                    }
+                    $fox_out .= '</div>';
                 }
             }
             echo $fox_out;

@@ -28,7 +28,7 @@ if ( !class_exists('App_control_seo') ) :
             } elseif ( is_page( array('video', 'gallery') ) ) {
                 $this->app_seo_custom_page();
             } else {
-                $this->app_seo_page_menu();
+
             }
         }
         public function app_temp_seo_all()
@@ -37,7 +37,7 @@ if ( !class_exists('App_control_seo') ) :
             $site_name = explode( '//', get_bloginfo( 'url' ) );
             $App_setMeta->meta_all( array(
                 'site_name' => $site_name[1],
-                'app_id' => '',
+                'app_id' => '476780242707904',
                 'admin_id' => '',
                 'card' => 'summary_large_image',
                 'creator' => '@trangfox'
@@ -152,19 +152,6 @@ if ( !class_exists('App_control_seo') ) :
         private function app_seo_404()
         {
 
-        }
-        private function app_seo_page_menu()
-        {
-            global $App_setMeta;
-            $site_name = explode( '//', get_bloginfo( 'url' ) );
-            $App_setMeta->meta_all( array(
-                'site_name' => $site_name[1],
-                'app_id' => '',
-                'admin_id' => '',
-                'card' => 'summary_large_image',
-                'creator' => '@trangfox',
-                'title' => 'Danh mục - Trangfox.com'
-            ) );
         }
     }
     
