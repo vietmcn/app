@@ -13,7 +13,7 @@ $(document).on("click", ".remove-address",function(e){
     e.preventDefault();
     $(this).parents(".address").remove();
     //update labels
-    $("#form1").find("label[for^='_meta_post[Ảnh đại diện-meta_thumbnail_png]']").each(function(){
+    $("#_meta_post").find("label[for^='_meta_postmeta_thumbnail_png']").each(function(){
         $(this).html("Address " + ($(this).parents('.address').index() + 1));
     });
 });

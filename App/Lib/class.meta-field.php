@@ -112,12 +112,24 @@ if ( ! class_exists( 'Trangfox_filed' ) ) :
             } else {
 
                 foreach ( $post_meta as $id => $key ) {
-                    $id = explode( '-', $id );
+                    $name = explode( '-', $id );
+                    $ids = explode( '-', $id );
                     $fox_out .= '<div class="Meta_item">';
-                    $fox_out .= '<label class="'.$value['id'].'"><span>'.$id[0].'</span></label>';
-                    if ( $id[1] == 'meta_thumbnail_png' ) {
+                    $fox_out .= '<label for="'.$value['id'].$ids[1].'"><span>'.$name[0].'</span></label>';
+                    if ( $ids[1] == 'meta_thumbnail_png' ) {
+                        $fox_out .= '<span id="add-address" class="button_plus">+</span>';
+                        $i = 0;
+                        $len = count($key);
                         foreach ($key as $keys ) {
-                            $fox_out .= '<input style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']' ).'" value="'.esc_attr( $keys ).'" />';
+                            if ( $i == 0 ) {
+                                $fox_out .= '<input class="meta_thumbnail" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']['.$i++.']' ).'" value="'.esc_attr( $keys ).'" />';
+                            } else {
+                                $fox_out .= '<div class="address">';
+                                $fox_out .= '<input style="margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']['.$i++.']' ).'" value="'.esc_attr( $keys ).'" />';
+                                $fox_out .= '<span class="remove-address button_plus">-</span>';
+                                $fox_out .= '</div>';
+                            }
+                            $i++;
                         }
                     } else {
                         $fox_out .= '<input style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']' ).'" value="'.esc_attr( $key ).'" />';
