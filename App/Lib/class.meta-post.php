@@ -75,10 +75,14 @@ if ( !class_exists('App_getMeta') ) :
                                         'type' => $atts['type'],
                                     ) );
                                 }
-                                
+                                if ( isset( $value[0] ) ) {
+                                    $img = explode( '/', $value[0] );
+                                } else {
+                                    $img = explode( '/', $value );
+                                }
                                 $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 $out .= '<figure>';
-                                $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="'.$value[0].'" alt="'.$atts['alt'].'" />';
+                                $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].'.jpg" alt="'.$atts['alt'].'" />';
                                 $out .= '</figure></a>';
                             }
                         }
