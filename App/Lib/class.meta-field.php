@@ -116,7 +116,7 @@ if ( ! class_exists( 'Trangfox_filed' ) ) :
                     $ids = explode( '-', $id );
                     $fox_out .= '<div class="Meta_item">';
                     $fox_out .= '<label for="'.$value['id'].$ids[1].'"><span>'.$name[0].'</span></label>';
-                    if ( $ids[1] == 'meta_thumbnail_png' ) {
+                    if ( isset( $ids[1] ) == 'meta_thumbnail_png' ) {
                         $fox_out .= '<span id="add-address" class="button_plus">+</span>';
                         $i = 0;
                         $len = count($key);

@@ -42,14 +42,14 @@ if ( !class_exists('App_getMeta') ) :
                     if ( $atts['echo'] == true ) {
                         if ( get_post_format( $atts['post_id'] ) == 'gallery' && $App_mobile->isMobile() && $atts['gallery'] == true && $atts['type'] != 'swiper' ) {
                             if ( $key[1] == 'meta_thumbnail_png' ) {
-                                $v = explode( ';', $value );
                                 $out .= $this->media_title( array( 
                                     'post_id' => $atts['post_id'],
                                     'alt' => $atts['alt'],
                                 ) );
                                 $out .= $this->media_meta();
                                 $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
-                                foreach ( $v as $vs ) {
+                                foreach ( $value as $item ) {
+                                    
                                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="'.$vs.'" alt="'.$atts['alt'].'" />';
                                 }
                                 $out .= '</a></figure>';
@@ -75,9 +75,10 @@ if ( !class_exists('App_getMeta') ) :
                                         'type' => $atts['type'],
                                     ) );
                                 }
+                                
                                 $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 $out .= '<figure>';
-                                $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="'.$value.'" alt="'.$atts['alt'].'" />';
+                                $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="'.$value[0].'" alt="'.$atts['alt'].'" />';
                                 $out .= '</figure></a>';
                             }
                         }
