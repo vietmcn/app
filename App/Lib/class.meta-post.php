@@ -49,8 +49,8 @@ if ( !class_exists('App_getMeta') ) :
                                 $out .= $this->media_meta();
                                 $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 foreach ( $value as $item ) {
-                                    
-                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="'.$vs.'" alt="'.$atts['alt'].'" />';
+                                    $item = explode( '-', $item );
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$item[3].'.jpg" alt="'.$atts['alt'].'" />';
                                 }
                                 $out .= '</a></figure>';
                             }
@@ -75,13 +75,10 @@ if ( !class_exists('App_getMeta') ) :
                                         'type' => $atts['type'],
                                     ) );
                                 }
-                                if ( isset( $value[0] ) ) {
-                                    $img = explode( '/', $value[0] );
-                                } else {
-                                    $img = explode( '/', $value );
-                                }
+                                
                                 $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 $out .= '<figure>';
+                                $img = explode( '/', $value[0] );
                                 $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].'.jpg" alt="'.$atts['alt'].'" />';
                                 $out .= '</figure></a>';
                             }

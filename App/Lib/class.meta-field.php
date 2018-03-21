@@ -120,8 +120,8 @@ if ( ! class_exists( 'Trangfox_filed' ) ) :
                         if ( $key ) {
                             $fox_out .= '<span id="add-address" class="button_plus">+</span>';
                             $i = 0;
-                            $len = count($key);
-                            foreach ($key as $keys ) {
+                            $len = count( $key );
+                            foreach ( $key as $keys ) {
                                 if ( $i == 0 ) {
                                     $fox_out .= '<input class="meta_thumbnail" style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']['.$i++.']' ).'" value="'.esc_attr( $keys ).'" />';
                                 } else {
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Trangfox_filed' ) ) :
                                 }
                                 $i++;
                             }
-                        }
+                        } 
                     } else {
                         $fox_out .= '<input style="width: 100%;margin: 5px 0px;" type="text" name="'.esc_attr( $value['id'].'['.$id.']' ).'" value="'.esc_attr( $key ).'" />';
                     }

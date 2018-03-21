@@ -8,7 +8,7 @@ if ( !class_exists('App_post' ) ) :
         public function getAuthor( $att = array() ) 
         {
             $author_id = get_post_field ('post_author', $att['post_id']);
-            $display_name = get_the_author_meta( 'display_name' , $att['post_id'] ); 
+            $display_name = get_the_author_meta( 'nickname' , $att['post_id'] ); 
             return $display_name;
         }
         public function title( $att = array() )
