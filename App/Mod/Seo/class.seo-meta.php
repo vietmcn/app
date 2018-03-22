@@ -17,6 +17,7 @@ if ( !class_exists( 'App_meta_seo' ) ) :
                 $out .= '<meta name="twitter:card" content="'.$att['card'].'" />';
                 $out .= '<meta name="twitter:creator" content="'.$att['creator'].'">';
                 $out .= '<meta content="index,follow" name="robots">';
+                $out .= '<meta name="yandex-verification" content="8016cf125a34ec66" />';
             }
             echo $out;
         }
@@ -40,8 +41,8 @@ if ( !class_exists( 'App_meta_seo' ) ) :
             $out .= '<meta property="og:image:type" content="image/jpeg">';
             $out .= '<meta property="og:image:width" content="600px">';
             $out .= '<meta property="og:image:height" content="600px">';
-            $out .= '<meta name="twitter:title" content="'.$att['title'].'" />';
-            $out .= '<meta name="twitter:description" content="'.$att['desc'].'" />';
+            $out .= '<meta name="twitter:title" content="'.esc_attr( $att['title'] ).'" />';
+            $out .= '<meta name="twitter:description" content="'.esc_attr( $att['desc'] ).'" />';
             $out .= '<meta name="twitter:image:src" content="'.$att['img'].'">';
             if ( isset( $att['single']['enbale'] ) == true ) {
                 $out .= '<meta name="article:section" content="'.$att['single']['cate'].'">';

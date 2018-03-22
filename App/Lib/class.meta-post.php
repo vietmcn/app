@@ -33,7 +33,11 @@ if ( !class_exists('App_getMeta') ) :
             global $App_mobile;
             ob_start();
             $meta = get_post_meta( $atts['post_id'], $atts['key_name'], true );
-
+            if ( is_home() || is_front_page() || is_category() || is_tag() && $App_mobile->isMobile() ) {
+                $thumbnail_size = 'm';
+            } else {
+                $thumbnail_size = 'l';
+            }
             $out = '';
             if ( !empty( $meta ) ) {
                 
@@ -48,9 +52,11 @@ if ( !class_exists('App_getMeta') ) :
                                 ) );
                                 $out .= $this->media_meta();
                                 $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                                $i = 0;
                                 foreach ( $value as $item ) {
-                                    $item = explode( '-', $item );
-                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$item[3].'.jpg" alt="'.$atts['alt'].'" />';
+                                    $item = explode( '/', $item );
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$item[3].$thumbnail_size.'.jpg" alt="'.$atts['alt'].'" />';
+                                    if ( ++$i >= 3 ) break;
                                 }
                                 $out .= '</a></figure>';
                             }
@@ -78,13 +84,14 @@ if ( !class_exists('App_getMeta') ) :
                                 $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 $out .= '<figure>';
                                 $img = explode( '/', $value[0] );
-                                $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].'.jpg" alt="'.$atts['alt'].'" />';
+                                $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].$thumbnail_size.'.jpg" alt="'.$atts['alt'].'" />';
                                 $out .= '</figure></a>';
                             }
                         }
                     } else {
                         if ( $key[1] == 'meta_thumbnail_png' ) {
-                            $out .= $value;
+                            $img = explode( '/', $value[0] );
+                            $out .= '//i.imgur.com/'.$img[3].'l.jpg';
                         }
                     }
                 }
