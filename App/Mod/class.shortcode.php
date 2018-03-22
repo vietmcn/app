@@ -9,14 +9,19 @@ if ( !class_exists('App_control_shortcode' ) ) :
         }
         public function img( $att ) 
         {
+            global $App_mobile;
             $att = shortcode_atts( array(
                 'link' => '',
                 'tieu-de' => get_the_title(),
                 'mota' => '',
             ), $att );
             $link = explode('/', $att['link'] );
-
-            $out  = '<figure data-sub-html="'.$att['mota'].'" class="item" data-src="'.esc_url( '//i.imgur.com/'.$link[3].'.jpg' ).'" ><img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy" alt="'.esc_attr( $att['tieu-de'] ).'" data-src="'.esc_url( '//i.imgur.com/'.$link[3].'.jpg' ).'">';
+            if ( $App_mobile->isMobile() ) {
+                $thumbnail_size = 'm';
+            } else {
+                $thumbnail_size = 'l';
+            }
+            $out  = '<figure data-sub-html="'.$att['mota'].'" class="item" data-src="'.esc_url( '//i.imgur.com/'.$link[3].'.jpg' ).'" ><img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy" alt="'.esc_attr( $att['tieu-de'] ).'" data-src="'.esc_url( '//i.imgur.com/'.$link[3].$thumbnail_size.'.jpg' ).'">';
             $out .= '<figcaption class="img-desc">'.$att['mota'].'</figcaption>';
             $out .= '</figure>';
             return $out;

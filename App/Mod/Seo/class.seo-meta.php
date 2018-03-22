@@ -17,7 +17,9 @@ if ( !class_exists( 'App_meta_seo' ) ) :
                 $out .= '<meta name="twitter:card" content="'.$att['card'].'" />';
                 $out .= '<meta name="twitter:creator" content="'.$att['creator'].'">';
                 $out .= '<meta content="index,follow" name="robots">';
+                $out .= '<meta name="msvalidate.01" content="9F7A2046401E5DB22A1A111CDB802522" />';
                 $out .= '<meta name="yandex-verification" content="8016cf125a34ec66" />';
+                $out .= '<meta name="p:domain_verify" content="7ec74e7b109c46ee05de4bbf4629ab14"/>';
             }
             echo $out;
         }
@@ -28,22 +30,22 @@ if ( !class_exists( 'App_meta_seo' ) ) :
             } else {
                 $out  = '<title>'.$att['title'].'</title>';
             }
-            $out .= '<link rel="canonical" href="'.$att['url'].'" >';
-            $out .= '<meta name="description" content="'.$att['desc'].'" />';
-            $out .= '<meta itemprop="description" content="'.$att['desc'].'" />';
-            $out .= '<meta itemprop="image" content="'.$att['img'].'" />';
+            $out .= '<link rel="canonical" href="'.esc_url( $att['url'] ).'" >';
+            $out .= '<meta name="description" content="'.esc_attr( $att['desc'] ).'" />';
+            $out .= '<meta itemprop="description" content="'.esc_attr( $att['desc'] ).'" />';
+            $out .= '<meta itemprop="image" content="'.esc_url( $att['img'] ).'" />';
             $out .= '<meta property="og:type" content="'.$att['type'].'">';
-            $out .= '<meta property="og:url" content="'.$att['url'].'">';
-            $out .= '<meta property="og:title" content="'.$att['title'].'">';
-            $out .= '<meta property="og:description" content="'.$att['desc'].'">';
-            $out .= '<meta property="og:image" content="'.$att['img'].'">';
-            $out .= '<meta property="og:image:alt" content="'.$att['alt'].'">';
+            $out .= '<meta property="og:url" content="'.esc_url( $att['url'] ).'">';
+            $out .= '<meta property="og:title" content="'.esc_attr( $att['title'] ).'">';
+            $out .= '<meta property="og:description" content="'.esc_attr( $att['desc'] ).'">';
+            $out .= '<meta property="og:image" content="'.esc_url( $att['img'] ).'">';
+            $out .= '<meta property="og:image:alt" content="'.esc_attr( $att['alt'] ).'">';
             $out .= '<meta property="og:image:type" content="image/jpeg">';
             $out .= '<meta property="og:image:width" content="600px">';
             $out .= '<meta property="og:image:height" content="600px">';
             $out .= '<meta name="twitter:title" content="'.esc_attr( $att['title'] ).'" />';
             $out .= '<meta name="twitter:description" content="'.esc_attr( $att['desc'] ).'" />';
-            $out .= '<meta name="twitter:image:src" content="'.$att['img'].'">';
+            $out .= '<meta name="twitter:image:src" content="'.esc_url( $att['img'] ).'">';
             if ( isset( $att['single']['enbale'] ) == true ) {
                 $out .= '<meta name="article:section" content="'.$att['single']['cate'].'">';
                 $out .= '<meta name="article:published_time" content="'.$att['single']['date_public'].'">';

@@ -66,10 +66,17 @@ if ( !class_exists('App_getMeta') ) :
                                     'post_id' => $atts['post_id'],
                                     'alt' => $atts['alt'],
                                 ) );
+                                if ( ! is_single() ) {
+                                    $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
+                                    $dispay = 'display:none';
+                                } else {
+                                    $dispay = 'display:none';
+                                }
+                                $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 $out .= '<figure>';
-                                $out .= '<img style="display:none;" alt="'.$atts['alt'].'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
+                                $out .= '<img style="'.$dispay.'" alt="'.$atts['alt'].'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
                                 $out .= '</figure>';
-                                $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
+                                $out .= '</a>';
                                 $out .= $this->media_meta();
                             }
                         } else {
@@ -81,11 +88,14 @@ if ( !class_exists('App_getMeta') ) :
                                         'type' => $atts['type'],
                                     ) );
                                 }
+                                $img = explode( '/', $value[0] );
                                 $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
                                 $out .= '<figure>';
-                                $img = explode( '/', $value[0] );
                                 $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].$thumbnail_size.'.jpg" alt="'.$atts['alt'].'" />';
                                 $out .= '</figure></a>';
+                                if ( is_single() ) {
+                                    $out .= $this->media_meta();
+                                }
                             }
                         }
                     } else {
@@ -96,7 +106,24 @@ if ( !class_exists('App_getMeta') ) :
                     }
                 }
             } else {
-                $out .= 'Lổi Hệ thống Rồi Đại Vương Ơi!';
+                if ( ! is_single() ) {
+                    if ( get_post_format( $atts['post_id'] ) == 'video' && $App_mobile->isMobile() ) {
+                        $meta = $this->media_meta();
+                        $out .= $this->media_title( array( 
+                            'post_id' => $atts['post_id'],
+                            'alt' => $atts['alt'],
+                        ) );
+                    } else {
+                        $meta = '';
+                    }
+                    $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                    $out .= '<figure>';
+                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="'.$atts['alt'].'" />';
+                    $out .= '</figure></a>';
+                    $out .= $meta;
+                } else {
+                    $out .= '//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg';
+                }
             }
             $out .= ob_get_clean();
             return $out;

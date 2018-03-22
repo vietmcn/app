@@ -46,7 +46,7 @@ if ( ! class_exists( 'App_control_single' ) ) :
             $App_getcontents->tag( array( 
                 'post_id' => $post->ID,
             ) );
-            #$App_getcontents->comment();
+            $App_getcontents->comment();
             echo '</div>';
         }
         public function app_single_related()
