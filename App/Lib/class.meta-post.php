@@ -51,11 +51,11 @@ if ( !class_exists('App_getMeta') ) :
                                     'alt' => $atts['alt'],
                                 ) );
                                 $out .= $this->media_meta();
-                                $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                                $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $i = 0;
                                 foreach ( $value as $item ) {
                                     $item = explode( '/', $item );
-                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$item[3].$thumbnail_size.'.jpg" alt="'.$atts['alt'].'" />';
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$item[3].$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
                                     if ( ++$i >= 3 ) break;
                                 }
                                 $out .= '</a></figure>';
@@ -70,11 +70,11 @@ if ( !class_exists('App_getMeta') ) :
                                     $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
                                     $dispay = 'display:none';
                                 } else {
-                                    $dispay = 'display:none';
+                                    $dispay = 'display:block';
                                 }
-                                $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                                $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<figure>';
-                                $out .= '<img style="'.$dispay.'" alt="'.$atts['alt'].'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
+                                $out .= '<img style="'.$dispay.'" alt="'.esc_attr( $atts['alt'] ).'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
                                 $out .= '</figure>';
                                 $out .= '</a>';
                                 $out .= $this->media_meta();
@@ -89,9 +89,13 @@ if ( !class_exists('App_getMeta') ) :
                                     ) );
                                 }
                                 $img = explode( '/', $value[0] );
-                                $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                                $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<figure>';
-                                $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].$thumbnail_size.'.jpg" alt="'.$atts['alt'].'" />';
+                                if ( isset( $img[3] ) ) {
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].'l.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
+                                } else {
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
+                                }
                                 $out .= '</figure></a>';
                                 if ( is_single() ) {
                                     $out .= $this->media_meta();
@@ -106,23 +110,25 @@ if ( !class_exists('App_getMeta') ) :
                     }
                 }
             } else {
-                if ( ! is_single() ) {
+                if ( get_post_format( $atts['post_id'] ) != 'gallery' ) {
                     if ( get_post_format( $atts['post_id'] ) == 'video' && $App_mobile->isMobile() ) {
                         $meta = $this->media_meta();
                         $out .= $this->media_title( array( 
                             'post_id' => $atts['post_id'],
                             'alt' => $atts['alt'],
                         ) );
+                        $classThumbnail = 'video-nothumbnail';
                     } else {
                         $meta = '';
+                        $classThumbnail = '';
                     }
-                    $out .= '<a href="'.get_permalink().'" title="'.$atts['alt'].'">';
+                    $out .= '<a href="'.get_permalink().'" title="">';
                     $out .= '<figure>';
-                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="'.$atts['alt'].'" />';
+                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy '.$classThumbnail.'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="" />';
                     $out .= '</figure></a>';
                     $out .= $meta;
                 } else {
-                    $out .= '//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg';
+                   # $out .= '//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg';
                 }
             }
             $out .= ob_get_clean();

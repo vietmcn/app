@@ -22,10 +22,13 @@ if ( !class_exists( 'App_control_footer' ) ) :
         }
         public function app_footer_before()
         {
-            $out  = '<footer class="App-footer col-12">';
-            $out .= $this->menu();
-            $out .= '</footer>';
-            echo $out;
+            global $App_mobile;
+            if ( ! $App_mobile->isMobile() ) {
+                $out  = '<footer class="App-footer col-12">';
+                $out .= $this->menu();
+                $out .= '</footer>';
+                echo $out;
+            }
         }
     }
     
