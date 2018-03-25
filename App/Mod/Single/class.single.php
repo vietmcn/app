@@ -52,32 +52,36 @@ if ( ! class_exists( 'App_control_single' ) ) :
         public function app_single_related()
         {
             global $post, $App_getcontents;
-            $cat = get_the_category( $post->id );
-            $Query = array();
-
-            $Query['post_type'] = 'post';
-            $Query['post_per_page'] = '6';
-            if ( $cat ) {
-                $cats = '';
-                foreach ($cat as $value) {
-                    $cats .= $value->term_id.',';
+            if ( get_post_format( $post->ID ) != 'video' ) {
+                $cat = get_the_category( $post->id );
+                $Query = array();
+    
+                $Query['post_type'] = 'post';
+                $Query['post_per_page'] = '6';
+                if ( $cat ) {
+                    $cats = '';
+                    foreach ($cat as $value) {
+                        $cats .= $value->term_id.',';
+                    }
+                    $Query['cat'] = array( $cats );
                 }
-                $Query['cat'] = array( $cats );
-            }
-            $Query['post__not_in'] = array( $post->ID );
-
-            if ( get_post_format( $post->ID ) == 'video' ) {
-                $Query['tax_query'] = array(
-                    array(
-                        'taxonomy' => 'post_format',
-                        'field'    => 'slug',
-                        'terms'    => array( 'post-format-video' ),
-                    )
-                );
+                $Query['post__not_in'] = array( $post->ID );
+    
+                if ( get_post_format( $post->ID ) == 'video' ) {
+                    $Query['tax_query'] = array(
+                        array(
+                            'taxonomy' => 'post_format',
+                            'field'    => 'slug',
+                            'terms'    => array( 'post-format-video' ),
+                        )
+                    );
+                } else {
+                    $Query['tax_query'] = NULL;
+                }
+                $App_getcontents->related( $Query );
             } else {
-                $Query['tax_query'] = NULL;
+                
             }
-            $App_getcontents->related( $Query );
         }
     }
     
