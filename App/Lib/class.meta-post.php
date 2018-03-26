@@ -1,4 +1,7 @@
 <?php
+if ( !defined( 'ABSPATH' ) ) :
+    exit;
+endif;
 if ( !class_exists('App_getMeta') ) :
     class App_getMeta
     {
@@ -110,7 +113,7 @@ if ( !class_exists('App_getMeta') ) :
                     }
                 }
             } else {
-                if ( get_post_format( $atts['post_id'] ) != 'gallery' ) {
+                if ( ! is_single() ) {
                     if ( get_post_format( $atts['post_id'] ) == 'video' && $App_mobile->isMobile() ) {
                         $meta = $this->media_meta();
                         $out .= $this->media_title( array( 
@@ -128,7 +131,7 @@ if ( !class_exists('App_getMeta') ) :
                     $out .= '</figure></a>';
                     $out .= $meta;
                 } else {
-                   # $out .= '//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg';
+                   $out .= '//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg';
                 }
             }
             $out .= ob_get_clean();

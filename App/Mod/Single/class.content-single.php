@@ -138,15 +138,17 @@ if ( !class_exists( 'App_contents' ) ) :
                         $format = '';
                     }
                     $out .= '<div data-post="'.$App_Query->post->ID.'" class="App-single-related-item App-icon">';
-                    $out .= $App_getMetapost->media( array(
+                    $out .= '<a href="'.get_permalink().'" title="'.get_the_title().'"><figure>';
+                    $out .= '<img class="app-lazy" src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" data-src="'.$App_getMetapost->media( array(
                         'post_id' => $App_Query->post->ID,
                         'lazyClass' => 'app-lazy',
                         'gallery' => false,
-                        'alt' => get_the_title(),
+                        #'alt' => get_the_title(),
                         'key_name' => '_meta_post',
-                        'echo' => true,
+                        'echo' => false,
                         'type' => 'normal',
-                    ) );
+                    ) ).'" alt="'.get_the_title().'"/>';
+                    $out .= '</figure></a>';
                     $out .= '<h3 class="article-title"><a href="'.get_permalink().'" title="'.get_the_title().'">'.$format.get_the_title().'</a></h3>';
                     $out .= '</div>';
                 endwhile;
