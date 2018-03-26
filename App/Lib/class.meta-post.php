@@ -58,9 +58,17 @@ if ( !class_exists('App_getMeta') ) :
                                 $i = 0;
                                 foreach ( $value as $item ) {
                                     $item = explode( '/', $item );
-                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$item[3].$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
-                                    if ( ++$i >= 3 ) break;
+                                    if ( ++$i == 1 ) {
+                                        $thumbnail_first = ' thumbnail-first';
+                                    } else {
+                                        $thumbnail_first = ' normal';
+                                    }
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].$thumbnail_first.'" data-src="//i.imgur.com/'.$item[3].$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
+                                    if ( ++$i >= 7 ) { 
+                                        break; 
+                                    }
                                 }
+                                $out .= '<span class="app-thumbnail-number flex">+'.count( $value ).'</span>';
                                 $out .= '</a></figure>';
                             }
                         } elseif( get_post_format( $atts['post_id'] ) == 'video' && $atts['type'] != 'swiper' && $App_mobile->isMobile() ) {

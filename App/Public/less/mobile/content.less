@@ -44,10 +44,27 @@
         .app-gallery {
             padding-bottom: 5px;
             .app-media-gallery {
-                display: flex;
                 img {
-                    width: 100/3%;
-                    height: 100px;
+                    float: left;
+                    width: 35%;
+                    height: 30vw;
+                }
+                .thumbnail-first {
+                    width: 65%;
+                    height: 90vw;
+                }
+                .app-thumbnail-number {
+                    position: absolute;
+                    bottom: 5px;
+                    right: 0;
+                    background: rgba(0, 0, 0, 0.21);
+                    font-weight: 600;
+                    width: 35%;
+                    height: 30vw;
+                    align-items: center;
+                    font-size: 2rem;
+                    justify-content: center;
+                    color: #fff;
                 }
             }
         }
