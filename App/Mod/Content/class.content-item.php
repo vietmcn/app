@@ -90,8 +90,8 @@ if ( !class_exists('App_post' ) ) :
         {
             $cats = get_the_category();
             $out  = '<div class="postmeta">';
+            $out .= '<time datetime="'.get_the_time('c').'">'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'</time>';
             $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
-            $out .= '<time datetime="'.get_the_time('c').'">'.human_time_diff( get_the_time('U'), current_time('timestamp') ).' trước</time>';
             $out .= '</div>';
             return $out;
         }
@@ -120,24 +120,46 @@ if ( !class_exists('App_post' ) ) :
             $out  = '';
             $out .= '<article data-post="trangfox-'.$atts['post_id'].'" class="'.$postitemClass.'">';
             $out .= $out_info;
-            $out .= $this->media( array(
-                'post_id' => $atts['post_id'],
-                'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
-                'gallery' => ( $App_mobile->isMobile() ) ? true : false,
-                'alt' => get_the_title(),
-                'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
-                'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
-                'type' => $atts['type'],
-            ) ); 
-            if ( get_post_format( $atts['post_id'] ) != 'video' && get_post_format( $atts['post_id'] ) != 'gallery' && $atts['type'] != 'swiper' || ! $App_mobile->isMobile() ) {
-                $out .= $out_item;
-                $out .= $this->title( array(
+            if ( $App_mobile->isMobile() ) {
+                if ( get_post_format( $atts['post_id'] ) != 'video' && get_post_format( $atts['post_id'] ) != 'gallery' && $atts['type'] != 'swiper' || ! $App_mobile->isMobile() ) {
+                    $out .= $out_item;
+                    $out .= $this->title( array(
+                        'post_id' => $atts['post_id'],
+                        'type' => $atts['type'],
+                    ) );
+                    $out .= $this->meta();
+                    $out .= $desc;
+                    $out .= $out_enditem;
+                }
+                $out .= $this->media( array(
                     'post_id' => $atts['post_id'],
+                    'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
+                    'gallery' => ( $App_mobile->isMobile() ) ? true : false,
+                    'alt' => get_the_title(),
+                    'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
+                    'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
                     'type' => $atts['type'],
                 ) );
-                $out .= $this->meta();
-                $out .= $desc;
-                $out .= $out_enditem;
+            } else {
+                $out .= $this->media( array(
+                    'post_id' => $atts['post_id'],
+                    'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
+                    'gallery' => ( $App_mobile->isMobile() ) ? true : false,
+                    'alt' => get_the_title(),
+                    'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
+                    'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
+                    'type' => $atts['type'],
+                ) );
+                if ( get_post_format( $atts['post_id'] ) != 'video' && get_post_format( $atts['post_id'] ) != 'gallery' && $atts['type'] != 'swiper' || ! $App_mobile->isMobile() ) {
+                    $out .= $out_item;
+                    $out .= $this->title( array(
+                        'post_id' => $atts['post_id'],
+                        'type' => $atts['type'],
+                    ) );
+                    $out .= $this->meta();
+                    $out .= $desc;
+                    $out .= $out_enditem;
+                }
             }
             $out .= $out_endinfo;
             $out .= '</article>';

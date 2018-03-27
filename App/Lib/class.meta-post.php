@@ -20,20 +20,9 @@ if ( !class_exists('App_getMeta') ) :
                 return $title;
             }
         }
-        function media_meta() 
-        {
-            
-            $cats = get_the_category();
-            $out  = '<div class="postmeta">';
-            $out .= '<span class="category"><a href="'.get_category_link( $cats[0]->term_id ).'" title="'.$cats[0]->name.'">'.$cats[0]->name.'</a></span>';
-            $out .= '<time>'.human_time_diff( get_the_time('U'), current_time('timestamp') ).'Trước</time>';
-            $out .= '</div>';
-            return $out;
-            
-        }
         public function media( $atts = array() )
         {
-            global $App_mobile;
+            global $App_mobile, $App_ListPost;
             ob_start();
             $meta = get_post_meta( $atts['post_id'], $atts['key_name'], true );
             if ( is_home() || is_front_page() || is_category() || is_tag() && $App_mobile->isMobile() ) {
@@ -53,7 +42,7 @@ if ( !class_exists('App_getMeta') ) :
                                     'post_id' => $atts['post_id'],
                                     'alt' => $atts['alt'],
                                 ) );
-                                $out .= $this->media_meta();
+                                $out .= $App_ListPost->meta();
                                 $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $i = 0;
                                 foreach ( $value as $item ) {
@@ -77,6 +66,7 @@ if ( !class_exists('App_getMeta') ) :
                                     'post_id' => $atts['post_id'],
                                     'alt' => $atts['alt'],
                                 ) );
+                                $out .= $App_ListPost->meta();
                                 if ( ! is_single() ) {
                                     $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
                                     $dispay = 'display:none';
@@ -88,7 +78,6 @@ if ( !class_exists('App_getMeta') ) :
                                 $out .= '<img style="'.$dispay.'" alt="'.esc_attr( $atts['alt'] ).'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
                                 $out .= '</figure>';
                                 $out .= '</a>';
-                                $out .= $this->media_meta();
                             }
                         } else {
                             if ( $key[1] == 'meta_thumbnail_png' ) {
@@ -99,6 +88,9 @@ if ( !class_exists('App_getMeta') ) :
                                         'type' => $atts['type'],
                                     ) );
                                 }
+                                if ( is_single() ) {
+                                    $out .= $App_ListPost->meta();
+                                }
                                 $img = explode( '/', $value[0] );
                                 $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<figure>';
@@ -108,9 +100,7 @@ if ( !class_exists('App_getMeta') ) :
                                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
                                 }
                                 $out .= '</figure></a>';
-                                if ( is_single() ) {
-                                    $out .= $this->media_meta();
-                                }
+                                
                             }
                         }
                     } else {
@@ -123,21 +113,22 @@ if ( !class_exists('App_getMeta') ) :
             } else {
                 if ( ! is_single() ) {
                     if ( get_post_format( $atts['post_id'] ) == 'video' && $App_mobile->isMobile() ) {
-                        $meta = $this->media_meta();
-                        $out .= $this->media_title( array( 
+                        $title .= $this->media_title( array( 
                             'post_id' => $atts['post_id'],
                             'alt' => $atts['alt'],
                         ) );
+                        $meta = $App_ListPost->meta();
                         $classThumbnail = 'video-nothumbnail';
                     } else {
                         $meta = '';
                         $classThumbnail = '';
                     }
+                    $out .= $title;
+                    $out .= $meta;
                     $out .= '<a href="'.get_permalink().'" title="">';
                     $out .= '<figure>';
                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy '.$classThumbnail.'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="" />';
                     $out .= '</figure></a>';
-                    $out .= $meta;
                 } else {
                    $out .= '//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg';
                 }
