@@ -94,7 +94,7 @@ if ( ! class_exists( 'App_content' ) ) :
                         $paged = 1;
                     }
                     //Swiper
-                    $this->app_home_swiper();
+                    #$this->app_home_swiper();
                     //Title
                     $this->app_home_title();
                     //get content
