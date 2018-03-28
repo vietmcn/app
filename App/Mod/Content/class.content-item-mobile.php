@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
-if ( !class_exists('App_post' ) ) :
+if ( ! class_exists('App_post' ) ) :
     class App_post 
     {
         public function getAuthor( $att = array() ) 
@@ -103,11 +103,11 @@ if ( !class_exists('App_post' ) ) :
                 $out_endinfo = '</div>';
                 $out_item = '<div class="app-info-item col-md-7">';
                 $out_enditem = '</div>';
-                if ( ! $App_mobile->isMobile() ) {
+                #if ( ! $App_mobile->isMobile() ) {
                     $desc = $this->desc();
-                } else {
-                    $desc = '';
-                }
+                #} else {
+                  #  $desc = '';
+                #}
                 $postitemClass = 'App-content-item';
             } else {
                 $out_info = '';
@@ -122,7 +122,9 @@ if ( !class_exists('App_post' ) ) :
             $out .= $out_info;
             if ( $App_mobile->isMobile() ) {
                 if ( get_post_format( $atts['post_id'] ) != 'video' && get_post_format( $atts['post_id'] ) != 'gallery' && $atts['type'] != 'swiper' || ! $App_mobile->isMobile() ) {
-                    $out .= $out_item;
+                    
+                }
+                $out .= $out_item;
                     $out .= $this->title( array(
                         'post_id' => $atts['post_id'],
                         'type' => $atts['type'],
@@ -130,7 +132,6 @@ if ( !class_exists('App_post' ) ) :
                     $out .= $this->meta();
                     $out .= $desc;
                     $out .= $out_enditem;
-                }
                 $out .= $this->media( array(
                     'post_id' => $atts['post_id'],
                     'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',

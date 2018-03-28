@@ -34,7 +34,7 @@ if ( !class_exists( 'App_getContent' ) ) :
             if ( $App_query->have_posts() ) {
                 ob_start();
                 $out = '';
-                while ( $App_query->have_posts() ) : $App_query->the_post(); 
+                while ( $App_query->have_posts() ) : $App_query->the_post();
                     $out .= $App_ListPost->listPost( array(
                         'post_id' =>  $App_query->post->ID,
                         'type' => 'normal',

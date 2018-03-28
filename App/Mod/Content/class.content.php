@@ -2,8 +2,14 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+global $App_mobile;
+if ( $App_mobile->isMobile() ) { 
+    require_once( dirname(__FILE__) . '/class.content-item-mobile.php' );
+} else {
+    require_once( dirname(__FILE__) . '/class.content-item-desktop.php' );
+}
 require_once( dirname(__FILE__) . '/class.content-ajax.php' );
-require_once( dirname(__FILE__) . '/class.content-item.php' );
 require_once( dirname(__FILE__) . '/class.content-while.php' );
 
 if ( ! class_exists( 'App_content' ) ) :
@@ -11,7 +17,7 @@ if ( ! class_exists( 'App_content' ) ) :
     {
         public function __construct()
         {
-            add_action( 'app_main', array( $this, 'app_conent' ) );
+            add_action( 'app_main', array( $this, 'app_conent' ) );   
         }
         function app_home_swiper()
         {
