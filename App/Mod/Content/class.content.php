@@ -4,11 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $App_mobile;
-if ( $App_mobile->isMobile() ) { 
-    require_once( dirname(__FILE__) . '/class.content-item-mobile.php' );
-} else {
-    require_once( dirname(__FILE__) . '/class.content-item-desktop.php' );
-}
+require_once( dirname(__FILE__) . '/class.content-item.php' );
 require_once( dirname(__FILE__) . '/class.content-ajax.php' );
 require_once( dirname(__FILE__) . '/class.content-while.php' );
 

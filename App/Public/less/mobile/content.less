@@ -1,7 +1,7 @@
 //main: ../mobile.less
 .App-content-item {
-    padding: 0;
-    margin-bottom: 2rem;
+    padding: 0 0 1rem;
+    background-color: #f4f4f4;
     width: 100%;
     .app-info {
         position: relative;
@@ -74,8 +74,8 @@
             }
         }
         .app-info-item {
-            padding-right: 0px;
-            padding-left: 10px;
+            padding: 10px;
+            background-color: #fff;
             h3 {
                 width: 100%;
                 margin-bottom: 5px;
@@ -83,11 +83,15 @@
                     color: #333;
                 }
             }
+            .desc {
+                font-size: 13px;
+                margin-bottom: 0px;
+            }
         }
         //title 
         .app-video {
             h3 {
-                margin-bottom: 6px;
+                margin-bottom: 0px;
             }
             .postmeta {
                 margin-top: 10px;
@@ -97,18 +101,13 @@
     .postmeta {
         font-size: 13px;
         span.category {
-            margin-right: 10px;
+            margin-left: 10px;
         }
         a {
             color: #666;
         }
         time {
             color: #9e9e9e;
-        }
-    }
-    .app-gallery {
-        .postmeta {
-            margin-bottom: 10px;
         }
     }
 }
@@ -170,18 +169,6 @@
 .sticky {
     background-color: #fff;
     z-index: 99;
-}
-.sticky::after {
-    content: "";
-    border-bottom: 1px solid #e8e8e8;
-    position: absolute;
-    bottom: -3px;
-    height: 1px;
-    width: 100%;
-    left: 0px;
-}
-.is-sticky::after {
-    bottom: 0px;
 }
 .is-sticky {
     width: 100%!important;

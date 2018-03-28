@@ -34,8 +34,8 @@ if ( ! class_exists('App_post' ) ) :
         {
             $excerpt = get_the_excerpt();
             if ( $excerpt ) {
-                $out = '<div class="desc">';
-                $charlength = '150';
+                $out = '<p class="desc">';
+                $charlength = '100';
                 if ( mb_strlen( $excerpt ) > $charlength ) {
                     $subex = mb_substr( $excerpt, 0, $charlength - 5 );
                     $exwords = explode( ' ', $subex );
@@ -49,7 +49,7 @@ if ( ! class_exists('App_post' ) ) :
                 } else {
                     $out .= $excerpt;
                 }
-                $out .= '</p></div>';
+                $out .= '</p>';
                 return $out;
             } else {
                 //
@@ -165,6 +165,36 @@ if ( ! class_exists('App_post' ) ) :
             $out .= $out_endinfo;
             $out .= '</article>';
             return $out;
+        }
+        public function post_mobile( $atts = array() ) 
+        {
+            global $App_mobile;
+            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item">';
+            $out .= '<div class="app-info">';
+            $out .= $this->media( array(
+                'post_id' => $atts['post_id'],
+                'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
+                'gallery' => ( $App_mobile->isMobile() ) ? true : false,
+                'alt' => get_the_title(),
+                'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
+                'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
+                'type' => $atts['type'],
+            ) );
+            $out .= '<div class="app-info-item col-md-7">';
+            $out .= $this->title( array(
+                'post_id' => $atts['post_id'],
+                'type' => $atts['type'],
+            ) );
+            $out .= $this->meta();
+            $out .= $this->desc();
+            $out .= '</div>';
+            $out .= '</div>';
+            $out .= '</article>';
+            return $out;
+        }
+        public function post_desktop()
+        {
+
         }
         public function Video( $atts = array() ) 
         {

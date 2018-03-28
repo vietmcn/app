@@ -38,11 +38,6 @@ if ( !class_exists('App_getMeta') ) :
                     if ( $atts['echo'] == true ) {
                         if ( get_post_format( $atts['post_id'] ) == 'gallery' && $App_mobile->isMobile() && $atts['gallery'] == true && $atts['type'] != 'swiper' ) {
                             if ( $key[1] == 'meta_thumbnail_png' ) {
-                                $out .= $this->media_title( array( 
-                                    'post_id' => $atts['post_id'],
-                                    'alt' => $atts['alt'],
-                                ) );
-                                $out .= $App_ListPost->meta();
                                 $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $i = 0;
                                 foreach ( $value as $item ) {
@@ -62,11 +57,7 @@ if ( !class_exists('App_getMeta') ) :
                             }
                         } elseif( get_post_format( $atts['post_id'] ) == 'video' && $atts['type'] != 'swiper' && $App_mobile->isMobile() ) {
                             if ( $key[1] == 'meta_video' ) {
-                                $out .= $this->media_title( array( 
-                                    'post_id' => $atts['post_id'],
-                                    'alt' => $atts['alt'],
-                                ) );
-                                $out .= $App_ListPost->meta();
+
                                 if ( ! is_single() ) {
                                     $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.$value.'" data-display-title="false"></div>';
                                     $dispay = 'display:none';

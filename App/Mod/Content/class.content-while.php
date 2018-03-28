@@ -4,20 +4,24 @@ if ( !class_exists( 'App_getContent' ) ) :
     {
         public function Post( $atts = array() )
         {
-            global $App_ListPost;
+            global $App_ListPost, $App_mobile;
             ob_start();
             $App_query = new WP_Query( $atts );
             $out  = '';
             if ( $App_query->have_posts() ) {
-                while ( $App_query->have_posts() ) : $App_query->the_post(); 
-                    $out .= $App_ListPost->listPost( array(
-                      'post_id' =>  $App_query->post->ID,
-                      'type' => 'normal',
-                      'thumbnail' => array(
-                          'key_name' => '_meta_post',
-                          'echo' => true,
-                      ),
-                    ) ); 
+                while ( $App_query->have_posts() ) : $App_query->the_post();
+                    if ( $App_mobile->isMobile() ) {
+                        $out .= $App_ListPost->post_mobile( array(
+                          'post_id' =>  $App_query->post->ID,
+                          'type' => 'normal',
+                          'thumbnail' => array(
+                              'key_name' => '_meta_post',
+                              'echo' => true,
+                          ),
+                        ) ); 
+                    } else {
+
+                    }
                 endwhile;
                 wp_reset_postdata();
             } else {
@@ -35,7 +39,7 @@ if ( !class_exists( 'App_getContent' ) ) :
                 ob_start();
                 $out = '';
                 while ( $App_query->have_posts() ) : $App_query->the_post();
-                    $out .= $App_ListPost->listPost( array(
+                    $out .= $App_ListPost->post_mobile( array(
                         'post_id' =>  $App_query->post->ID,
                         'type' => 'normal',
                         'thumbnail' => array(
@@ -69,30 +73,6 @@ if ( !class_exists( 'App_getContent' ) ) :
                 echo $out;
                 die();
             }
-        }
-        public function app_Video( $att = array() ) 
-        {
-            global $App_ListPost;
-            ob_start();
-            $App_query = new WP_Query( $atts );
-            $out  = '';
-            if ( $App_query->have_posts() ) {
-                while ( $App_query->have_posts() ) : $App_query->the_post(); 
-                    $out .= $App_ListPost->listPost( array(
-                      'post_id' =>  $App_query->post->ID,
-                      'type' => 'normal',
-                      'thumbnail' => array(
-                          'key_name' => '_meta_post',
-                          'echo' => true,
-                      ),
-                    ) ); 
-                endwhile;
-                wp_reset_postdata();
-            } else {
-               $out .= '<article id="App-noContent"><h4>Tải hết được rồi nàng ơi!!!</h4></article>';
-            }
-            $out .= ob_get_clean();
-            echo $out;
         }
         public function swiper( $att = array() )
         {
