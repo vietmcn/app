@@ -1,6 +1,6 @@
 //main: ../mobile.less
 .App-content-item {
-    padding: 0 0 1rem;
+    padding: 0 0 12px;
     background-color: #f4f4f4;
     width: 100%;
     .app-info {
@@ -20,6 +20,7 @@
             margin: 0px;
             display: flex;
             display: -webkit-flex;
+            position: relative;
         }
         h3 {
             font-size: 15px;
@@ -47,7 +48,6 @@
             }
         }
         .app-gallery {
-            padding-bottom: 5px;
             .app-media-gallery {
                 img {
                     float: left;
@@ -60,7 +60,7 @@
                 }
                 .app-thumbnail-number {
                     position: absolute;
-                    bottom: 5px;
+                    bottom: 0px;
                     right: 0;
                     background: rgba(0, 0, 0, 0.21);
                     font-weight: 600;
@@ -152,6 +152,14 @@
         letter-spacing: 2px;
         /* text-transform: uppercase; */
         margin: 0;
+    }
+    a.menu-back {
+        display: inline-block;
+        padding: 10px 15px;
+        color: #000;
+        position: relative;
+        top: 1px;
+        font-size: 20px;
     }
     .app-home-link {
         width: 100%;

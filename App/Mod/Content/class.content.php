@@ -41,8 +41,10 @@ if ( ! class_exists( 'App_content' ) ) :
             if ( is_page( array( 'video', 'gallery' ) ) ) {
                 $title = get_the_title();
                 $menu = '';
+                $back = '<a class="menu-back" href="/"><i class="ion-ios-arrow-back"></i></a>';
             } else {
-                $title = 'Newfeed';
+                $title = 'Bản Tin';
+                $back  = '';
                 $menu  = '<div class="app-home-link">';
                 $menu .= '<span class="app-home-Gallery"><a href="/gallery" title="Cập nhận xu hướng thời trang mới nhất">Hình ảnh</a></span>';
                 $menu .= '<span class="app-home-Video"><a href="/video" title="Hướng dẫn làm đẹp">Video</a></span>';
@@ -50,6 +52,7 @@ if ( ! class_exists( 'App_content' ) ) :
             }
             if ( $App_mobile->isMobile() ) {
                 $out  = '<div id="app-home-title" class="sticky" data-sticky-class="is-sticky">';
+                $out .= $back;
                 $out .= '<h4>'.$title.'</h4>';
                 $out .= $menu;
                 $out .= '</div>';
