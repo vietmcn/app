@@ -12,7 +12,7 @@ if ( ! class_exists( 'App_script_admin' ) ) :
 
             $screen = get_current_screen(); // This is how we will check what page we are on
             if ( in_array( $screen->id, array( 'post', 'page') ) ) {
-                    wp_enqueue_script(  'App-admin', get_stylesheet_directory_uri().'/App/Public/js/App-admin.js' );
+                wp_enqueue_script(  'App-admin', get_stylesheet_directory_uri().'/App/Public/js/App-admin.js' );
             }
         }
         public function script_css()

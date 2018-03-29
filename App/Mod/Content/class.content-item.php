@@ -169,7 +169,12 @@ if ( ! class_exists('App_post' ) ) :
         public function post_mobile( $atts = array() ) 
         {
             global $App_mobile;
-            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item">';
+            if ( is_page( 'video' ) ) {
+                $classCss = 'content-video';
+            } else {
+                $classCss = 'content-normal';
+            }
+            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item '.$classCss.'">';
             $out .= '<div class="app-info">';
             $out .= $this->media( array(
                 'post_id' => $atts['post_id'],

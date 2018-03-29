@@ -104,18 +104,10 @@ if ( !class_exists('App_getMeta') ) :
             } else {
                 if ( ! is_single() ) {
                     if ( get_post_format( $atts['post_id'] ) == 'video' && $App_mobile->isMobile() ) {
-                        $title .= $this->media_title( array( 
-                            'post_id' => $atts['post_id'],
-                            'alt' => $atts['alt'],
-                        ) );
-                        $meta = $App_ListPost->meta();
                         $classThumbnail = 'video-nothumbnail';
                     } else {
-                        $meta = '';
                         $classThumbnail = '';
                     }
-                    $out .= $title;
-                    $out .= $meta;
                     $out .= '<a href="'.get_permalink().'" title="">';
                     $out .= '<figure>';
                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy '.$classThumbnail.'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="" />';

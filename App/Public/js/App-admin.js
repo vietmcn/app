@@ -14,6 +14,6 @@ $(document).on("click", ".remove-address",function(e){
     $(this).parents(".address").remove();
     //update labels
     $("#_meta_post").find("label[for^='_meta_postmeta_thumbnail_png']").each(function(){
-        $(this).html("Address " + ($(this).parents('.address').index() + 1));
+        //$(this).html("Ảnh Đại Diện " + ($(this).parents('.address').index() + 1));
     });
 });

@@ -18,6 +18,7 @@ require_once 'Mod/class.shortcode.php';
 require_once 'Mod/functions.php';
 //Admin
 if ( is_admin() ) {
+    require_once 'Admin/class.post.php';
     require_once 'Admin/class.metapost.php';
     require_once 'Admin/class.category.php';
     require_once 'Admin/class.script.php';
