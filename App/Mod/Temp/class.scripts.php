@@ -51,8 +51,6 @@ if ( !class_exists('App_conf_script' ) ) {
             wp_enqueue_script( 'App-lib-js', get_template_directory_uri() .'/App/Public/js/App-lib.min.js', array('jquery'), $app_ver, true );
             wp_enqueue_script( 'App-js', get_stylesheet_directory_uri() . '/App/Public/js/App.min.js', array('jquery'), $app_ver, true );
             wp_enqueue_script( 'App-Swiper-js', '//cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js', array('jquery'), '4.1.6', true );
-            wp_enqueue_script( 'App-gird-gallery', '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js', array('jquery'), $app_ver, true );
-            wp_enqueue_script( 'App-gird-gallery-imagesloaded', '//imagesloaded.desandro.com/imagesloaded.pkgd.js', array('jquery'), $app_ver, true );
         }
         public function conf_print_script()
         {

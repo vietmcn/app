@@ -23,16 +23,12 @@ jQuery(document).ready(function($){
 		$(this).LAZYYT();
 	});
 	//
-	// init Masonry
-	var $grid = $('.app-media-gallery').imagesLoaded( function() {
-		// init Masonry after all images have loaded
-		$grid.masonry({
-			itemSelector: '.grid-item',
-			percentPosition: true,
-			columnWidth: '.grid-sizer'
-		});
-	  });
-
+	var swiper = new Swiper('.app-gallery', {
+		slidesPerView: 3,
+		spaceBetween: 5,
+		freeMode: true,
+		lazy: true,
+	});
 	//Ajax Load More Post srcoll
 	var canBeLoaded = true, // this param allows to initiate the AJAX call only if necessary
 	bottomOffset = 1500; // the distance (in px) from the page bottom when you want to load more posts
@@ -70,8 +66,16 @@ jQuery(document).ready(function($){
 						//Lazy load images
 						$("img.app-lazy").lazyload();
 						canBeLoaded = true;
+						//load youtube
 						$('.js-lazyYT').each(function() {
 							$(this).LAZYYT();
+						});
+						//swiper
+						var swiper = new Swiper('.app-gallery', {
+							slidesPerView: 3,
+							spaceBetween: 5,
+							freeMode: true,
+							lazy: true,
 						});
 					} else {
 						//$('#App').hide(); 
