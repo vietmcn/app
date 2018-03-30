@@ -23,18 +23,16 @@ jQuery(document).ready(function($){
 		$(this).LAZYYT();
 	});
 	//
-	$(window).load(function() {
-		var options =
-		{
-			srcNode: 'img',             // grid items (class, node)
-			margin: '20px',             // margin in pixel, default: 0px
-			width: '150px',             // grid item width in pixel, default: 220px
-			max_width: '',              // dynamic gird item width if specified, (pixel)
-			resizable: true,           // re-layout if window resize
-			transition: 'all 0.5s ease' // support transition for CSS3, default: all 0.5s ease
-		}
-		$('.app-media-gallery').gridify(options);
-	});
+	// init Masonry
+	var $grid = $('.app-media-gallery').imagesLoaded( function() {
+		// init Masonry after all images have loaded
+		$grid.masonry({
+			itemSelector: '.grid-item',
+			percentPosition: true,
+			columnWidth: '.grid-sizer'
+		});
+	  });
+
 	//Ajax Load More Post srcoll
 	var canBeLoaded = true, // this param allows to initiate the AJAX call only if necessary
 	bottomOffset = 1500; // the distance (in px) from the page bottom when you want to load more posts

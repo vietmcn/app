@@ -38,22 +38,28 @@ if ( !class_exists('App_getMeta') ) :
                     if ( $atts['echo'] == true ) {
                         if ( get_post_format( $atts['post_id'] ) == 'gallery' && $App_mobile->isMobile() && $atts['gallery'] == true && $atts['type'] != 'swiper' ) {
                             if ( $key[1] == 'meta_thumbnail_png' ) {
-                                $out .= '<figure class="app-media-gallery"><a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
+                                $out .= '<figure class="app-media-gallery">';
+                                $out .= '<div class="grid-sizer"></div>';
+                                #$out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $i = 0;
                                 foreach ( $value as $item ) {
                                     $item = explode( '/', $item );
                                     if ( ++$i == 1 ) {
                                         $thumbnail_first = ' thumbnail-first';
+                                        $size = 'l';
                                     } else {
                                         $thumbnail_first = ' normal';
+                                        $size = 'm';
                                     }
-                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].$thumbnail_first.'" data-src="//i.imgur.com/'.$item[3].$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
+                                    $out .= '<div class="grid-item">';
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].$thumbnail_first.'" data-src="//i.imgur.com/'.$item[3].$size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
+                                    $out .= '</div>';
                                     if ( ++$i >= 7 ) { 
                                         break; 
                                     }
                                 }
                                 $out .= '<span class="app-thumbnail-number flex">+'.count( $value ).'</span>';
-                                $out .= '</a></figure>';
+                                $out .= '</figure>';
                             }
                         } elseif( get_post_format( $atts['post_id'] ) == 'video' && $atts['type'] != 'swiper' && $App_mobile->isMobile() ) {
                             if ( $key[1] == 'meta_video' ) {

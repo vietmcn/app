@@ -17,6 +17,7 @@
         }
         figure {
             min-width: 125px;
+            height: 500px;
             margin: 0px;
             display: flex;
             display: -webkit-flex;
@@ -49,30 +50,21 @@
         }
         .app-gallery {
             .app-media-gallery {
+                
+                
+
                 img {
                     float: left;
-                    width: 35%;
-                    height: 30vw;
-                }
-                .thumbnail-first {
-                    width: 65%;
-                    height: 90vw;
-                }
-                .app-thumbnail-number {
-                    position: absolute;
-                    bottom: 0px;
-                    right: 0;
-                    background: rgba(0, 0, 0, 0.21);
-                    font-weight: 600;
-                    width: 35%;
-                    height: 30vw;
-                    align-items: center;
-                    font-size: 2rem;
-                    justify-content: center;
-                    color: #fff;
+                    max-width: 100%;
+                    display: block;
                 }
             }
         }
+        .app-media-gallery::after {
+            content: '';
+            display: block;
+            clear: both;
+        }          
         .app-info-item {
             padding: 10px;
             background-color: #fff;
