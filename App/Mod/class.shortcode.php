@@ -5,7 +5,7 @@ if ( !class_exists('App_control_shortcode' ) ) :
         public function __construct()
         {
             add_shortcode( 'photo', array( $this, 'img' ) );
-            add_shortcode( 'youtube', array( $this, 'video' ) );
+            add_shortcode( 'xvideo', array( $this, 'video' ) );
         }
         public function img( $att ) 
         {
@@ -31,9 +31,9 @@ if ( !class_exists('App_control_shortcode' ) ) :
         public function video( $att ) 
         {
             $att = shortcode_atts( array(
-                'id' => '',
-                'tieude' => 'Video không có tiêu đề.',
-                'noidung' => '',
+                'link' => '',
+                'tieude' => get_the_title(),
+                'noidung' => get_the_excerpt(),
                 'by' => 'upload by trangfox',
             ), $att );
             if ( !empty( $att['by'] ) ) {
@@ -41,14 +41,17 @@ if ( !class_exists('App_control_shortcode' ) ) :
             } else {
                 $by = '';
             }
-            ob_start();
-            $out  = '<figure>';
-            $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.esc_attr( $att['id'] ).'" data-display-title="false"></div>';
-            $out .= '<figcaption class="img-desc">';
-            $out .= '<strong class="title-video">'.$att['tieude'].'</strong>'.$att['noidung'].$by;
-            $out .= '</figcaption>';
-            $out .= '</figure>';
-            $out .= ob_get_clean();
+            if ( isset( $att['link'] ) ) {
+                $link = explode( '=', $att['link'] );
+                ob_start();
+                $out  = '<figure>';
+                $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.esc_attr( $link[1] ).'" data-display-title="false"></div>';
+                $out .= '<figcaption class="img-desc">';
+                $out .= '<strong class="title-video">'.esc_attr( $att['tieude'] ).'</strong>'.esc_attr( $att['noidung'] ).'<br/>'.$by;
+                $out .= '</figcaption>';
+                $out .= '</figure>';
+                $out .= ob_get_clean();
+            }
             return $out;
         }
     }

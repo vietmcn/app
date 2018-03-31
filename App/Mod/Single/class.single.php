@@ -18,14 +18,14 @@ if ( ! class_exists( 'App_control_single' ) ) :
             global $post, $App_getcontents, $App_mobile;
             
             if ( $App_mobile->isMobile() ) {
-                if ( get_post_format( $post->ID ) != 'video' ) {
+                #if ( get_post_format( $post->ID ) != 'video' ) {
                     $App_getcontents->cover( array(
                         'post_id' => $post->ID,
                     ) );
                     $App_getcontents->brum( array(
                         'post_id' => $post->ID,
                     ) );
-                }
+               # }
             }   
         }
         public function app_single_content()
@@ -51,8 +51,8 @@ if ( ! class_exists( 'App_control_single' ) ) :
         }
         public function app_single_related()
         {
-            global $post, $App_getcontents;
-            if ( get_post_format( $post->ID ) != 'video' ) {
+            global $post, $App_getcontents, $App_getcontent;
+            #if ( get_post_format( $post->ID ) != 'video' ) {
                 $cat = get_the_category( $post->id );
                 $Query = array();
     
@@ -79,9 +79,9 @@ if ( ! class_exists( 'App_control_single' ) ) :
                     $Query['tax_query'] = NULL;
                 }
                 $App_getcontents->related( $Query );
-            } else {
+#} else {
                 
-            }
+            #}
         }
     }
     

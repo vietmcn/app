@@ -95,9 +95,13 @@ if ( !class_exists('App_getMeta') ) :
                         }
                     } else {
                         if ( $key[1] == 'meta_thumbnail_png' ) {
-                            $img = explode( '/', $value[0] );
-                            $out .= '//i.imgur.com/'.$img[3].'l.jpg';
-                        }
+                            if ( get_post_format( $atts['post_id'] ) != 'video' ) {
+                                $img = explode( '/', $value[0] );
+                                $out .= '//i.imgur.com/'.$img[3].'l.jpg';
+                            }
+                        } elseif ( $key[1] == 'meta_video' ) {
+                            $out .= 'http://img.youtube.com/vi/'.$value.'/maxresdefault.jpg';
+                        } 
                     }
                 }
             } else {

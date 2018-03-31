@@ -14,7 +14,7 @@ if ( !class_exists( 'App_temp_menu' ) ) :
         public function app_mobile_menu()
         {
             global $App_mobile;
-            if ( $App_mobile->isMobile() ) {
+            if ( $App_mobile->isMobile() && ! is_404() ) {
                 $out  = '<div id="app-footer-menu" class="menu-footer">';
                 $out .= wp_nav_menu( array(
                     'theme_location' => 'menu_main',

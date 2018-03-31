@@ -39,6 +39,9 @@ if ( !class_exists('App_conf_script' ) ) {
             wp_enqueue_style( 'App-Swiper-css', '//cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css', '', '4.0', 'all' );
             wp_enqueue_style( 'App-icon-css', '//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', '', '2.0.1', 'all' );
             wp_enqueue_style( 'App-fonts-css', '//fonts.googleapis.com/css?family=Maven+Pro:400,500,700', '', $app_ver, 'all' );
+            if ( is_404() ) {
+                wp_enqueue_style( 'App-page-404', get_template_directory_uri().'/App/Public/css/app.404.min.css', '', $app_ver, 'all' );
+            }
             if ( $App_mobile->isMobile() ) {
                 $this->mobile();
             } else {
@@ -57,12 +60,7 @@ if ( !class_exists('App_conf_script' ) ) {
             global $App_mobile;
             if ( is_single() && $App_mobile->isMobile() ) {
                 ?>
-                <script> jQuery(document).ready(function($){$('.App-content-single').lightGallery({
-                    selector: '.item',
-                    zoom: true, 
-                    loop: false,
-                    });
-                });</script>
+                <script> jQuery(document).ready(function($){$('.App-content-single').lightGallery({selector: '.item',zoom: true,loop: false,});});</script>
                 <?php
             } else {
                 ?><script>jQuery(document).ready(function($){var sticky = new Sticky('.sticky');sticky.update();var swiper = new Swiper('.swiper-container', {lazy: true,pagination: {el: '.swiper-pagination',dynamicBullets: true,},});});</script><?php
