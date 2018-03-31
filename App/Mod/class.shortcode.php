@@ -22,7 +22,9 @@ if ( !class_exists('App_control_shortcode' ) ) :
                 $thumbnail_size = 'l';
             }
             $out  = '<figure data-sub-html="'.$att['mota'].'" class="item" data-src="'.esc_url( '//i.imgur.com/'.$link[3].'.jpg' ).'" ><img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy" alt="'.esc_attr( $att['tieu-de'] ).'" data-src="'.esc_url( '//i.imgur.com/'.$link[3].$thumbnail_size.'.jpg' ).'">';
-            $out .= '<figcaption class="img-desc">'.$att['mota'].'</figcaption>';
+            if ( isset( $att['mota'] ) ) {
+                $out .= '<figcaption class="img-desc">'.esc_attr( $att['mota'] ).'</figcaption>';
+            }
             $out .= '</figure>';
             return $out;
         }

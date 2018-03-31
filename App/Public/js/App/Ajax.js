@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
 	//
 	var swiper = new Swiper('.app-gallery', {
 		slidesPerView: 3,
-		spaceBetween: 5,
+		spaceBetween: 2,
 		freeMode: true,
 		lazy: true,
 	});
@@ -73,7 +73,7 @@ jQuery(document).ready(function($){
 						//swiper
 						var swiper = new Swiper('.app-gallery', {
 							slidesPerView: 3,
-							spaceBetween: 5,
+							spaceBetween: 2,
 							freeMode: true,
 							lazy: true,
 						});

@@ -87,8 +87,11 @@
     }
     .postmeta {
         font-size: 13px;
+        i {
+            margin-right: 2px;
+        }
         span.category {
-            margin-left: 10px;
+            margin-left: 5px;
         }
         a {
             color: #666;
@@ -107,6 +110,13 @@
         }
     }
 }
+.app-page-video {
+    #App {
+        h5 {
+            color: #fff;
+        }
+    }
+}
 #App {
     width: 100%;
     display: flex;
@@ -114,7 +124,7 @@
     justify-content: center;
     text-align: center;
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     h5 {
         margin: 0px;
         font-size: 14px;
@@ -150,12 +160,14 @@
         margin: 0;
     }
     a.menu-back {
-        display: inline-block;
-        padding: 10px 15px;
+        padding: 5px 10px;
         color: #000;
         position: relative;
+        height: 100%;
         top: 1px;
         font-size: 20px;
+        display: flex;
+        align-items: center;
     }
     .app-home-link {
         width: 100%;
