@@ -42,12 +42,18 @@ if ( !class_exists('App_getMeta') ) :
                                 $i = 0;
                                 foreach ( $value as $item ) {
                                     $item = explode( '/', $item );
+                                    if ( $item[2] == 'i.imgur.com' ) {
+                                        $item_e = explode( '.', $item[3] );
+                                        $thumbnail_item = $item_e[0];
+                                    } else {
+                                        $thumbnail_item = $item[3];
+                                    }
                                     if ( ++$i == 1 ) {
                                         $thumbnail_first = ' thumbnail-first';
                                     } else {
                                         $thumbnail_first = ' normal';
                                     }
-                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="swiper-lazy '.$thumbnail_first.' swiper-slide" data-src="//i.imgur.com/'.$item[3].$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="swiper-lazy '.$thumbnail_first.' swiper-slide" data-src="//i.imgur.com/'.$thumbnail_item.$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
                                     if ( ++$i >= 7 ) { 
                                         break; 
                                     }
@@ -65,7 +71,7 @@ if ( !class_exists('App_getMeta') ) :
                                 }
                                 $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<figure>';
-                                $out .= '<img style="'.$dispay.'" alt="'.esc_attr( $atts['alt'] ).'" src="//img.youtube.com/vi/'.$value.'/maxresdefault.jpg"/>';
+                                $out .= '<img style="'.$dispay.'" alt="'.esc_attr( $atts['alt'] ).'" src="//img.youtube.com/vi/'.$value.'/default.jpg"/>';
                                 $out .= '</figure>';
                                 $out .= '</a>';
                             }
@@ -94,14 +100,23 @@ if ( !class_exists('App_getMeta') ) :
                             }
                         }
                     } else {
-                        if ( $key[1] == 'meta_thumbnail_png' ) {
+                        if (  $key[1] == 'meta_thumbnail_png' ) {
                             if ( get_post_format( $atts['post_id'] ) != 'video' ) {
                                 $img = explode( '/', $value[0] );
-                                $out .= '//i.imgur.com/'.$img[3].'l.jpg';
+                                if ( $img[2] == 'i.imgur.com' ) {
+                                    $item_e = explode( '.', $img[3] );
+                                    $thumbnail_item = $item_e[0];
+                                } else {
+                                    $thumbnail_item = $img[3];
+                                }
+                                $out .= '//i.imgur.com/'.$thumbnail_item.'l.jpg';
                             }
-                        } elseif ( $key[1] == 'meta_video' ) {
-                            $out .= 'http://img.youtube.com/vi/'.$value.'/maxresdefault.jpg';
                         } 
+                        if ( !is_single() ) {
+                            if ( $key[1] == 'meta_video' ) {
+                                $out .= 'http://img.youtube.com/vi/'.$value.'/default.jpg';
+                            } 
+                        }
                     }
                 }
             } else {

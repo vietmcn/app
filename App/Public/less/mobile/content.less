@@ -21,6 +21,8 @@
             display: flex;
             display: -webkit-flex;
             position: relative;
+            max-height: 400px;
+            overflow: hidden;
         }
         h3 {
             font-size: 15px;
@@ -101,6 +103,9 @@
         }
     }
 }
+.App-content-item:first-of-type {
+    margin-top: 45px;
+}
 .content-video {
     background: transparent;
     .app-info-item {
@@ -149,7 +154,8 @@
     align-items: center;
     left: 0!important;
     padding: 0 10px;
-    position: relative;
+    position: absolute;
+    border-bottom: 1px solid rgba(202, 201, 201, 0.7215686274509804);
     h4 {
         color: #f1416d;
         width: 60%;

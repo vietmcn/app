@@ -158,6 +158,10 @@ if ( !class_exists( 'App_contents' ) ) :
             $out .= ob_get_clean();
             echo $out;
         }
+        public function get_video( $att = array() )
+        {
+            
+        }
     }
     
 endif;

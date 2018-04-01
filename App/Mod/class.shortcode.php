@@ -12,20 +12,30 @@ if ( !class_exists('App_control_shortcode' ) ) :
             global $App_mobile;
             $att = shortcode_atts( array(
                 'link' => '',
-                'tieu-de' => get_the_title(),
+                'tieude' => get_the_title(),
                 'mota' => '',
             ), $att );
-            $link = explode('/', $att['link'] );
-            if ( $App_mobile->isMobile() ) {
-                $thumbnail_size = 'm';
+            if ( isset( $att['link'] ) ) {
+                $link = explode('/', $att['link'] );
+                if ( $link[2] == 'i.imgur.com' ) {
+                    $item_e = explode( '.', $link[3] );
+                    $thumbnail_item = $item_e[0];
+                } else {
+                    $thumbnail_item = $link[3];
+                }
+                if ( $App_mobile->isMobile() ) {
+                    $thumbnail_size = 'l';
+                } else {
+                    $thumbnail_size = '';
+                }
+                $out  = '<figure data-sub-html="'.$att['mota'].'" class="item" data-src="'.esc_url( '//i.imgur.com/'.$thumbnail_item.'.jpg' ).'" ><img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy" alt="'.esc_attr( $att['tieude'] ).'" data-src="'.esc_url( '//i.imgur.com/'.$thumbnail_item.$thumbnail_size.'.jpg' ).'">';
+                if ( isset( $att['mota'] ) ) {
+                    $out .= '<figcaption class="img-desc">'.esc_attr( $att['mota'] ).'</figcaption>';
+                }
+                $out .= '</figure>';
             } else {
-                $thumbnail_size = 'l';
+                $out = 'Oop! Lổi rồi';
             }
-            $out  = '<figure data-sub-html="'.$att['mota'].'" class="item" data-src="'.esc_url( '//i.imgur.com/'.$link[3].'.jpg' ).'" ><img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy" alt="'.esc_attr( $att['tieu-de'] ).'" data-src="'.esc_url( '//i.imgur.com/'.$link[3].$thumbnail_size.'.jpg' ).'">';
-            if ( isset( $att['mota'] ) ) {
-                $out .= '<figcaption class="img-desc">'.esc_attr( $att['mota'] ).'</figcaption>';
-            }
-            $out .= '</figure>';
             return $out;
         }
         public function video( $att ) 
@@ -47,7 +57,7 @@ if ( !class_exists('App_control_shortcode' ) ) :
                 $out  = '<figure>';
                 $out .= '<div id="App-yotube" class="js-lazyYT App-youtube" data-youtube-id="'.esc_attr( $link[1] ).'" data-display-title="false"></div>';
                 $out .= '<figcaption class="img-desc">';
-                $out .= '<strong class="title-video">'.esc_attr( $att['tieude'] ).'</strong>'.esc_attr( $att['noidung'] ).'<br/>'.$by;
+                $out .= '<strong class="title-video">'.esc_attr( $att['tieude'] ).'</strong>'.esc_attr( $att['noidung'] ).$by;
                 $out .= '</figcaption>';
                 $out .= '</figure>';
                 $out .= ob_get_clean();
