@@ -7,7 +7,7 @@ if ( !class_exists( 'App_control_footer' ) ) :
     {
         public function __construct()
         {
-            add_action( 'app_footer', array( $this, 'app_footer_before' ) );
+            #add_action( 'app_footer', array( $this, 'app_footer_before' ) );
         }
         private function menu()
         {

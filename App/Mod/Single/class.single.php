@@ -9,24 +9,8 @@ if ( ! class_exists( 'App_control_single' ) ) :
     {
         public function __construct()
         {
-            add_action( 'app_single', array( $this, 'app_single_cover' ), 5 );
             add_action( 'app_single', array( $this, 'app_single_content'), 15 );
             add_action( 'app_single', array( $this, 'app_single_related' ), 60 );
-        }
-        public function app_single_cover()
-        {
-            global $post, $App_getcontents, $App_mobile;
-            
-            if ( $App_mobile->isMobile() ) {
-                #if ( get_post_format( $post->ID ) != 'video' ) {
-                    $App_getcontents->cover( array(
-                        'post_id' => $post->ID,
-                    ) );
-                    $App_getcontents->brum( array(
-                        'post_id' => $post->ID,
-                    ) );
-               # }
-            }   
         }
         public function app_single_content()
         {

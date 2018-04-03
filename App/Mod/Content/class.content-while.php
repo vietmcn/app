@@ -20,7 +20,14 @@ if ( !class_exists( 'App_getContent' ) ) :
                           ),
                         ) ); 
                     } else {
-
+                        $out .= $App_ListPost->post_desktop( array(
+                            'post_id' =>  $App_query->post->ID,
+                            'type' => 'normal',
+                            'thumbnail' => array(
+                                'key_name' => '_meta_post',
+                                'echo' => true,
+                            ),
+                        ) ); 
                     }
                 endwhile;
                 wp_reset_postdata();
@@ -32,20 +39,31 @@ if ( !class_exists( 'App_getContent' ) ) :
         }
         public function Ajax( $att = array() )
         {
-            global $App_ListPost;
+            global $App_ListPost, $App_mobile;
 
             $App_query = new WP_Query( $att );
             if ( $App_query->have_posts() ) {
                 ob_start();
                 $out = '';
                 while ( $App_query->have_posts() ) : $App_query->the_post();
-                    $out .= $App_ListPost->post_mobile( array(
-                        'post_id' =>  $App_query->post->ID,
-                        'type' => 'normal',
-                        'thumbnail' => array(
-                            'key_name' => '_meta_post',
-                        ),
-                    ) ); 
+                    if ( $App_mobile->isMobile() ) {
+                        $out .= $App_ListPost->post_mobile( array(
+                            'post_id' =>  $App_query->post->ID,
+                            'type' => 'normal',
+                            'thumbnail' => array(
+                                'key_name' => '_meta_post',
+                            ),
+                        ) ); 
+                    } else {
+                        $out .= $App_ListPost->post_desktop( array(
+                            'post_id' =>  $App_query->post->ID,
+                            'type' => 'normal',
+                            'thumbnail' => array(
+                                'key_name' => '_meta_post',
+                                'echo' => true,
+                            ),
+                        ) ); 
+                    }
                 endwhile;
                 $out .= ob_get_clean();
                 echo $out;

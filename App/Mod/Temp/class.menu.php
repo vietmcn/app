@@ -7,7 +7,7 @@ if ( !class_exists( 'App_temp_menu' ) ) :
     {
         public function __construct()
         {
-            add_action( 'wp_footer', array( $this, 'app_mobile_menu' ) ); 
+            #add_action( 'wp_footer', array( $this, 'app_mobile_menu' ) ); 
             add_action( 'app_main_before', array( $this, 'app_main_menu' ) );
             add_action( 'app_single', array( $this, 'app_main_menu') );
         }

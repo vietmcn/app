@@ -32,12 +32,18 @@ if ( !class_exists('App_header') ) :
             if ( is_single() ) {
                 $h1 = 'div';
                 $h2 = 'span';
+                $class= 'app-Nothome';
+                $alt = 'Quy Lại Trang Chủ';
+                $title = '<span><i class="ion-ios-arrow-back"></i></span>Về Trang Chủ';
             } else {
                 $h1 = 'h1';
                 $h2 = 'h2';
+                $class = 'app-Home';
+                $title = 'Trangfox.com';
+                $alt = 'Trang chủ Trangfox.com';
             }
             $out  = '<div data-elemt="logo" class="col-12">';
-            $out .= '<'.$h1.' class="App-logo"><a href="/" title="Trang Chủ">Trang<span>Fox</span>.Com</a></'.$h1.'>';
+            $out .= '<'.$h1.' class="App-logo"><a class="flex '.$class.'" href="/" title="'.$alt.'">'.$title.'</a></'.$h1.'>';
             $out .= '<'.$h2.' class="App-logo-desc">'.get_bloginfo( 'description' ).'</'.$h2.'>';
             $out .= '</div>';
             echo $out;

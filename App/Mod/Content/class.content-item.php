@@ -194,15 +194,43 @@ if ( ! class_exists('App_post' ) ) :
             ) );
             $out .= '<footer class="app-info-item col-md-7">';
             $out .= $this->desc();
-            $out .= 'tag:';
             $out .= '</footer>';
             #$out .= '</div>';
             $out .= '</article>';
             return $out;
         }
-        public function post_desktop()
+        public function post_desktop( $atts = array() )
         {
-
+            global $App_mobile;
+            if ( is_page( 'video' ) ) {
+                $classCss = 'content-video';
+            } else {
+                $classCss = 'content-normal';
+            }
+            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item '.$classCss.'">';
+            #$out .= '<div class="app-info">';
+            $out .= '<header id="app-content-header">';
+            $out .= $this->title( array(
+                'post_id' => $atts['post_id'],
+                'type' => $atts['type'],
+            ) );
+            $out .= $this->meta();
+            $out .= '</header>';
+            $out .= $this->media( array(
+                'post_id' => $atts['post_id'],
+                'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
+                'gallery' => ( $App_mobile->isMobile() ) ? true : false,
+                'alt' => get_the_title(),
+                'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
+                'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
+                'type' => $atts['type'],
+            ) );
+            $out .= '<footer class="app-info-item col-md-7">';
+            $out .= $this->desc();
+            $out .= '</footer>';
+            #$out .= '</div>';
+            $out .= '</article>';
+            return $out;
         }
         public function Video( $atts = array() ) 
         {

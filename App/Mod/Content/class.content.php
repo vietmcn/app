@@ -61,7 +61,7 @@ if ( ! class_exists( 'App_content' ) ) :
         }
         function app_mobile_menu()
         {
-            echo 'Hello Menu';
+            #echo 'Hello Menu';
         }
         public function app_conent()
         {
@@ -69,51 +69,45 @@ if ( ! class_exists( 'App_content' ) ) :
             
             if ( $App_getcontent ) {
 
-                if ( is_page('menu') ) {
-
-                    $this->app_mobile_menu();
-
+                //set paged
+                if ( is_home() || is_front_page() ) {
+                    $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
+                } elseif ( is_category() ) {
+                    $paged = get_query_var( 'page_cat' ) ? get_query_var( 'page_cat' ) : 1;
+                } elseif ( is_tag() ) {
+                    $paged = get_query_var( 'page_tag' ) ? get_query_var( 'page_tag' ) : 1;
+                } elseif ( is_page('video') ) {
+                    $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
+                    $tax = array( 
+                        'taxonomy' => 'post_format',
+                        'field'    => 'slug',
+                        'terms'    => array( 'post-format-video' ),
+                    );
+                } elseif ( is_page('gallery') ) {
+                    $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
+                    $tax = array( 
+                        'taxonomy' => 'post_format',
+                        'field'    => 'slug',
+                        'terms'    => array( 'post-format-gallery' ),
+                    );
                 } else {
-                    //set paged
-                    if ( is_home() || is_front_page() ) {
-                        $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
-                    } elseif ( is_category() ) {
-                        $paged = get_query_var( 'page_cat' ) ? get_query_var( 'page_cat' ) : 1;
-                    } elseif ( is_tag() ) {
-                        $paged = get_query_var( 'page_tag' ) ? get_query_var( 'page_tag' ) : 1;
-                    } elseif ( is_page('video') ) {
-                        $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
-                        $tax = array( 
-                            'taxonomy' => 'post_format',
-                            'field'    => 'slug',
-                            'terms'    => array( 'post-format-video' ),
-                        );
-                    } elseif ( is_page('gallery') ) {
-                        $paged = get_query_var( 'page' ) ? get_query_var( 'page' ) : 1;
-                        $tax = array( 
-                            'taxonomy' => 'post_format',
-                            'field'    => 'slug',
-                            'terms'    => array( 'post-format-gallery' ),
-                        );
-                    } else {
-                        $paged = 1;
-                    }
-                    //Swiper
-                    #$this->app_home_swiper();
-                    //Title
-                    $this->app_home_title();
-                    //get content
-                    $App_getcontent->Post( array(
-                        'post_type' => 'post',
-                        'posts_per_page' => '4',
-                        'cat' => get_query_var( 'cat' ) ? absint( get_query_var( 'cat' ) ) : NULL,
-                        'tag_id' => get_query_var( 'tag_id' ) ? absint( get_query_var( 'tag_id' ) ) : NULL,
-                        'paged' => $paged,
-                        'type' => 'normal',
-                        'tax_query' => ( isset( $tax ) ) ? array( $tax ) : NULL,
-                    ) );
-                    echo '<div id="App"></div>';
+                    $paged = 1;
                 }
+                //Swiper
+                #$this->app_home_swiper();
+                //Title
+                #$this->app_home_title();
+                //get content
+                $App_getcontent->Post( array(
+                    'post_type' => 'post',
+                    'posts_per_page' => '4',
+                    'cat' => get_query_var( 'cat' ) ? absint( get_query_var( 'cat' ) ) : NULL,
+                    'tag_id' => get_query_var( 'tag_id' ) ? absint( get_query_var( 'tag_id' ) ) : NULL,
+                    'paged' => $paged,
+                    'type' => 'normal',
+                    'tax_query' => ( isset( $tax ) ) ? array( $tax ) : NULL,
+                ) );
+                echo '<div id="App"></div>';
                 
             } else {
                 echo 'Models Content Không Được Thêm Vào Đúng Cách';

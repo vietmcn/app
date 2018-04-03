@@ -1,9 +1,16 @@
 //main: ../mobile.less
-header {
+header[data-elemt="App-header"],  {
     display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid #d2d2d2;
-    padding: 5px 0px;
+    /* flex-direction: column; */
+    align-items: center;
+    padding: 5px 0;
+    background: #fb8239;
+    position: fixed;
+    right: 0;
+    min-height: 50px;
+    left: 0;
+    z-index: 999;
+    top: 0px;
     .App-header-content {
         display: flex;
         align-items: center;
@@ -11,15 +18,29 @@ header {
         div[data-elemt="logo"] {
             padding: 0 10px;
             .App-logo {
-                font-size: 1.5rem;
+                font-size: 18px;
                 margin: 0px;
                 a {
-                    color: #515151;
+                    color: #f4f4f4;
                     font-weight: 400;
+                    align-items: center;
                     span {
-                        font-weight: 500;
-                        color: #ff127d;
+                        margin-right: 5px;
+                        background: #fff;
+                        height: 20px;
+                        width: 20px;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 90px;
+                        color: #fb8139;
+                        i {
+                            font-size: 22px;
+                        }
                     }
+                }
+                a.app-Nothome {
+                    text-transform: uppercase;
                 }
                 a:hover {
                     text-decoration: none;
