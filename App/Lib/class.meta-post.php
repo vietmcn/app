@@ -88,10 +88,16 @@ if ( !class_exists('App_getMeta') ) :
                                     $out .= $App_ListPost->meta();
                                 }
                                 $img = explode( '/', $value[0] );
+                                if ( $img[2] == 'i.imgur.com' ) {
+                                    $item_e = explode( '.', $img[3] );
+                                    $thumbnail_item = $item_e[0];
+                                } else {
+                                    $thumbnail_item = $img[3];
+                                }
                                 $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<figure>';
-                                if ( isset( $img[3] ) ) {
-                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$img[3].'l.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
+                                if ( isset( $img ) ) {
+                                    $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$thumbnail_item.'l.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
                                 } else {
                                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
                                 }

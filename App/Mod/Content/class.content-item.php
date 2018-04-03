@@ -175,7 +175,14 @@ if ( ! class_exists('App_post' ) ) :
                 $classCss = 'content-normal';
             }
             $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item '.$classCss.'">';
-            $out .= '<div class="app-info">';
+            #$out .= '<div class="app-info">';
+            $out .= '<header id="app-content-header">';
+            $out .= $this->title( array(
+                'post_id' => $atts['post_id'],
+                'type' => $atts['type'],
+            ) );
+            $out .= $this->meta();
+            $out .= '</header>';
             $out .= $this->media( array(
                 'post_id' => $atts['post_id'],
                 'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
@@ -185,15 +192,11 @@ if ( ! class_exists('App_post' ) ) :
                 'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
                 'type' => $atts['type'],
             ) );
-            $out .= '<div class="app-info-item col-md-7">';
-            $out .= $this->title( array(
-                'post_id' => $atts['post_id'],
-                'type' => $atts['type'],
-            ) );
-            $out .= $this->meta();
+            $out .= '<footer class="app-info-item col-md-7">';
             $out .= $this->desc();
-            $out .= '</div>';
-            $out .= '</div>';
+            $out .= 'tag:';
+            $out .= '</footer>';
+            #$out .= '</div>';
             $out .= '</article>';
             return $out;
         }

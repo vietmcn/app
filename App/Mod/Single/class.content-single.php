@@ -45,9 +45,9 @@ if ( !class_exists( 'App_contents' ) ) :
             $out .= '</figure>';
             $out .= '<div class="logo share flex">';
             $out .= '<span class="App-logo"><a href="/" title="Trang Chủ">Trang<span>Fox</span>.Com</a></span>';
-            $out .= '<p class="app-share flex">';
-            $out .= '<span class="fb"><a href="//www.facebook.com/dialog/feed?app_id=476780242707904&link='.utf8_uri_encode( get_permalink() ).'" title="Chia sẽ bài viết"><i class="ion-social-facebook"></i></a></span>';
-            $out .= '</p>';
+            #$out .= '<p class="app-share flex">';
+            #$out .= '<span class="fb"><a href="//www.facebook.com/dialog/feed?app_id=476780242707904&link='.utf8_uri_encode( get_permalink() ).'" title="Chia sẽ bài viết"><i class="ion-social-facebook"></i></a></span>';
+            #$out .= '</p>';
             $out .= '</div>';
             $out .= '</header>';
             echo $out;
