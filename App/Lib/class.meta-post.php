@@ -69,11 +69,11 @@ if ( !class_exists('App_getMeta') ) :
                                 } else {
                                     $dispay = 'display:block';
                                 }
-                                $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<figure>';
+                                $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<img style="'.$dispay.'" alt="'.esc_attr( $atts['alt'] ).'" src="//img.youtube.com/vi/'.$value.'/default.jpg"/>';
-                                $out .= '</figure>';
                                 $out .= '</a>';
+                                $out .= '</figure>';
                             }
                         } else {
                             if ( $key[1] == 'meta_thumbnail_png' ) {
@@ -94,14 +94,14 @@ if ( !class_exists('App_getMeta') ) :
                                 } else {
                                     $thumbnail_item = $img[3];
                                 }
-                                $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 $out .= '<figure>';
+                                $out .= '<a href="'.get_permalink().'" title="'.esc_attr( $atts['alt'] ).'">';
                                 if ( isset( $img ) ) {
                                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/'.$thumbnail_item.'l.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
                                 } else {
                                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="'.$atts['lazyClass'].'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="'.esc_attr( $atts['alt'] ).'" />';
                                 }
-                                $out .= '</figure></a>';
+                                $out .= '</a></figure>';
                                 
                             }
                         }
@@ -132,10 +132,10 @@ if ( !class_exists('App_getMeta') ) :
                     } else {
                         $classThumbnail = '';
                     }
-                    $out .= '<a href="'.get_permalink().'" title="">';
                     $out .= '<figure>';
+                    $out .= '<a href="'.get_permalink().'" title="">';
                     $out .= '<img src="'.get_template_directory_uri().'/App/Public/img/app-loading.gif" class="app-lazy '.$classThumbnail.'" data-src="//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg" alt="" />';
-                    $out .= '</figure></a>';
+                    $out .= '</a></figure>';
                 } else {
                    $out .= '//i.imgur.com/7G6PwVt'.$thumbnail_size.'.jpg';
                 }

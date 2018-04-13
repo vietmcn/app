@@ -74,16 +74,7 @@ if ( ! class_exists('App_post' ) ) :
         public function media( $atts = array() )
         {
             global $App_getMetapost;
-            if ( get_post_format( $atts['post_id'] ) == 'gallery' ) {
-                $class = 'gallery';
-            } elseif( get_post_format( $atts['post_id'] ) == 'video' ) {
-                $class = 'video';
-            } else {
-                $class = 'media';
-            }
-            $out  = '<div class="app-'.$class.' thumbnail">';
-            $out .= $App_getMetapost->media( $atts );
-            $out .= '</div>';
+            $out = $App_getMetapost->media( $atts );
             return $out;
         }
         public function meta()
@@ -95,76 +86,11 @@ if ( ! class_exists('App_post' ) ) :
             $out .= '</div>';
             return $out;
         }
-        public function listPost( $atts = array() )
+        function share()
         {
-            global $App_mobile;
-            if ( $atts['type'] == 'normal' ) {
-                $out_info = '<div class="app-info">';
-                $out_endinfo = '</div>';
-                $out_item = '<div class="app-info-item col-md-7">';
-                $out_enditem = '</div>';
-                #if ( ! $App_mobile->isMobile() ) {
-                    $desc = $this->desc();
-                #} else {
-                  #  $desc = '';
-                #}
-                $postitemClass = 'App-content-item';
-            } else {
-                $out_info = '';
-                $out_endinfo = '';
-                $out_item = '';
-                $out_enditem = '';
-                $desc = '';
-                $postitemClass = 'App-swiper swiper-slide';
-            }
-            $out  = '';
-            $out .= '<article data-post="trangfox-'.$atts['post_id'].'" class="'.$postitemClass.'">';
-            $out .= $out_info;
-            if ( $App_mobile->isMobile() ) {
-                if ( get_post_format( $atts['post_id'] ) != 'video' && get_post_format( $atts['post_id'] ) != 'gallery' && $atts['type'] != 'swiper' || ! $App_mobile->isMobile() ) {
-                    
-                }
-                $out .= $out_item;
-                    $out .= $this->title( array(
-                        'post_id' => $atts['post_id'],
-                        'type' => $atts['type'],
-                    ) );
-                    $out .= $this->meta();
-                    $out .= $desc;
-                    $out .= $out_enditem;
-                $out .= $this->media( array(
-                    'post_id' => $atts['post_id'],
-                    'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
-                    'gallery' => ( $App_mobile->isMobile() ) ? true : false,
-                    'alt' => get_the_title(),
-                    'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
-                    'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
-                    'type' => $atts['type'],
-                ) );
-            } else {
-                $out .= $this->media( array(
-                    'post_id' => $atts['post_id'],
-                    'lazyClass' => ( isset( $atts['thumbnail']['lazyClass'] ) ) ? $atts['thumbnail']['lazyClass'] : 'app-lazy',
-                    'gallery' => ( $App_mobile->isMobile() ) ? true : false,
-                    'alt' => get_the_title(),
-                    'key_name' => ( isset( $atts['thumbnail']['key_name'] ) ) ? $atts['thumbnail']['key_name'] : '_meta_post',
-                    'echo' => ( isset( $atts['thumbnail']['echo'] ) ) ? $atts['thumbnail']['echo'] : true,
-                    'type' => $atts['type'],
-                ) );
-                if ( get_post_format( $atts['post_id'] ) != 'video' && get_post_format( $atts['post_id'] ) != 'gallery' && $atts['type'] != 'swiper' || ! $App_mobile->isMobile() ) {
-                    $out .= $out_item;
-                    $out .= $this->title( array(
-                        'post_id' => $atts['post_id'],
-                        'type' => $atts['type'],
-                    ) );
-                    $out .= $this->meta();
-                    $out .= $desc;
-                    $out .= $out_enditem;
-                }
-            }
-            $out .= $out_endinfo;
-            $out .= '</article>';
-            return $out;
+            $out = '<span class="app-share"><i class="ion-android-share-alt"></i>Chia sẽ</span>';
+            $out .= '<span class="app-comment"><i class="ion-ios-chatbubble-outline"></i><a href="'.get_permalink().'/#comment">Bình luận</a></span>';
+            return  $out;
         }
         public function post_mobile( $atts = array() ) 
         {
@@ -174,7 +100,12 @@ if ( ! class_exists('App_post' ) ) :
             } else {
                 $classCss = 'content-normal';
             }
-            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item '.$classCss.'">';
+            if ( get_post_format( $atts['post_id'] ) == 'gallery' ) {
+                $type = ' app-gallery';
+            } else {
+                $type = ' normal';
+            }
+            $out  = '<article data-post="trangfox-'.$atts['post_id'].'" class="App-content-item '.$classCss.$type.'">';
             #$out .= '<div class="app-info">';
             $out .= '<header id="app-content-header">';
             $out .= $this->title( array(
@@ -182,6 +113,7 @@ if ( ! class_exists('App_post' ) ) :
                 'type' => $atts['type'],
             ) );
             $out .= $this->meta();
+            $out .= $this->desc();
             $out .= '</header>';
             $out .= $this->media( array(
                 'post_id' => $atts['post_id'],
@@ -193,7 +125,7 @@ if ( ! class_exists('App_post' ) ) :
                 'type' => $atts['type'],
             ) );
             $out .= '<footer class="app-info-item col-md-7">';
-            $out .= $this->desc();
+            $out .= $this->share();
             $out .= '</footer>';
             #$out .= '</div>';
             $out .= '</article>';

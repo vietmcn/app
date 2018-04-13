@@ -63,7 +63,6 @@ if ( ! class_exists( 'App_ajax' ) ) :
             global $App_getcontent;
             check_ajax_referer( 'app-nonce', 'security' );
 			header("Content-Type: text/html");
-		   
             // prepare our arguments for the query
             $args = json_decode( stripslashes( $_POST['query'] ), true );
             $args['paged'] = esc_attr( $_POST['page'] ) + 1; // we need next page to be loaded
