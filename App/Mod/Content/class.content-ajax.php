@@ -64,12 +64,12 @@ if ( ! class_exists( 'App_ajax' ) ) :
             check_ajax_referer( 'app-nonce', 'security' );
 			header("Content-Type: text/html");
             // prepare our arguments for the query
-            $args = json_decode( stripslashes( $_POST['query'] ), true );
-            $args['paged'] = esc_attr( $_POST['page'] ) + 1; // we need next page to be loaded
+            $args = json_decode( stripslashes( $_GET['query'] ), true );
+            $args['paged'] = esc_attr( $_GET['page'] ) + 1; // we need next page to be loaded
             $args['post_status'] = 'publish';
-            $args['posts_per_page'] = ( isset( $_POST['posts_per_page'] ) ) ? $_POST['posts_per_page'] : 5;
-            $args['cat'] = ( isset( $_POST['cat'] ) ) ? $_POST['cat'] : '';
-            $args['tax_query'] = ( isset( $_POST['tax_query'] ) ) ? $_POST['tax_query'] : NULL;
+            $args['posts_per_page'] = ( isset( $_GET['posts_per_page'] ) ) ? $_GET['posts_per_page'] : 5;
+            $args['cat'] = ( isset( $_GET['cat'] ) ) ? $_GET['cat'] : '';
+            $args['tax_query'] = ( isset( $_GET['tax_query'] ) ) ? $_GET['tax_query'] : NULL;
             // it is always better to use WP_Query but not here
             if ( is_page( array( 'video', 'gallery' ) ) ) {
                 $App_getcontent->Ajax_custom_page( $args );

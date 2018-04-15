@@ -45,7 +45,7 @@ jQuery(document).ready(function($){
 			$.ajax({
 				url : app_loadmore_params.ajaxurl, // AJAX handler
 				data : data,
-				type : 'POST',
+				type : 'GET',
 				cache : false,
 				async: true,
 				datatype: "html",
